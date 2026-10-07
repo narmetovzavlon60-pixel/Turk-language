@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>TÖMER Türkçe — O'zbeklar uchun</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{
+  --bg:var(--tg-theme-bg-color,#f2f2f7);--sec:var(--tg-theme-secondary-bg-color,#fff);
+  --text:var(--tg-theme-text-color,#111);--hint:var(--tg-theme-hint-color,#8a8a8e);
+  --link:var(--tg-theme-link-color,#2481cc);--btn:var(--tg-theme-button-color,#2481cc);
+  --btntext:var(--tg-theme-button-text-color,#fff);
+  --g1:var(--btn);--g2:color-mix(in srgb,var(--btn) 62%,#000);
+  --ok:#34c759;--bad:#ff3b30;--line:rgba(128,128,128,.2);
+  --glass:rgba(255,255,255,.72);--shadow:0 1px 3px rgba(0,0,0,.06);
+  --top:calc(max(env(safe-area-inset-top),var(--tsa-t,0px)) + var(--tca-t,0px));
+  --bot:max(env(safe-area-inset-bottom),var(--tsa-b,0px));
+}
+:root[data-dark]{--glass:rgba(24,24,28,.7);--shadow:0 1px 3px rgba(0,0,0,.4);color-scheme:dark}
+@supports(color:color-mix(in srgb,red 50%,blue)){:root{--glass:color-mix(in srgb,var(--bg) 70%,transparent)}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+html,body{margin:0;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+body{background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  padding-bottom:calc(84px + var(--bot));-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;transition:background .35s,color .35s}
+input{-webkit-user-select:text;user-select:text}
+.hdr{position:sticky;top:0;z-index:60;padding:calc(10px + var(--top)) 16px 10px;display:flex;align-items:center;gap:10px;
+  background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border-bottom:.5px solid var(--line)}
+.hdr h1{font-size:20px;margin:0;font-weight:800;letter-spacing:-.4px;flex:1;min-width:0}
+.hdr .sub{font-size:12px;color:var(--hint);font-weight:500;display:block;letter-spacing:0}
+.back,.ibtn{background:rgba(128,128,128,.14);border:0;color:var(--link);font-size:17px;min-width:34px;height:34px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0 10px;font-weight:700;gap:4px}
+.ibtn{font-size:15px;color:var(--text)}
+.view>*{animation:up .38s cubic-bezier(.2,.8,.2,1) both}
+.view>*:nth-child(2){animation-delay:.04s}.view>*:nth-child(3){animation-delay:.08s}.view>*:nth-child(4){animation-delay:.12s}.view>*:nth-child(n+5){animation-delay:.16s}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.92);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.shake{animation:shake .3s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.card{background:var(--sec);border-radius:18px;padding:14px 16px;margin:10px 16px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:16px;font-weight:700}.card p{margin:0 0 8px}
+.muted{color:var(--hint);font-size:13px}
+.btn{background:var(--btn);color:var(--btntext);border:0;border-radius:14px;padding:14px 18px;font-size:15px;font-weight:600;width:100%;font-family:inherit;transition:transform .12s,opacity .12s}
+.btn:active,.item:active,.chip:active,.opt:active,.seg button:active{transform:scale(.97);opacity:.85}
+.btn.ghost{background:transparent;color:var(--link);border:1.5px solid var(--line)}
+.btn.small{width:auto;padding:8px 14px;font-size:13px;border-radius:11px}
+.btn.ok{background:var(--ok);color:#fff}.btn:disabled{opacity:.45}
+.row{display:flex;gap:10px;align-items:center}
+.bar{height:7px;border-radius:4px;background:rgba(128,128,128,.2);overflow:hidden;margin-top:8px}
+.bar>i{display:block;height:100%;background:var(--btn);border-radius:4px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar.g>i{background:var(--ok)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:8px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:8px 15px;border-radius:20px;background:var(--sec);color:var(--text);font-size:13px;font-weight:600;border:0;white-space:nowrap;font-family:inherit;transition:.2s}
+.chip.on{background:var(--btn);color:var(--btntext)}.chip.mini{padding:6px 12px;font-size:12px}
+.seg{display:flex;margin:10px 16px;padding:3px;border-radius:12px;background:rgba(128,128,128,.16)}
+.seg button{flex:1;border:0;background:none;padding:8px;border-radius:10px;font:600 13px inherit;font-family:inherit;color:var(--hint);transition:.2s}
+.seg button.on{background:var(--sec);color:var(--text);box-shadow:var(--shadow)}
+.item{display:flex;align-items:center;gap:12px;padding:13px 15px;background:var(--sec);border-radius:16px;margin:8px 16px;transition:transform .12s;box-shadow:var(--shadow)}
+.item .ic{flex:0 0 40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;background:rgba(128,128,128,.13)}
+.item .tx{flex:1;min-width:0}.item .tx b{display:block;font-size:14.5px;font-weight:600;line-height:1.35}
+.item .tx span{display:block;font-size:12.5px;color:var(--hint);margin-top:2px}.item .ar{color:var(--hint);font-size:16px}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:8px;background:rgba(128,128,128,.14);color:var(--hint)}
+.badge.a1{background:rgba(227,10,23,.14);color:#e5303c}.badge.a2{background:rgba(255,149,0,.16);color:#e08600}
+.badge.b1{background:rgba(52,199,89,.16);color:#2fae55}.badge.b2{background:rgba(36,129,204,.18);color:#3d93e0}
+.inp{width:100%;padding:13px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--sec);color:var(--text);font-size:15px;font-family:inherit;outline:none}
+.inp:focus{border-color:var(--btn)}
+.nav{position:fixed;left:10px;right:10px;bottom:calc(8px + var(--bot));z-index:100;display:flex;padding:5px;border-radius:26px;
+  background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);border:.5px solid var(--line);box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.nav button{flex:1;background:none;border:0;color:var(--hint);font:600 10px inherit;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:20px;transition:.25s}
+.nav button.on{color:var(--btn);background:rgba(128,128,128,.14)}
+.nav .ic{font-size:20px;line-height:1;transition:transform .25s}.nav button.on .ic{transform:translateY(-1px) scale(1.12)}
+.hero{margin:12px 16px;border-radius:24px;padding:18px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--btntext);position:relative;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.2)}
+.hero:after{content:"☪";position:absolute;right:-6px;bottom:-34px;font-size:120px;opacity:.12}
+.hero h2{margin:0 0 2px;font-size:18px;font-weight:800}.hero p{margin:0;font-size:13px;opacity:.9}
+.ava{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;flex:0 0 auto;overflow:hidden}
+.ava img{width:100%;height:100%;object-fit:cover}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 16px}
+.stat{background:var(--sec);border-radius:16px;padding:12px 6px;text-align:center;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:19px;font-weight:800;letter-spacing:-.5px}.stat span{font-size:11px;color:var(--hint);font-weight:600}
+.gram{background:var(--sec);border-radius:16px;padding:14px 15px;margin:8px 16px;font-size:14.5px;line-height:1.65;box-shadow:var(--shadow);-webkit-user-select:text;user-select:text}
+.gram b{color:var(--link)}.gram code{background:rgba(128,128,128,.16);padding:1px 6px;border-radius:6px;font-size:13.5px}
+.ex{background:var(--sec);border-radius:16px;margin:10px 16px;overflow:hidden;box-shadow:var(--shadow)}
+.ex .line{padding:11px 15px;border-bottom:1px solid var(--line)}.ex .line:last-child{border-bottom:0}
+.ex .tr{font-weight:700;font-size:14.5px}.ex .uz{font-size:13px;color:var(--hint);margin-top:2px}
+.dline{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px}
+.dline .who{flex:0 0 30px;height:30px;border-radius:50%;background:rgba(128,128,128,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--hint)}
+.dline .body{flex:1}.dline .tr{font-size:14.5px;font-weight:600}.dline .uz{font-size:13px;color:var(--hint);margin-top:2px;display:none}
+.dline.show .uz{display:block;animation:up .2s both}
+.opt{display:block;width:100%;text-align:left;padding:13px 15px;border-radius:14px;background:var(--bg);border:1.5px solid var(--line);color:var(--text);font:500 14.5px inherit;font-family:inherit;margin-bottom:9px;transition:.15s}
+.opt.sel{border-color:var(--btn);background:rgba(36,129,204,.1)}.opt.good{border-color:var(--ok);background:rgba(52,199,89,.14)}
+.opt.bad{border-color:var(--bad);background:rgba(255,59,48,.12)}.opt.gone{opacity:.2;pointer-events:none;text-decoration:line-through}
+.qtext{font-size:16.5px;font-weight:700;line-height:1.45;margin:6px 0 14px}.qmeta{font-size:12px;color:var(--hint);font-weight:700}
+.fb{border-radius:12px;padding:12px 14px;margin:12px 0;font-size:13.5px;animation:pop .2s}
+.fb.good{background:rgba(52,199,89,.14);border-left:4px solid var(--ok)}.fb.bad{background:rgba(255,59,48,.12);border-left:4px solid var(--bad)}
+.ansarea{min-height:52px;border:1.5px dashed var(--line);border-radius:14px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.ansarea .chip{background:var(--btn);color:var(--btntext)}
+.ring{position:relative;flex:0 0 auto}.ring svg{transform:rotate(-90deg)}
+.ring .val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800}
+.sect{padding:16px 18px 4px;font-size:13px;font-weight:700;color:var(--hint)}
+.empty{text-align:center;padding:44px 24px;color:var(--hint);font-size:14px}
+.wod{margin:10px 16px;border-radius:22px;padding:18px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--g2),var(--g1))}
+.wod:before{content:"";position:absolute;right:-26px;top:-26px;width:120px;height:120px;border-radius:50%;box-shadow:inset -24px 8px 0 0 rgba(255,255,255,.2)}
+.wod .w{font-size:28px;font-weight:800;letter-spacing:-.6px;margin-top:10px}.wod .t{font-size:15px;opacity:.92}
+.pill{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:10px;background:rgba(255,255,255,.24);display:inline-block}
+.coin{background:rgba(255,170,0,.18);color:#e69500;font-weight:800;font-size:13px;padding:7px 11px;border-radius:17px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 16px}
+.th{background:var(--sec);border-radius:18px;padding:10px;box-shadow:var(--shadow);border:2px solid transparent;transition:.2s}
+.th.act{border-color:var(--btn)}
+.sw{height:62px;border-radius:12px;position:relative;overflow:hidden;margin-bottom:8px;border:1px solid var(--line)}
+.sw i{position:absolute;left:8px;right:8px;bottom:8px;height:16px;border-radius:6px}.sw u{position:absolute;left:8px;top:8px;width:50%;height:8px;border-radius:4px;opacity:.85}
+.th b{display:block;font-size:13.5px}.th .btn{margin-top:8px;padding:8px;font-size:12.5px;border-radius:10px}
+.timer{height:5px;border-radius:3px;background:rgba(128,128,128,.2);overflow:hidden;margin-bottom:10px}.timer i{display:block;height:100%;background:var(--bad);width:100%;transition:width 1s linear}
+.timer.frz i{background:#5ac8fa}
+.boosts{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+#toast{position:fixed;left:50%;top:calc(14px + var(--top));transform:translate(-50%,-90px);z-index:300;background:rgba(30,30,34,.92);color:#fff;padding:10px 16px;border-radius:16px;font-size:13.5px;font-weight:600;max-width:88%;text-align:center;transition:transform .35s cubic-bezier(.2,.9,.3,1.2);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+#toast.on{transform:translate(-50%,0)}
+#app.still .view>*{animation:none}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="nav" id="nav"></div>
+<div id="toast"></div>
+
+<script>
+/* ===== TELEGRAM MINI APP INIT ===== */
+const tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : null;
+function applySafe(){
+  if(!tg) return;
+  const s=document.documentElement.style, a=tg.safeAreaInset||{}, c=tg.contentSafeAreaInset||{};
+  s.setProperty('--tsa-t',(a.top||0)+'px'); s.setProperty('--tsa-b',(a.bottom||0)+'px'); s.setProperty('--tca-t',(c.top||0)+'px');
+}
+if (tg) {
+  try{tg.ready();}catch(e){} try{tg.expand();}catch(e){} try{tg.enableClosingConfirmation();}catch(e){}
+  try{tg.disableVerticalSwipes&&tg.disableVerticalSwipes();}catch(e){}
+  applySafe();
+  ['safeAreaChanged','contentSafeAreaChanged','viewportChanged'].forEach(function(ev){try{tg.onEvent(ev,applySafe);}catch(e){}});
+}
+const TG_USER = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user : null;
+const USER_NAME = TG_USER ? ((TG_USER.first_name||'')+(TG_USER.last_name?' '+TG_USER.last_name:'')).trim() : "O'quvchi";
+const USER_INITIALS = TG_USER ? (((TG_USER.first_name||'?')[0]||'?')+((TG_USER.last_name||'')[0]||'')).toUpperCase() : "O'Q";
+
+/* ===== HAPTICS ===== */
+const hap = {
+  _h(f){ try{ if(tg&&tg.HapticFeedback) f(tg.HapticFeedback); else if(navigator.vibrate) navigator.vibrate(8); }catch(e){} },
+  light(){ this._h(function(h){h.impactOccurred('light');}); },
+  sel(){ this._h(function(h){h.selectionChanged();}); },
+  ok(){ this._h(function(h){h.notificationOccurred('success');}); },
+  bad(){ this._h(function(h){h.notificationOccurred('error');}); },
+  warn(){ this._h(function(h){h.notificationOccurred('warning');}); }
+};
+
+/* ===== STATE ===== */
+const STORE_KEY = 'tomer_uzbek_v1';
+const DEFAULTS = ()=>({learned:[],tests:{},xp:0,streak:0,lastDay:null,totalCorrect:0,totalAnswered:0,
+  coins:50,themes:['classic'],theme:'classic',inv:{shield:0,hint:0,freeze:0,life:0},doubleUntil:0,sound:true});
+let state = DEFAULTS();
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw){
+      const p = JSON.parse(raw), d = DEFAULTS();
+      if(p.coins === undefined) p.coins = p.xp || 0;      // eski foydalanuvchilar: tangalar = XP
+      state = Object.assign(d, p);
+      state.inv = Object.assign(d.inv, p.inv || {});
+      if(!Array.isArray(state.learned)) state.learned=[];
+      if(!state.tests || typeof state.tests!=='object') state.tests={};
+      if(!Array.isArray(state.themes)||state.themes.indexOf('classic')<0) state.themes=['classic'].concat(state.themes||[]);
+    }
+  }catch(e){}
+  updateStreak();
+}
+function saveState(){ try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){} }
+const dayNum = s => Math.round(Date.parse(s+'T00:00:00Z')/86400000);
+function updateStreak(){
+  const today = new Date().toISOString().slice(0,10);
+  if(state.lastDay === today) return;
+  if(!state.lastDay) state.streak = 1;
+  else {
+    const missed = dayNum(today) - dayNum(state.lastDay) - 1;
+    if(missed <= 0) state.streak++;
+    else if(state.inv.shield >= missed){ state.inv.shield -= missed; state.streak++; setTimeout(function(){toast('🛡 Streak Shield seriyangizni saqlab qoldi!');},600); }
+    else state.streak = 1;
+  }
+  state.lastDay = today; saveState();
+}
+const doubleOn = () => state.doubleUntil > Date.now();
+function addXp(n){ const a = n * (doubleOn()?2:1); state.xp += a; state.coins += a; saveState(); return a; }
+const levelOf = () => Math.floor(state.xp/200)+1;
+
+/* ===== SOUND (Web Audio API) ===== */
+const Snd = (function(){
+  let ctx=null, master=null;
+  function ready(){
+    if(!state.sound) return false;
+    try{
+      if(!ctx){ const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
+        ctx=new AC(); master=ctx.createGain(); master.gain.value=.55; master.connect(ctx.destination); }
+      if(ctx.state==='suspended') ctx.resume();
+      return true;
+    }catch(e){ return false; }
+  }
+  function tone(f,t,d,type,v,to){
+    const o=ctx.createOscillator(), g=ctx.createGain(), n=ctx.currentTime+t;
+    o.type=type||'sine'; o.frequency.setValueAtTime(f,n);
+    if(to) o.frequency.exponentialRampToValueAtTime(to,n+d);
+    g.gain.setValueAtTime(.0001,n); g.gain.exponentialRampToValueAtTime(v,n+.012); g.gain.exponentialRampToValueAtTime(.0001,n+d);
+    o.connect(g); g.connect(master); o.start(n); o.stop(n+d+.03);
+  }
+  return {
+    click(){ if(ready()) tone(1200,0,.045,'sine',.1,800); },
+    tab(){ if(ready()){ tone(700,0,.05,'sine',.1); tone(950,.04,.06,'sine',.08); } },
+    ok(){ if(ready()){ [523.25,659.25,783.99,1046.5].forEach(function(f,i){ tone(f,i*.075,.35,'triangle',.16); }); } },
+    bad(){ if(ready()){ tone(220,0,.28,'sine',.22,150); tone(165,.05,.3,'sine',.14,110); } },
+    coin(){ if(ready()){ tone(988,0,.07,'square',.06); tone(1319,.08,.4,'square',.06); tone(2637,.1,.25,'sine',.05); } },
+    sweep(){ if(ready()){ tone(260,0,.45,'sine',.14,1500); tone(390,.05,.4,'triangle',.06,2200); } }
+  };
+})();
+function toggleSound(){
+  state.sound = !state.sound; saveState();
+  if(state.sound) Snd.click();
+  document.querySelectorAll('.snd').forEach(function(b){ b.textContent = state.sound?'🔊':'🔇'; });
+  const t=document.getElementById('sndTxt'); if(t) t.textContent = state.sound?'Yoqilgan':"O'chirilgan";
+}
+function toast(m){
+  const t=document.getElementById('toast'); t.textContent=m; t.classList.add('on');
+  clearTimeout(toast._t); toast._t=setTimeout(function(){t.classList.remove('on');},2200);
+}
+/* Global tap feedback: sound + haptic */
+document.addEventListener('click',function(e){
+  const el=e.target.closest('button,.item,.chip,.opt,.th'); if(!el||el.disabled||el.hasAttribute('data-q')||el.classList.contains('snd')) return;
+  if(el.closest('.nav')){ Snd.tab(); hap.sel(); }
+  else if(el.classList.contains('chip')||el.classList.contains('opt')||el.closest('.seg')){ Snd.click(); hap.sel(); }
+  else { Snd.click(); hap.light(); }
+},true);
+
+/* ===== THEMES (15) ===== */
+/* [id, nom, narx, qorong'i, bg, sec, text, hint, accent, accent2, btntext] */
+const THEMES = [
+ ['classic','Telegram Classic',0,0],
+ ['amoled','Dark AMOLED',120,1,'#000000','#121214','#f5f5f7','#8e8e93','#0a84ff','#0040dd','#fff'],
+ ['crimson','Crimson Red',100,0,'#fff3f3','#ffffff','#2a0a0d','#9a6a6e','#e30a17','#8f0610','#fff'],
+ ['emerald','Emerald Green',100,0,'#edf9f2','#ffffff','#0b2a1b','#5f8a74','#0f9d58','#0a6b3c','#fff'],
+ ['gold','Sunset Gold',140,0,'#fff7e6','#fffdf7','#3a2705','#9c8350','#d98a00','#b04a00','#fff'],
+ ['neon','Cyberpunk Neon',250,1,'#0b0614','#170c2a','#f4eaff','#9a86c4','#ff2bd6','#00c8e6','#fff'],
+ ['ocean','Ocean Blue',120,0,'#e8f5ff','#ffffff','#062a45','#5b86a3','#0a84d6','#0b4f9c','#fff'],
+ ['pink','Pastel Pink',120,0,'#fff0f5','#ffffff','#3d1f2b','#a8788a','#e86a9a','#c2467a','#fff'],
+ ['mint','Forest Mint',140,0,'#eef8f3','#fbfffd','#153027','#6b9484','#3eb489','#1f8a66','#fff'],
+ ['purple','Deep Purple',180,1,'#120a24','#1e1338','#efe8ff','#9b8bc2','#8b5cf6','#5b21b6','#fff'],
+ ['cappu','Cappuccino',140,0,'#f4ece3','#fbf6f0','#3b2a1e','#957d68','#8b5e3c','#5a3822','#fff'],
+ ['nord','Nord Ice',180,1,'#2e3440','#3b4252','#eceff4','#9aa5bd','#88c0d0','#5e81ac','#2e3440'],
+ ['midnight','Midnight Blue',200,1,'#0a1128','#121c3d','#e8eefc','#7f8fb8','#3d7bff','#1c3fa8','#fff'],
+ ['violet','Sunset Violet',160,0,'#fbeff8','#ffffff','#2e1236','#a07aa6','#b84fd1','#f0647a','#fff'],
+ ['white','Minimal White',80,0,'#ffffff','#f4f4f6','#111111','#86868b','#111111','#3a3a3c','#fff']
+].map(function(a){ return {id:a[0],name:a[1],price:a[2],dark:a[3],c:a.slice(4)}; });
+const themeById = id => THEMES.filter(function(t){return t.id===id;})[0] || THEMES[0];
+function applyTheme(id, silent){
+  const t = themeById(id), r = document.documentElement, s = r.style;
+  ['--bg','--sec','--text','--hint','--link','--btn','--btntext','--g1','--g2'].forEach(function(k){ s.removeProperty(k); });
+  r.removeAttribute('data-dark'); r.removeAttribute('data-theme');
+  if(t.id!=='classic'){
+    const c=t.c; s.setProperty('--bg',c[0]); s.setProperty('--sec',c[1]); s.setProperty('--text',c[2]); s.setProperty('--hint',c[3]);
+    s.setProperty('--link',c[4]); s.setProperty('--btn',c[4]); s.setProperty('--g1',c[4]); s.setProperty('--g2',c[5]); s.setProperty('--btntext',c[6]);
+    r.setAttribute('data-theme',t.id); if(t.dark) r.setAttribute('data-dark','');
+  }
+  if(tg){ try{ const bg = t.id==='classic' ? tg.themeParams.bg_color : t.c[0]; if(bg){ tg.setHeaderColor(bg); tg.setBackgroundColor(bg); tg.setBottomBarColor&&tg.setBottomBarColor(bg);} }catch(e){} }
+}
+
+/* ===== UTILITIES ===== */
+const low = s => String(s == null ? '' : s).toLocaleLowerCase('tr-TR').trim();
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function shuffle(a){const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=r[i];r[i]=r[j];r[j]=t;}return r;}
+
+/* ============================================================
+   DATA 1 — GRAMMATIKA MAVZULARI
+   ============================================================ */
+const TOPICS = [
+
+/* ==================== A1 ==================== */
+{
+id:'a1-1', lvl:'A1', n:1, tr:'Alifbo va talaffuz qoidalari', uz:'Alifbo va talaffuz',
+body:`Turk alifbosida <b>29 ta harf</b> bor: 8 unli va 21 undosh. O'zbek lotin alifbosida bo'lmagan <b>6 ta harf</b> mavjud: <code>ç, ğ, ı, ö, ş, ü</code>. Turk tilida esa o'zbek tilidagi <code>q, x, ng</code> harflari umuman yo'q.
+<br><br><b>Muhim mosliklar (o'zbek ↔ turk):</b><br>
+• <code>ç</code> = o'zbekcha <b>ch</b> — çay (choy), çiçek (gul)<br>
+• <code>ş</code> = o'zbekcha <b>sh</b> — şeker (shakar), şehir (shahar)<br>
+• <code>ı</code> = orqa qator, qisqa <b>i</b> — kırmızı (qizil), altı (olti)<br>
+• <code>i</code> = old qator, yumshoq <b>i</b> — iyi (yaxshi), iki (ikki)<br>
+• <code>ö</code> = <b>o'</b> va <b>o</b> orasidagi tovush — göz (ko'z), göl (ko'l)<br>
+• <code>ü</code> = <b>u</b> va <b>i</b> orasidagi tovush — gül (gul), güzel (go'zal)<br>
+• <code>ğ</code> = juda yumshoq, deyarli eshitilmaydigan <b>g</b> — dağ (tog'), değil (emas)
+<br><br><b>Oltin qoida:</b> turk tilida so'zlar <b>yozilgandek o'qiladi</b>. "Bir harf — bir tovush" tamoyili amal qiladi. O'zbek tilidagi kabi harf tushib qolmaydi yoki qo'shilib ketmaydi.`,
+ex:[["Merhaba!","Salom!"],["Nasılsın?","Qalaysan?"],["Teşekkür ederim","Rahmat"],["Görüşürüz","Ko'rishguncha"],["Öğretmen","O'qituvchi"],["Şeker","Shakar"],["Çiçek","Gul"],["Kırmızı","Qizil"],["Göz","Ko'z"],["Gülümsemek","Tabassum qilmoq"]]
+},
+{
+id:'a1-2', lvl:'A1', n:2, tr:'Büyük Ünlü Uyumu', uz:'Katta unlilar garmoniyasi',
+body:`Bu turk tilining <b>eng muhim qonuni</b>. Qo'shimchaning unlisi so'zning <b>oxirgi unlisiga</b> moslashadi.
+<br><br>• Oxirgi unli <b>orqa qator</b> bo'lsa (<code>a, ı, o, u</code>) → qo'shimchada ham <code>a, ı</code> keladi.<br>
+• Oxirgi unli <b>old qator</b> bo'lsa (<code>e, i, ö, ü</code>) → qo'shimchada <code>e, i</code> keladi.
+<br><br>O'zbek tilida bunday qonun yo'q, shuning uchun bu mavzuni yodlash juda muhim. Masalan: o'zbekcha "kitoblar" — turkcha <code>kitaplar</code> (a → lar), o'zbekcha "uylar" — turkcha <code>evler</code> (e → ler).
+<br><br><b>Diqqat:</b> arab va fors tillaridan kirgan ba'zi so'zlar bu qonunga bo'ysunmaydi: <code>saat → saatler</code> (saatlar emas), <code>kalp → kalpler</code>.`,
+ex:[["kitap → kitaplar","kitob → kitoblar"],["ev → evler","uy → uylar"],["okul → okullar","maktab → maktablar"],["göz → gözler","ko'z → ko'zlar"],["araba → arabalar","mashina → mashinalar"],["öğrenci → öğrenciler","o'quvchi → o'quvchilar"],["gün → günler","kun → kunlar"],["sokak → sokaklar","ko'cha → ko'chalar"]]
+},
+{
+id:'a1-3', lvl:'A1', n:3, tr:'Küçük Ünlü Uyumu', uz:'Kichik unlilar garmoniyasi',
+body:`Bu qonun <b>lab (yumaloq) unlilari</b> haqida. Qoida shunday:
+<br><br>• So'z oxiridagi unli <b>tekis</b> bo'lsa (<code>a, e, ı, i</code>) → keyingi unli ham faqat <b>tekis</b> bo'ladi: <code>a, e, ı, i</code>.<br>
+• So'z oxiridagi unli <b>yumaloq</b> bo'lsa (<code>o, ö, u, ü</code>) → keyingi unli <b>yumaloq</b> (<code>u, ü</code>) yoki <b>tekis</b> (<code>a, e</code>) bo'ladi, lekin hech qachon <code>ı, i</code> bo'lmaydi.
+<br><br>Amalda bu eng ko'p <b>egalik qo'shimchalari</b> va <b>-yor</b> qo'shimchasida uchraydi.`,
+ex:[["okul + um → okulum","maktabim"],["göz + üm → gözüm","ko'zim"],["yol + a → yola","yo'lga"],["köy + e → köye","qishloqqa"],["gel + iyor → geliyor","kelyapti"],["yap + ıyor → yapıyor","qilyapti"],["oku + yor → okuyor","o'qiyapti"],["gör + üyor → görüyor","ko'ryapti"]]
+},
+{
+id:'a1-4', lvl:'A1', n:4, tr:'Ünsüz Yumuşaması', uz:'Undosh yumshashi (p,ç,t,k → b,c,d,ğ)',
+body:`So'z oxiridagi <b>p, ç, t, k</b> undoshlari <b>unli bilan boshlanuvchi</b> qo'shimcha oldidan yumshaydi:
+<br><br><code>p → b</code> &nbsp;•&nbsp; <code>ç → c</code> &nbsp;•&nbsp; <code>t → d</code> &nbsp;•&nbsp; <code>k → ğ</code>
+<br><br>O'zbek tilida bunday hodisa yo'q, lekin talaffuzda o'xshashlik seziladi: "kitobim" deb aytamiz, "kitapim" emas.
+<br><br><b>Istisnolar:</b><br>
+1) Bir bo'g'inli so'zlarda ko'pincha yumshamaydi: <code>top → topu</code>, <code>süt → sütü</code>, <code>saç → saçı</code>, <code>üç → üçü</code>.<br>
+2) Chet tillardan kirgan so'zlar: <code>hukuk → hukuku</code>, <code>sepet → sepeti</code>.<br>
+3) Xos ismlar yozuvda yumshamaydi, talaffuzda yumshaydi: <code>Ahmet'e</code> (o'qilishi: Ahmede).`,
+ex:[["kitap → kitabı","kitobni"],["ağaç → ağacı","daraxtni"],["yurt → yurdu","vatanni"],["çocuk → çocuğu","bolani"],["renk → rengi","rangni"],["sokak → sokağa","ko'chaga"],["dolap → dolabı","shkafni"],["ayak → ayağı","oyoqni"]]
+},
+{
+id:'a1-5', lvl:'A1', n:5, tr:'Ünsüz Sertleşmesi (Fıstıkçı Şahap)', uz:'Undosh qattiqlashishi',
+body:`Agar so'z <b>jarangsiz undosh</b> bilan tugasa, <code>d-</code> bilan boshlanuvchi qo'shimcha <code>t-</code> ga aylanadi.
+<br><br>Jarangsiz undoshlar eslab qolish uchun maxsus ibora bilan yodlanadi: <b>"Fıstıkçı Şahap"</b> → <code>f, s, t, k, ç, ş, h, p</code>.
+<br><br>Ya'ni: <code>-da → -ta</code>, <code>-de → -te</code>, <code>-dan → -tan</code>, <code>-den → -ten</code>, <code>-dı → -tı</code>, <code>-di → -ti</code>.
+<br><br>Agar so'z jarangli undosh yoki unli bilan tugasa, qo'shimcha <code>d-</code> bilan qoladi.`,
+ex:[["kitap + da → kitapta","kitobda"],["ağaç + dan → ağaçtan","daraxtdan"],["sokak + ta → sokakta","ko'chada"],["okul + da → okulda","maktabda"],["ev + de → evde","uyda"],["göl + de → gölde","ko'lda"],["1919'da","1919-yilda"],["sabah + tan → sabahtan","ertalabdan"]]
+},
+{
+id:'a1-6', lvl:'A1', n:6, tr:'Çoğul Eki (-lar / -ler)', uz:"Ko'plik qo'shimchasi (-lar / -ler)",
+body:`Turk tilida ko'plik <b>faqat bitta</b> qo'shimcha bilan yasaladi: <code>-lar / -ler</code>. U katta unlilar garmoniyasiga bo'ysunadi.
+<br><br>O'zbek tilidagi <code>-lar</code> bilan deyarli bir xil, lekin turkchada <b>ikkita shakli</b> bor: orqa unli → <code>-lar</code>, old unli → <code>-ler</code>.
+<br><br><b>Muhim farq:</b> sondan keyin ko'plik qo'shimchasi <b>ishlatilmaydi</b>:<br>
+✅ <code>üç öğrenci</code> (uch o'quvchi) &nbsp;—&nbsp; ❌ <code>üç öğrenciler</code><br>
+Bu qoida o'zbek tilida ham mavjud: "uch o'quvchi" deymiz, "uch o'quvchilar" emas.`,
+ex:[["bir kitap — iki kitap","bir kitob — ikki kitob"],["öğrenciler","o'quvchilar"],["evler","uylar"],["arabalar","mashinalar"],["gözler","ko'zlar"],["günler","kunlar"],["çocuklar","bolalar"],["kitaplar ve defterler","kitoblar va daftarlar"]]
+},
+{
+id:'a1-7', lvl:'A1', n:7, tr:'İşaret Zamirleri ve Soru Zamirleri', uz:"Ko'rsatish va so'roq olmoshlari",
+body:`<b>Ko'rsatish olmoshlari:</b><br>
+• <code>bu</code> — shu, yaqin narsa (o'zbekcha "bu")<br>
+• <code>şu</code> — ana shu, o'rtacha masofa<br>
+• <code>o</code> — u, anavi (o'zbekcha "u" ham shaxs, ham narsa uchun)
+<br><br><b>So'roq olmoshlari:</b><br>
+• <code>kim?</code> — kim? (shaxs uchun)<br>
+• <code>ne?</code> — nima? (narsa uchun)<br>
+• <code>neresi? / nerede?</code> — qayeri? / qayerda?<br>
+• <code>nasıl?</code> — qanday?<br>
+• <code>kaç?</code> — nechta? necha?<br>
+• <code>hangi?</code> — qaysi?<br>
+• <code>neden / niçin?</code> — nima uchun?
+<br><br>Turk tilida <b>o</b> olmoshi o'zbek tilidagi "u" kabi ham shaxsga, ham narsaga ishora qiladi.`,
+ex:[["Bu ne?","Bu nima?"],["Bu bir kitap.","Bu kitob."],["Şu kim?","Ana shu kim?"],["O benim kardeşim.","U mening ukam."],["O neresi?","U qayer?"],["Nasılsınız?","Qalaysiz?"],["Kaç yaşındasın?","Necha yoshdasan?"],["Hangi kitabı istiyorsun?","Qaysi kitobni xohlaysan?"]]
+},
+{
+id:'a1-8', lvl:'A1', n:8, tr:'Soru Eki (-mı / -mi / -mu / -mü)', uz:"So'roq qo'shimchasi (-mi)",
+body:`Turk tilida so'roq qo'shimchasi <b>alohida so'z</b> sifatida yoziladi va <b>4 xil</b> shaklga ega: <code>mı, mi, mu, mü</code>. U katta va kichik unli garmoniyasiga to'liq bo'ysunadi.
+<br><br>O'zbek tilidagi <code>-mi</code> bilan ma'nosi bir xil, lekin:<br>
+1) Turkchada <b>doim ajratib yoziladi</b>.<br>
+2) Shakli so'zning oxirgi unlisiga qarab o'zgaradi.<br>
+3) Shaxs qo'shimchasi so'roq qo'shimchasidan <b>keyin</b> keladi: <code>öğrenci misin?</code>
+<br><br><b>Tanlash qoidasi:</b> oxirgi unli <code>a, ı</code> → <code>mı</code>; <code>e, i</code> → <code>mi</code>; <code>o, u</code> → <code>mu</code>; <code>ö, ü</code> → <code>mü</code>.`,
+ex:[["Bu kitap mı?","Bu kitobmi?"],["Sen öğrenci misin?","Sen o'quvchimisan?"],["O doktor mu?","U shifokormi?"],["Ev güzel mi?","Uy chiroy limi?"],["Türkçe biliyor musun?","Turkcha bilasanmi?"],["Bugün gidiyor muyuz?","Bugun ketyapmizmi?"],["Süt var mı?","Sut bormi?"],["Yorgun musunuz?","Charchaganmisiz?"]]
+},
+{
+id:'a1-9', lvl:'A1', n:9, tr:'Sayılar ve Sıra Sayıları', uz:"Sonlar va tartib sonlar",
+body:`<b>Asosiy sonlar:</b><br>
+<code>bir</code> (1), <code>iki</code> (2), <code>üç</code> (3), <code>dört</code> (4), <code>beş</code> (5), <code>altı</code> (6), <code>yedi</code> (7), <code>sekiz</code> (8), <code>dokuz</code> (9), <code>on</code> (10), <code>yirmi</code> (20), <code>otuz</code> (30), <code>kırk</code> (40), <code>elli</code> (50), <code>altmış</code> (60), <code>yetmiş</code> (70), <code>seksen</code> (80), <code>doksan</code> (90), <code>yüz</code> (100), <code>bin</code> (1000), <code>milyon</code> (1 000 000).
+<br><br><b>Tartib sonlar:</b> so'zga <code>-ıncı / -inci / -uncu / -üncü</code> qo'shiladi. Oxirgi unli va undoshga qarab tanlanadi. Unli bilan tugasa → <code>-ncı / -nci</code>.
+<br><br>O'zbek tilidagi <code>-inchi</code> qo'shimchasiga to'liq mos keladi.`,
+ex:[["bir, iki, üç, dört, beş","bir, ikki, uch, to'rt, besh"],["yirmi bir","yigirma bir"],["yüz elli","yuz elli"],["bin dokuz yüz","ming to'qqiz yuz"],["birinci","birinchi"],["ikinci","ikkinchi"],["üçüncü","uchinchi"],["dördüncü, beşinci, altıncı","to'rtinchi, beshinchi, oltinchi"],["onuncu","o'ninchi"]]
+},
+{
+id:'a1-10', lvl:'A1', n:10, tr:'Var / Yok', uz:"Bor / Yo'q tushunchasi",
+body:`Turk tilida <b>bor</b> va <b>yo'q</b> tushunchalari <code>var</code> va <code>yok</code> so'zlari bilan ifodalanadi. Bu o'zbek tilidagi "bor" va "yo'q" bilan <b>deyarli bir xil</b>.
+<br><br>Egalik qo'shimchasi bilan birga ishlatiladi: <code>benim ... var</code>, ya'ni "menda ... bor". Turk tilida shaxs ko'pincha egalik qo'shimchasi orqali ko'rsatiladi.
+<br><br><b>So'roq shakli:</b> <code>var mı?</code> / <code>yok mu?</code><br>
+<b>Inkor shakli:</b> <code>yok</code> — "yo'q". <code>değil</code> esa "emas" ma'nosini beradi (bu boshqa narsa!).`,
+ex:[["Benim bir kardeşim var.","Mening bir ukam bor."],["Param yok.","Pulim yo'q."],["Burada market var mı?","Bu yerda do'kon bormi?"],["Zamanım yok.","Vaqtim yo'q."],["Sorun yok.","Muammo yo'q."],["Sende kalem var mı?","Senda qalam bormi?"],["Hayır, yok.","Yo'q, yo'q."],["İki tane var.","Ikkita bor."]]
+},
+{
+id:'a1-11', lvl:'A1', n:11, tr:'Yönelme Hali (-a / -e)', uz:"Jo'nalish kelishigi (-ga / -ka)",
+body:`Jo'nalish kelishigi <b>kimga? nimaga? qayerga?</b> savollariga javob beradi. Qo'shimchasi: <code>-a / -e</code>.
+<br><br>• Oxirgi unli orqa qator (<code>a,ı,o,u</code>) → <code>-a</code><br>
+• Oxirgi unli old qator (<code>e,i,ö,ü</code>) → <code>-e</code><br>
+• So'z <b>unli bilan tugasa</b> → orasiga <b>y</b> qo'shiladi: <code>-ya / -ye</code>
+<br><br>O'zbek tilidagi <code>-ga / -ka / -qa</code> qo'shimchasiga mos keladi. Xos ismlarda apostrof qo'yiladi: <code>Ali'ye</code>, <code>Ankara'ya</code>.`,
+ex:[["Okula gidiyorum.","Maktabga ketyapman."],["Eve geliyorum.","Uyga kelyapman."],["Ali'ye verdim.","Aliga berdim."],["Ankara'ya gidiyoruz.","Anqaraga ketyapmiz."],["Sana söylüyorum.","Senga aytayapman."],["Bana bak.","Menga qara."],["İstanbul'a hoş geldiniz.","Istanbulga xush kelibsiz."],["Masaya koydum.","Stolga qo'ydim."]]
+},
+{
+id:'a1-12', lvl:'A1', n:12, tr:'Bulunma Hali (-da / -de / -ta / -te)', uz:"O'rin kelishigi (-da / -de)",
+body:`O'rin kelishigi <b>qayerda? kimda?</b> savollariga javob beradi. Qo'shimchasi: <code>-da / -de</code>.
+<br><br>Undosh qattiqlashishi qonuniga ko'ra, jarangsiz undoshdan keyin <code>-ta / -te</code> bo'ladi ("Fıstıkçı Şahap" qoidasi).
+<br><br>O'zbek tilidagi <code>-da</code> qo'shimchasi bilan bir xil. Farqi shundaki, turkchada <b>ikki shakl</b> bor va qattiqlashish qoidasi qat'iy amal qiladi.`,
+ex:[["Evdeyim.","Uydaman."],["Okulda.","Maktabda."],["Kitapta yazıyor.","Kitobda yozilgan."],["Sokakta oynuyorlar.","Ko'chada o'ynayaptilar."],["İşteyim.","Ishdaman."],["Markette.","Do'konda."],["Ankara'da yaşıyorum.","Anqarada yashayman."],["Ağaçta kuş var.","Daraxtda qush bor."]]
+},
+{
+id:'a1-13', lvl:'A1', n:13, tr:'Ayrılma Hali (-dan / -den / -tan / -ten)', uz:"Chiqish kelishigi (-dan)",
+body:`Chiqish kelishigi <b>kimdan? nimadan? qayerdan?</b> savollariga javob beradi. Qo'shimchasi: <code>-dan / -den</code>, jarangsiz undoshdan keyin <code>-tan / -ten</code>.
+<br><br>O'zbek tilidagi <code>-dan</code> bilan bir xil ma'noga ega. Turkchada bu kelishik <b>sabab</b> ma'nosini ham beradi: <code>yorgunluktan</code> — charchoqdan.
+<br><br>Xos ismlarda: <code>İstanbul'dan</code>, <code>Ali'den</code>.`,
+ex:[["Okuldan geliyorum.","Maktabdan kelyapman."],["Evden çıktım.","Uydan chiqdim."],["İstanbul'dan geldim.","Istanbuldan keldim."],["Senden hoşlanıyorum.","Senga yoqaman."],["Sabahtan akşama kadar.","Ertalabdan kechgacha."],["Yorgunluktan uyudum.","Charchoqdan uxlab qoldim."],["Ağaçtan düştü.","Daraxtdan tushdi."],["Hastadan haber var mı?","Bemordan xabar bormi?"]]
+},
+{
+id:'a1-14', lvl:'A1', n:14, tr:'Belirtme Hali (-ı / -i / -u / -ü)', uz:"Tushum kelishigi (-ni)",
+body:`Tushum kelishigi <b>kimni? nimani?</b> savollariga javob beradi. Qo'shimchasi: <code>-ı / -i / -u / -ü</code>.
+<br><br>• So'z unli bilan tugasa → orasiga <b>y</b>: <code>-yı / -yi / -yu / -yü</code><br>
+• Yumshash qoidasi ishlaydi: <code>kitap → kitabı</code>
+<br><br>O'zbek tilidagi <code>-ni</code> bilan bir xil. <b>Muhim farq:</b> turk tilida faqat <b>aniq, ma'lum</b> narsa tushum kelishigida bo'ladi. "Kitob o'qiyapman" → <code>kitap okuyorum</code> (qo'shimchasiz!), "Kitobni o'qiyapman" → <code>kitabı okuyorum</code>.`,
+ex:[["Kitabı okudum.","Kitobni o'qidim."],["Evi gördüm.","Uyni ko'rdim."],["Arabayı yıkadım.","Mashinani yuvdim."],["Suyu içtim.","Suvni ichdim."],["Seni seviyorum.","Seni sevaman."],["Onu tanıyor musun?","Uni taniysanmi?"],["Gazeteyi aldım.","Gazetani oldim."],["Çayı içelim.","Choyni ichaylik."]]
+},
+{
+id:'a1-15', lvl:'A1', n:15, tr:'Şimdiki Zaman (-yor)', uz:"Hozirgi zamon (-yapti)",
+body:`Hozirgi zamon <b>aynan hozir</b> bo'layotgan harakatni bildiradi. Qo'shimchasi: <code>-(ı/i/u/ü)yor</code>.
+<br><br><b>Yasalish qoidasi:</b><br>
+1) So'z unli bilan tugasa → unli tushib qoladi: <code>oku- + yor → okuyor</code>, <code>bekle- + yor → bekliyor</code>.<br>
+2) So'z undosh bilan tugasa → orasiga tor unli qo'shiladi: <code>gel- + iyor → geliyor</code>, <code>yap- + ıyor → yapıyor</code>, <code>gör- + üyor → görüyor</code>.
+<br><br><b>Shaxs qo'shimchalari:</b><br>
+<code>-um / -um</code> (men), <code>-sun</code> (sen), <code>—</code> (u), <code>-uz</code> (biz), <code>-sunuz</code> (siz), <code>-lar</code> (ular).
+<br><br>O'zbek tilidagi "-yapti" shakliga to'liq mos keladi.`,
+ex:[["Ben geliyorum.","Men kelyapman."],["Sen geliyorsun.","Sen kelyapsan."],["O geliyor.","U kelyapti."],["Biz geliyoruz.","Biz kelyapmiz."],["Siz geliyorsunuz.","Siz kelyapsiz."],["Onlar geliyorlar.","Ular kelyaptilar."],["Kitap okuyorum.","Kitob o'qiyapman."],["Türkçe öğreniyorum.","Turkcha o'rganyapman."]]
+},
+{
+id:'a1-16', lvl:'A1', n:16, tr:'Şimdiki Zamanın Olumsuz ve Soru Şekli', uz:"Hozirgi zamonning inkor va so'roq shakli",
+body:`<b>Inkor shakli:</b> o'zak + <code>-mı / -mi / -mu / -mü</code> + <code>-yor</code> + shaxs qo'shimchasi.<br>
+<code>gel- → gelmiyorum</code>, <code>oku- → okumuyorum</code>, <code>yap- → yapmıyorum</code>, <code>gör- → görmüyorum</code>.
+<br><br><b>So'roq shakli:</b> so'roq qo'shimchasi <b>shaxs qo'shimchasidan oldin</b> keladi.<br>
+<code>geliyor muyum?</code>, <code>geliyor musun?</code>, <code>geliyor mu?</code>, <code>geliyor muyuz?</code>, <code>geliyor musunuz?</code>, <code>geliyorlar mı?</code>
+<br><br>O'zbek tilidagi "kelyapmanmi?", "kelyapsanmi?" kabi shakllarga mos keladi.`,
+ex:[["Gelmiyorum.","Kelmayapman."],["Anlamıyorum.","Tushunmayapman."],["Bilmiyorum.","Bilmayapman."],["Çalışmıyor.","Ishlamayapti."],["Geliyor musun?","Kelyapsanmi?"],["Ne yapıyorsun?","Nima qilyapsan?"],["Nereye gidiyorsun?","Qayerga ketyapsan?"],["Neden gülmüyorsun?","Nega kulmayapsan?"]]
+},
+{
+id:'a1-17', lvl:'A1', n:17, tr:'Kişi Ekleri', uz:"Shaxs-son qo'shimchalari",
+body:`Turk tilida shaxs qo'shimchalari zamonlarga qarab o'zgaradi. Eng muhim uchta jadval:
+<br><br><b>1) Hozirgi zamon (-yor):</b><br>
+<code>-um</code> (men) • <code>-sun</code> (sen) • <code>—</code> (u) • <code>-uz</code> (biz) • <code>-sunuz</code> (siz) • <code>-lar</code> (ular)
+<br><br><b>2) O'tgan zamon (-dı):</b><br>
+<code>-m</code> (men) • <code>-n</code> (sen) • <code>—</code> (u) • <code>-k</code> (biz) • <code>-niz</code> (siz) • <code>-lar</code> (ular)
+<br><br><b>3) Kelasi zamon (-acak):</b><br>
+<code>-ım</code> (men) • <code>-sın</code> (sen) • <code>—</code> (u) • <code>-ız</code> (biz) • <code>-sınız</code> (siz) • <code>-lar</code> (ular)
+<br><br>O'zbek tilidan farqli o'laroq, turk tilida <b>u</b> va <b>ular</b> uchun ko'pincha qo'shimcha ishlatilmaydi yoki faqat <code>-lar</code> qo'shiladi.`,
+ex:[["Ben öğrenciyim.","Men o'quvchiman."],["Sen öğrencisin.","Sen o'quvchisan."],["O öğrenci.","U o'quvchi."],["Biz öğrenciyiz.","Biz o'quvchimiz."],["Siz öğrencisiniz.","Siz o'quvchisiz."],["Onlar öğrenci.","Ular o'quvchi."],["Ben geldim.","Men keldim."],["Sen geldin.","Sen kelding."]]
+},
+{
+id:'a1-18', lvl:'A1', n:18, tr:'Ek-Fiil: İsim Cümlelerinde Şimdiki Zaman', uz:"Ot gaplarda hozirgi zamon (Ben öğrenciyim)",
+body:`Turk tilida "men o'quvchiman" kabi gaplarda fe'l ishlatilmaydi. Buning o'rniga <b>shaxs qo'shimchasi</b> to'g'ridan-to'g'ri otga qo'shiladi.
+<br><br><b>Qo'shimchalar:</b><br>
+<code>-(y)ım</code> (men) → <code>öğrenciyim</code><br>
+<code>-sın</code> (sen) → <code>öğrencisin</code><br>
+<code>—</code> (u) → <code>öğrenci</code><br>
+<code>-(y)ız</code> (biz) → <code>öğrenciyiz</code><br>
+<code>-sınız</code> (siz) → <code>öğrencisiniz</code><br>
+<code>-lar</code> (ular) → <code>öğrenciler</code>
+<br><br><b>Inkor shakli:</b> <code>değil</code> so'zi bilan yasaladi: <code>Ben öğrenci değilim</code> — "Men o'quvchi emasman".`,
+ex:[["Ben öğrenciyim.","Men o'quvchiman."],["Sen doktorsun.","Sen shifokorsan."],["O öğretmen.","U o'qituvchi."],["Biz mutluyuz.","Biz baxtlimiz."],["Siz hazırsınız.","Siz tayyorsiz."],["Onlar yorgun.","Ular charchagan."],["Ben hasta değilim.","Men kasal emasman."],["O iyi bir insan.","U yaxshi inson."]]
+},
+{
+id:'a1-19', lvl:'A1', n:19, tr:'Emir Kipi', uz:'Buyruq mayli',
+body:`Buyruq mayli <b>so'z o'zagiga</b> hech qanday qo'shimcha qo'shmasdan yasaladi (sen uchun):
+<br><br><code>gel!</code> (kel!) • <code>git!</code> (bor!) • <code>bak!</code> (qara!) • <code>oku!</code> (o'qi!) • <code>yap!</code> (qil!)
+<br><br><b>Xushmuomala (siz) shakli:</b> <code>-ın / -in / -un / -ün</code> yoki <code>-yın / -yin</code>:<br>
+<code>gelin!</code> • <code>gidin!</code> • <code>bakın!</code> • <code>okuyun!</code> • <code>yapın!</code>
+<br><br><b>Inkor shakli:</b> <code>-ma / -me</code>:<br>
+<code>gelme!</code> (kelma!) • <code>gelmeyin!</code> (kelmang!) • <code>yapma!</code> (qilma!)
+<br><br>O'zbek tilidagi buyruq mayli bilan deyarli bir xil, faqat xushmuomala shakli qo'shimcha bilan yasaladi.`,
+ex:[["Gel buraya!","Bu yerga kel!"],["Lütfen oturun.","Iltimos, o'tiring."],["Bak!","Qara!"],["Dinleyin.","Tinglang."],["Yapma!","Qilma!"],["Gelmeyin.","Kelmang."],["Bana yardım et.","Menga yordam ber."],["Kapıyı aç.","Eshikni och."]]
+},
+{
+id:'a1-20', lvl:'A1', n:20, tr:'İstek Kipi: A1 Seviyesi (-alım / -elim)', uz:"Xohish mayli (-aylik / -ay)",
+body:`Xohish mayli <b>"keling, ... qilaylik"</b> yoki <b>"... qilay"</b> ma'nosini beradi.
+<br><br><b>"Biz" shakli:</b> <code>-alım / -elim</code> → <code>gidelim</code> (ketaylik), <code>yapalım</code> (qilaylik), <code>okuyalım</code> (o'qiyik).
+<br><br><b>"Men" shakli:</b> <code>-ayım / -eyim</code> → <code>gideyim</code> (ketay), <code>yapayım</code> (qilay), <code>bakayım</code> (qaray).
+<br><br>So'z unli bilan tugasa, orasiga <b>y</b> qo'shiladi: <code>oku- → okuyalım</code>, <code>bekle- → bekleyelim</code>.
+<br><br>O'zbek tilidagi "-aylik" va "-ay" qo'shimchalariga to'liq mos keladi.`,
+ex:[["Hadi gidelim!","Kel, ketaylik!"],["Yemek yiyelim.","Ovqat yeylik."],["Türkçe çalışalım.","Turkcha o'qiyik."],["Sinemaya gidelim mi?","Kinoga boraylikmi?"],["Bir kahve içeyim.","Bir qahva ichay."],["Sana yardım edeyim.","Senga yordam beray."],["Biraz dinlenelim.","Biroz dam olaylik."],["Başlayalım!","Boshlaylik!"]]
+},
+
+/* ==================== A2 ==================== */
+{
+id:'a2-1', lvl:'A2', n:1, tr:'İyelik Ekleri', uz:"Egalik qo'shimchalari",
+body:`Egalik qo'shimchalari <b>kimning?</b> savoliga javob beradi va otga qo'shiladi.
+<br><br><code>benim evim</code> — mening uyim<br>
+<code>senin evin</code> — sening uying<br>
+<code>onun evi</code> — uning uyi<br>
+<code>bizim evimiz</code> — bizning uyimiz<br>
+<code>sizin eviniz</code> — sizning uyingiz<br>
+<code>onların evi / evleri</code> — ularning uyi
+<br><br><b>Muhim qoida:</b> so'z unli bilan tugasa, 3-shaxsda orasiga <b>s</b> qo'shiladi: <code>araba → arabası</code>, <code>kapı → kapısı</code>.
+<br><br>Ko'plikda: <code>ev → evlerim</code> (uylarim), <code>evlerimiz</code> (uylarimiz).
+<br><br>O'zbek tilidagi "-im, -ing, -i, -imiz, -ingiz, -i" qo'shimchalariga to'liq mos keladi.`,
+ex:[["Benim adım Ali.","Mening ismim Ali."],["Senin kitabın nerede?","Sening kitobing qayerda?"],["Onun arabası yeni.","Uning mashinasi yangi."],["Bizim okulumuz büyük.","Bizning maktabimiz katta."],["Sizin eviniz güzel.","Sizning uyingiz chiroyli."],["Onların çocukları var.","Ularning bolalari bor."],["Kardeşim öğrenci.","Ukam o'quvchi."],["Annem evde.","Onam uyda."]]
+},
+{
+id:'a2-2', lvl:'A2', n:2, tr:'Belirtili İsim Tamlaması', uz:'Aniq izafet',
+body:`Aniq izafet — <b>aniq, ma'lum</b> ikki otning bog'lanishi. Birinchi ot <b>genitiv</b> (<code>-ın / -in / -un / -ün</code>), ikkinchi ot <b>egalik</b> qo'shimchasini oladi.
+<br><br><code>okulun kapısı</code> — maktabning eshigi<br>
+<code>evin rengi</code> — uyning rangi<br>
+<code>Ali'nin kitabı</code> — Alining kitobi
+<br><br>O'zbek tilidagi <b>"maktabning eshigi"</b> qurilishiga to'liq mos keladi. Ikkinchi ot ham, birinchi ot ham qo'shimcha oladi — bu o'zbek tilidagi kabi.
+<br><br><b>Diqqat:</b> so'z unli bilan tugasa, 1-otda <b>n</b> qo'shiladi: <code>araba → arabanın</code>, <code>kapı → kapının</code>.`,
+ex:[["okulun kapısı","maktabning eshigi"],["evin rengi","uyning rangi"],["Ali'nin kitabı","Alining kitobi"],["arabanın anahtarı","mashinaning kaliti"],["öğrencinin defteri","o'quvchining daftari"],["Türkiye'nin başkenti","Turkiyaning poytaxti"],["annenin yemeği","onaning ovqati"],["şehrin merkezi","shaharning markazi"]]
+},
+{
+id:'a2-3', lvl:'A2', n:3, tr:'Belirtisiz İsim Tamlaması', uz:'Aniqmas izafet',
+body:`Aniqmas izafetda birinchi ot <b>hech qanday qo'shimcha olmaydi</b>, ikkinchi ot esa <b>3-shaxs egalik</b> qo'shimchasini oladi.
+<br><br><code>okul kapısı</code> — maktab eshigi (qaysi maktab ekani noma'lum)<br>
+<code>Türk kahvesi</code> — turk qahvasi<br>
+<code>altın yüzük</code> — oltin uzuk
+<br><br>Farqi: aniq izafetda <b>aniq bir narsa</b> haqida gapiriladi, aniqmas izafetda esa <b>tur, xil</b> bildiriladi.
+<br><br>O'zbek tilida bu qurilish <b>izofat</b> deb ataladi: "maktab eshigi", "turk qahvasi", "oltin uzuk".`,
+ex:[["okul kapısı","maktab eshigi"],["Türk kahvesi","turk qahvasi"],["altın yüzük","oltin uzuk"],["tahta masa","yog'och stol"],["çay bardağı","choy piyolasi"],["kadın doktor","ayol shifokor"],["İngilizce kitabı","ingliz tili kitobi"],["çocuk oyunu","bolalar o'yini"]]
+},
+{
+id:'a2-4', lvl:'A2', n:4, tr:'Zincirleme İsim Tamlaması', uz:'Zanjirsimon izafet',
+body:`Zanjirsimon izafet — <b>uchtadan ortiq</b> otning ketma-ket bog'lanishi. Har bir oraliq ot ikki tomonlama qo'shimcha oladi.
+<br><br><code>okulun bahçe kapısı</code> — maktabning hovli eshigi<br>
+<code>Ali'nin kardeşinin arabası</code> — Alining ukasining mashinasi<br>
+<code>Türkiye'nin en büyük şehrinin adı</code> — Turkiyaning eng katta shahrining nomi
+<br><br>O'zbek tilida ham xuddi shunday zanjir hosil bo'ladi: "maktabning hovli eshigi". Bu qurilishda oxirgi ot har doim egalik qo'shimchasini oladi.`,
+ex:[["okulun bahçe kapısı","maktabning hovli eshigi"],["Ali'nin kardeşinin arabası","Alining ukasining mashinasi"],["evin çatı katı","uyning chordoq qavati"],["şirketin satış müdürü","kompaniyaning savdo direktori"],["üniversitenin yabancı dil bölümü","universitetning chet tillari bo'limi"],["annenin el işi","onaning qo'l ishi"],["bankanın kredi faizi","bankning kredit foizi"],["ülkenin ekonomik durumu","mamlakatning iqtisodiy ahvoli"]]
+},
+{
+id:'a2-5', lvl:'A2', n:5, tr:'Belirli Geçmiş Zaman (-dı / -di / -du / -dü)', uz:"Aniq o'tgan zamon",
+body:`Bu zamon <b>ko'rilgan, aniq, guvoh bo'lingan</b> o'tmishni bildiradi. Qo'shimchasi: <code>-dı / -di / -du / -dü</code>, jarangsiz undoshdan keyin <code>-tı / -ti / -tu / -tü</code>.
+<br><br><b>Shaxs qo'shimchalari:</b><br>
+<code>-m</code> (men) → <code>geldim</code><br>
+<code>-n</code> (sen) → <code>geldin</code><br>
+<code>—</code> (u) → <code>geldi</code><br>
+<code>-k</code> (biz) → <code>geldik</code><br>
+<code>-niz</code> (siz) → <code>geldiniz</code><br>
+<code>-lar</code> (ular) → <code>geldiler</code>
+<br><br>O'zbek tilidagi <code>-di</code> qo'shimchasiga to'liq mos keladi: "keldim, kelding, keldi, keldik, keldingiz, keldilar".`,
+ex:[["Dün okula geldim.","Kecha maktabga keldim."],["Sen ne yaptın?","Sen nima qilding?"],["Ali kitap okudu.","Ali kitob o'qidi."],["Biz sinemaya gittik.","Biz kinoga bordik."],["Siz nerede kaldınız?","Siz qayerda qoldingiz?"],["Onlar erken geldiler.","Ular erta keldilar."],["Sabah kahvaltı yaptım.","Ertalab nonushta qildim."],["Ben onu gördüm.","Men uni ko'rdim."]]
+},
+{
+id:'a2-6', lvl:'A2', n:6, tr:'Belirli Geçmiş Zamanın Olumsuz ve Soru Şekli', uz:"Aniq o'tgan zamonning inkor va so'roq shakli",
+body:`<b>Inkor:</b> o'zak + <code>-ma / -me</code> + <code>-dı / -di</code> + shaxs qo'shimchasi.<br>
+<code>gelmedim</code> (kelmadim), <code>gelmedin</code>, <code>gelmedi</code>, <code>gelmedik</code>, <code>gelmediniz</code>, <code>gelmediler</code>.
+<br><br><b>So'roq:</b> so'roq qo'shimchasi shaxs qo'shimchasidan oldin keladi.<br>
+<code>geldim mi?</code> (keldimmi?) • <code>geldin mi?</code> • <code>geldi mi?</code> • <code>geldik mi?</code> • <code>geldiniz mi?</code> • <code>geldiler mi?</code>
+<br><br>O'zbek tilida so'roq qo'shimchasi oxirida keladi, turkchada esa <b>shaxs qo'shimchasidan oldin</b> — bu muhim farq!`,
+ex:[["Gelmedim.","Kelmadim."],["Anlamadı.","Tushunmadi."],["Yapmadık.","Qilmadik."],["Geldin mi?","Keldingmi?"],["Gördün mü?","Ko'rdingmi?"],["Yedi mi?","Yedimi?"],["Okula gittiniz mi?","Maktabga bordingizmi?"],["Dün çalıştılar mı?","Kecha ishladilarmi?"]]
+},
+{
+id:'a2-7', lvl:'A2', n:7, tr:'Ek-Fiil: İsim Cümlelerinde Geçmiş Zaman', uz:"Ot gaplarda o'tgan zamon",
+body:`Ot gaplarni o'tgan zamonga aylantirish uchun <code>-(y)dı / -(y)di</code> qo'shimchasi otga qo'shiladi.
+<br><br><code>öğrenci → öğrenciydim</code> (o'quvchi edim)<br>
+<code>öğrenci → öğrenciydin</code><br>
+<code>öğrenci → öğrenciydi</code><br>
+<code>öğrenci → öğrenciydik</code><br>
+<code>öğrenci → öğrenciydiniz</code><br>
+<code>öğrenci → öğrenciydiler</code>
+<br><br><b>Inkor:</b> <code>değildim</code>, <code>değildin</code>, <code>değildi</code>...<br>
+<code>Ben hasta değildim</code> — Men kasal emasdim.
+<br><br>O'zbek tilidagi "edim, eding, edi" yordamchi fe'liga mos keladi.`,
+ex:[["Ben öğrenciydim.","Men o'quvchi edim."],["Sen gençtin.","Sen yosh eding."],["O doktordu.","U shifokor edi."],["Biz mutluyduk.","Biz baxtli edik."],["Siz haklıydınız.","Siz haq edingiz."],["Hava çok sıcaktı.","Havo juda issiq edi."],["Ben yorgun değildim.","Men charchagan emasdim."],["O zaman çocuktuk.","O'shanda bola edik."]]
+},
+{
+id:'a2-8', lvl:'A2', n:8, tr:'Gelecek Zaman (-acak / -ecek)', uz:'Kelasi zamon',
+body:`Kelasi zamon <b>kelajakda bo'ladigan</b> harakatni bildiradi. Qo'shimchasi: <code>-acak / -ecek</code>.
+<br><br><b>Shaxs qo'shimchalari:</b><br>
+<code>-ım</code> (men) → <code>geleceğim</code><br>
+<code>-sın</code> (sen) → <code>geleceksin</code><br>
+<code>—</code> (u) → <code>gelecek</code><br>
+<code>-ız</code> (biz) → <code>geleceğiz</code><br>
+<code>-sınız</code> (siz) → <code>geleceksiniz</code><br>
+<code>-lar</code> (ular) → <code>gelecekler</code>
+<br><br><b>Inkor:</b> <code>gelmeyeceğim</code>, <code>gelmeyeceksin</code>...<br>
+<b>So'roq:</b> <code>gelecek miyim?</code>, <code>gelecek misin?</code>
+<br><br>O'zbek tilidagi "-aman / -asan" kelasi zamon shakllariga mos keladi.`,
+ex:[["Yarın geleceğim.","Ertaga kelaman."],["Ne yapacaksın?","Nima qilasan?"],["O kitap okuyacak.","U kitob o'qiydi."],["Birlikte gideceğiz.","Birga boramiz."],["Siz ne zaman geleceksiniz?","Siz qachon kelasiz?"],["Onlar çalışacaklar.","Ular ishlaydilar."],["Yarın yağmur yağacak.","Ertaga yomg'ir yog'adi."],["Sana yardım edeceğim.","Senga yordam beraman."]]
+},
+{
+id:'a2-9', lvl:'A2', n:9, tr:'Gelecek Zamanda Yumuşama (k → ğ)', uz:"Kelasi zamonda yumshash (k → ğ)",
+body:`<code>-acak / -ecek</code> qo'shimchasidan keyin <b>unli bilan boshlanuvchi</b> shaxs qo'shimchasi kelsa, <code>k</code> harfi <b>ğ</b> ga aylanadi.
+<br><br><code>gelecek + im → geleceğim</code><br>
+<code>yapacak + ım → yapacağım</code><br>
+<code>gidecek + iz → gideceğiz</code><br>
+<code>okuyacak + ız → okuyacağız</code>
+<br><br>Ammo shaxs qo'shimchasi undosh bilan boshlansa (<code>-sın, -sınız, -lar</code>), <b>yumshash bo'lmaydi</b>:<br>
+<code>geleceksin</code>, <code>geleceksiniz</code>, <code>gelecekler</code>.
+<br><br>Bu qoida o'zbek tilida yo'q, shuning uchun yozuvda ko'p xato qilinadi. Diqqat bilan yodlang!`,
+ex:[["geleceğim","kelaman"],["geleceksin","kelasan"],["gelecek","keladi"],["geleceğiz","kelamiz"],["geleceksiniz","kelasiz"],["gelecekler","keladilar"],["yapacağım","qilaman"],["gideceğiz","boramiz"]]
+},
+{
+id:'a2-10', lvl:'A2', n:10, tr:'Lazım / Gerek / İhtiyacı Olmak', uz:"Kerak / Zarur / Ehtiyoji bor",
+body:`Turk tilida "<b>kerak</b>" ma'nosi uchta usulda ifodalanadi:
+<br><br><b>1) lazım / gerek</b> — harakat nomi (<code>-mak / -mek</code>) yoki fe'l o'zagi bilan:<br>
+<code>Gitmem lazım.</code> — Ketishim kerak.<br>
+<code>Çalışmak gerek.</code> — Ishlash kerak.
+<br><br><b>2) gerekiyor</b> — hozirgi zamonda:<br>
+<code>Beklememiz gerekiyor.</code> — Kutishimiz kerak.
+<br><br><b>3) ihtiyacı olmak</b> — "<b>ehtiyoji bor</b>" ma'nosida, <code>-a / -e</code> kelishigi bilan:<br>
+<code>Suya ihtiyacım var.</code> — Suvga ehtiyojim bor.<br>
+<code>Yardıma ihtiyacın var mı?</code> — Yordamga ehtiyojing bormi?
+<br><br>O'zbek tilidagi "kerak" so'ziga to'liq mos keladi.`,
+ex:[["Gitmem lazım.","Ketishim kerak."],["Dinlenmen gerek.","Dam olishing kerak."],["Param lazım.","Pulim kerak."],["Yardıma ihtiyacım var.","Yordamga ehtiyojim bor."],["Doktora gitmem gerekiyor.","Shifokorga borishim kerak."],["Sana ihtiyacım var.","Senga ehtiyojim bor."],["Daha çok çalışmamız lazım.","Ko'proq ishlashimiz kerak."],["Uyumam gerek.","Uxlashim kerak."]]
+},
+{
+id:'a2-11', lvl:'A2', n:11, tr:"«İstemek» Fiili ve İnfinitiv Yapıları", uz:'"Xohlamoq" fe\'li va infinitiv',
+body:`<b>istemek</b> fe'li "xohlamoq" ma'nosini beradi va o'zidan oldin <b>harakat nomi</b> (<code>-mak / -mek</code>) talab qiladi.
+<br><br><code>gitmek istiyorum</code> — ketishni xohlayapman<br>
+<code>yemek istiyor musun?</code> — ovqat yeyishni xohlaysanmi?<br>
+<code>öğrenmek istiyoruz</code> — o'rganishni xohlayapmiz
+<br><br><b>Inkor shakli:</b> <code>gitmek istemiyorum</code> — ketishni xohlamayapman.
+<br><br><b>Muhim:</b> turk tilida "xohlayman" deyish uchun <code>istiyorum</code> ishlatiladi, bu fe'l shaxs qo'shimchasini oladi, lekin asosiy fe'l (<code>gitmek</code>) o'zgarmaydi.
+<br><br>O'zbek tilidagi "-ishni xohlayman" qurilishiga to'liq mos keladi.`,
+ex:[["Türkçe öğrenmek istiyorum.","Turkcha o'rganishni xohlayapman."],["Ne yemek istiyorsun?","Nima yeyishni xohlaysan?"],["Evde kalmak istiyor.","Uyda qolishni xohlaydi."],["Sizinle konuşmak istiyoruz.","Siz bilan gaplashishni xohlayapmiz."],["Gitmek istemiyorum.","Ketishni xohlamayapman."],["Bir şey sormak istiyorum.","Bir narsa so'rashni xohlayapman."],["Dinlenmek istiyor musun?","Dam olishni xohlaysanmi?"],["Çalışmak istemiyorlar.","Ishlashni xohlamayaptilar."]]
+},
+{
+id:'a2-12', lvl:'A2', n:12, tr:'Gibi ve Kadar Edatları', uz:"«Gibi» va «Kadar» ko'makchilari",
+body:`<b>gibi</b> — "kabi, singari". O'xshashlikni bildiradi.<br>
+<code>Senin gibi çalışkanım.</code> — Sening kabi mehnatkashman.<br>
+<code>Buz gibi soğuk.</code> — Muz kabi sovuq.
+<br><br><b>kadar</b> — "kadar, qadar". Miqdor, chegara yoki taqqoslashni bildiradi.<br>
+<code>Senin kadar akıllısın.</code> — Sening qadaring aqllisan.<br>
+<code>Akşama kadar çalıştım.</code> — Kechgacha ishladim.<br>
+<code>Üç saat kadar bekledim.</code> — Uch soatcha kutdim.
+<br><br>O'zbek tilida <b>gibi</b> = "kabi", <b>kadar</b> = "kadar/qadar". Ikkisi ham o'zbek tilida mavjud va ma'nolari bir xil.`,
+ex:[["Senin gibi düşünüyorum.","Sening kabi o'ylayapman."],["Altın gibi parlıyor.","Oltin kabi yaltirayapti."],["Ben senin kadar hızlıyım.","Men sening qadaring tezman."],["Akşama kadar bekledim.","Kechgacha kutdim."],["Bir saat kadar sürdü.","Bir soatcha davom etdi."],["Çocuk gibi davranıyor.","Bola kabi tutyapti."],["Bu kadar yeter.","Shuncha yetadi."],["O kadar güzel değil.","Uncha chiroyli emas."]]
+},
+{
+id:'a2-13', lvl:'A2', n:13, tr:'İle / -le / -la Edatı', uz:"«İle» ko'makchisi (-le / -la)",
+body:`<b>ile</b> ko'makchisi "bilan" ma'nosini beradi va <b>ikki shaklda</b> ishlatiladi:
+<br><br><b>1) Alohida so'z sifatida:</b> <code>arkadaş ile</code> — do'st bilan<br>
+<b>2) Qo'shimcha sifatida:</b> <code>arkadaşla</code> — do'st bilan
+<br><br>Qo'shimcha shakli garmoniyaga bo'ysunadi: <code>-le / -la</code>. So'z unli bilan tugasa → <code>-yle / -yla</code>: <code>araba → arabayla</code>.
+<br><br><b>Ishlatilishi:</b> vosita (transport, qurol), birgalik, sabab.<br>
+<code>Otobüsle gidiyorum.</code> — Avtobusda ketyapman.<br>
+<code>Kalemle yazdım.</code> — Qalam bilan yozdim.<br>
+<code>Ali'yle konuştum.</code> — Ali bilan gaplashdim.
+<br><br>O'zbek tilidagi "-bilan" qo'shimchasiga to'liq mos keladi.`,
+ex:[["Arkadaşımla sinemaya gittim.","Do'stim bilan kinoga bordim."],["Otobüsle geliyorum.","Avtobusda kelyapman."],["Kalemle yaz.","Qalam bilan yoz."],["Ali'yle tanıştım.","Ali bilan tanishdim."],["Araba ile gidiyoruz.","Mashina bilan ketyapmiz."],["Trenle yolculuk yaptık.","Poyezd bilan sayohat qildik."],["Seninle konuşmak istiyorum.","Sen bilan gaplashishni xohlayapman."],["Bıçakla kestim.","Pichoq bilan kesdim."]]
+},
+{
+id:'a2-14', lvl:'A2', n:14, tr:'Edatlar: -dan önce / -dan sonra', uz:"«-dan önce» / «-dan sonra»",
+body:`Bu qurilishlar vaqt tartibini bildiradi.
+<br><br><b>-dan önce</b> — "-dan oldin":<br>
+<code>Dersten önce kahve içerim.</code> — Darsdan oldin qahva ichaman.<br>
+<code>Yemekten önce ellerini yıka.</code> — Ovqatdan oldin qo'llaringni yuv.
+<br><br><b>-dan sonra</b> — "-dan keyin":<br>
+<code>İşten sonra eve gidiyorum.</code> — Ishdan keyin uyga ketyapman.<br>
+<code>Yemekten sonra çay içelim.</code> — Ovqatdan keyin choy ichaylik.
+<br><br>O'zbek tilidagi "-dan oldin" va "-dan keyin" bilan <b>bir xil</b>. Eslatma: bu qurilishda ot <b>chiqish kelishigi</b>da (<code>-dan</code>) bo'ladi.`,
+ex:[["Dersten önce","Darsdan oldin"],["Yemekten sonra","Ovqatdan keyin"],["İşten sonra","Ishdan keyin"],["Toplantıdan önce","Yig'ilishdan oldin"],["Sınavdan sonra","Imtihondan keyin"],["Kahvaltıdan önce spor yaparım.","Nonushtadan oldin sport qilaman."],["Akşam yemeğinden sonra yürüyüşe çıktık.","Kechki ovqatdan keyin sayrga chiqdik."],["Ders çalıştıktan sonra dinlendim.","Dars o'qigandan keyin dam oldim."]]
+},
+{
+id:'a2-15', lvl:'A2', n:15, tr:'Edatlar: -a kadar / -dan beri', uz:"«-a kadar» / «-dan beri»",
+body:`<b>-a kadar</b> — "-gacha" (chegara):<br>
+<code>Akşama kadar çalıştım.</code> — Kechgacha ishladim.<br>
+<code>İstanbul'a kadar gittik.</code> — Istanbulgacha bordik.
+<br><br><b>-dan beri</b> — "-dan beri" (boshlanish nuqtasi):<br>
+<code>Sabahtan beri bekliyorum.</code> — Ertalabdan beri kutyapman.<br>
+<code>İki yıldan beri Türkçe öğreniyorum.</code> — Ikki yildan beri turkcha o'rganyapman.
+<br><br>O'zbek tilidagi "-gacha" va "-dan beri" qo'shimchalariga to'liq mos keladi. Ikkisi ham <b>kelishik qo'shimchasi</b> bilan ishlatiladi: <code>-a/-e</code> va <code>-dan/-den</code>.`,
+ex:[["Sabahtan beri çalışıyorum.","Ertalabdan beri ishlayapman."],["Akşama kadar bekleyeceğim.","Kechgacha kutaman."],["Eve kadar yürüdük.","Uygacha yurdik."],["Üç günden beri hastayım.","Uch kundan beri kasalman."],["Sınıfa kadar koştu.","Sinfgacha yugurdi."],["Çocukluğumdan beri buradayım.","Bolaligimdan beri bu yerdaman."],["Saat beşe kadar çalışıyoruz.","Soat beshgacha ishlayapmiz."],["Dünden beri onu arıyorum.","Kechadan beri uni qidirayapman."]]
+},
+{
+id:'a2-16', lvl:'A2', n:16, tr:'Miktar ve Derece Zarfları', uz:"Miqdor va daraja ravishlari",
+body:`<b>çok</b> — juda, ko'p<br>
+<code>Çok güzel.</code> — Juda chiroyli.
+<br><br><b>daha</b> — yana, ko'proq (taqqoslash)<br>
+<code>Daha büyük.</code> — Undan kattaroq.
+<br><br><b>en</b> — eng<br>
+<code>En güzel.</code> — Eng chiroyli.
+<br><br><b>biraz</b> — biroz, ozgina<br>
+<code>Biraz bekle.</code> — Biroz kut.
+<br><br><b>az</b> — oz<br>
+<code>Az kaldı.</code> — Oz qoldi.
+<br><br><b>pek</b> — unchalik (ko'pincha inkor bilan)<br>
+<code>Pek iyi değil.</code> — Unchalik yaxshi emas.
+<br><br><b>fazla</b> — ortiq<br>
+<code>Fazla konuşma.</code> — Ortiq gapirma.
+<br><br>O'zbek tilidagi "juda, yana, eng, biroz, oz" so'zlariga mos keladi. <b>daha</b> + sifat = qiyosiy daraja, <b>en</b> + sifat = orttirma daraja.`,
+ex:[["Çok güzel.","Juda chiroyli."],["Daha büyük bir ev istiyorum.","Undan kattaroq uy xohlayapman."],["En güzel şehir.","Eng chiroyli shahar."],["Biraz daha bekle.","Biroz ko'proq kut."],["Az param kaldı.","Oz pulim qoldi."],["Pek memnun değilim.","Unchalik mamnun emasman."],["Fazla yemek yeme.","Ortiq ovqat yema."],["Bu çok daha iyi.","Bu juda yaxshiroq."]]
+},
+{
+id:'a2-17', lvl:'A2', n:17, tr:'Yön Zarfları', uz:"Yo'nalish ravishlari",
+body:`<b>içeri</b> — ichkariga<br><code>İçeri gel.</code> — Ichkariga kir.
+<br><br><b>dışarı</b> — tashqariga<br><code>Dışarı çıktı.</code> — Tashqariga chiqdi.
+<br><br><b>aşağı</b> — pastga<br><code>Aşağı in.</code> — Pastga tush.
+<br><br><b>yukarı</b> — yuqoriga<br><code>Yukarı çık.</code> — Yuqoriga chiq.
+<br><br><b>ileri</b> — oldinga<br><code>İleri git.</code> — Oldinga bor.
+<br><br><b>geri</b> — orqaga<br><code>Geri dön.</code> — Orqaga qayt.
+<br><br><b>sağa / sola</b> — o'ngga / chapga<br>
+<b>dümdüz</b> — to'g'riga
+<br><br>O'zbek tilidagi "ichkariga, tashqariga, pastga, yuqoriga" so'zlariga mos keladi. Bu so'zlar ko'pincha fe'l bilan birga keladi.`,
+ex:[["İçeri gel!","Ichkariga kir!"],["Dışarı çıkıyoruz.","Tashqariga chiquapmiz."],["Aşağı bak.","Pastga qara."],["Yukarı çıktık.","Yuqoriga chiqdik."],["İleri gidin.","Oldinga boring."],["Geri dön!","Orqaga qayt!"],["Sağa dön.","O'ngga buril."],["Dümdüz gidin.","To'g'riga boring."]]
+},
+{
+id:'a2-18', lvl:'A2', n:18, tr:'Vasıta Hali (-ca / -ce)', uz:"Vosita kelishigi (-cha / -chа)",
+body:`<code>-ca / -ce</code> qo'shimchasi <b>"-cha / -chа"</b> ma'nosini beradi va quyidagi hollarda ishlatiladi:
+<br><br><b>1) Til nomlari:</b> <code>Türkçe</code> (turkcha), <code>Özbekçe</code> (o'zbekcha), <code>İngilizce</code> (inglizcha).
+<br><br><b>2) Fikr bildirish:</b> <code>bence</code> (menimcha), <code>sence</code> (seningcha), <code>onca</code> (uningcha), <code>bizce</code> (bizningcha).
+<br><br><b>3) Uslub, tarz:</b> <code>kardeşçe</code> (birodarlarcha), <code>insanca</code> (insonlarcha), <code>gizlice</code> (yashirincha).
+<br><br><b>4) Miqdor, taxmin:</b> <code>yüzce</code> (yuzlab), <code>saatçe</code> (soatcha).
+<br><br>O'zbek tilidagi <code>-cha</code> qo'shimchasiga to'liq mos keladi. Eslatma: til nomlari har doim katta harf bilan yoziladi.`,
+ex:[["Türkçe konuşuyorum.","Turkcha gaplashayapman."],["Özbekçe biliyor musun?","O'zbekcha bilasanmi?"],["Bence haklısın.","Menimcha haqsan."],["Sence ne yapmalıyım?","Seningcha nima qilishim kerak?"],["Onca bu doğru.","Uningcha bu to'g'ri."],["İngilizce öğreniyorum.","Inglizcha o'rganyapman."],["Kardeşçe paylaştık.","Birodarlarcha bo'lishdik."],["Biraz yavaşça konuş.","Biroz sekinchа gapir."]]
+},
+
+/* ==================== B1 ==================== */
+{
+id:'b1-1', lvl:'B1', n:1, tr:'Duyulan Geçmiş Zaman (-mış / -miş)', uz:"Eshitilgan o'tgan zamon (-mish)",
+body:`Bu zamon <b>guvoh bo'lmagan</b>, boshqalardan eshitilgan yoki keyin bilib qolingan o'tmishni bildiradi.
+<br><br><b>Shakli:</b> o'zak + <code>-mış / -miş / -muş / -müş</code> + shaxs qo'shimchasi.
+<br><br><code>gelmişim</code> — kelgan ekanman<br>
+<code>gelmişsin</code> — kelgan ekansan<br>
+<code>gelmiş</code> — kelgan ekan<br>
+<code>gelmişiz</code> — kelgan ekanmiz<br>
+<code>gelmişsiniz</code> — kelgan ekansiz<br>
+<code>gelmişler</code> — kelgan ekanlar
+<br><br><b>Inkor:</b> <code>gelmemişim</code>, <code>gelmemişsin</code>...
+<br><br><b>So'roq:</b> <code>gelmiş miyim?</code>, <code>gelmiş misin?</code>
+<br><br>O'zbek tilidagi <b>"-gan ekan"</b> qurilishiga to'liq mos keladi. Bu zamon ma'lumotni boshqadan eshitganimizni bildiradi.`,
+ex:[["Ali dün okula gelmiş.","Ali kecha maktabga kelgan ekan."],["Sınavı kazanmışsın, tebrikler!","Imtihondan o'tgan ekansan, tabriklaymiz!"],["Haberleri duymuş musun?","Xabarlarni eshitganmisan?"],["O çok çalışmış.","U juda ko'p ishlagan ekan."],["Onlar taşınmışlar.","Ular ko'chib ketgan ekanlar."],["Ben bunu bilmiyormuşum.","Men buni bilmayotgan ekanman."],["Kaza olmuş, kimse yaralanmamış.","Avariya bo'lgan ekan, hech kim yaralanmagan ekan."],["Sen hasta mıymışsın?","Sen kasal ekansanmi?"]]
+},
+{
+id:'b1-2', lvl:'B1', n:2, tr:'Duyulan Geçmiş Zaman Masal ve Rivayetlerde', uz:"Eshitilgan o'tgan zamon ertak va rivoyatlarda",
+body:`Turk ertaklari <b>har doim</b> <code>-mış</code> zamoni bilan boshlanadi. Bu an'anaviy uslub.
+<br><br><b>Klassik boshlanish:</b><br>
+<code>Bir varmış, bir yokmuş...</code> — Bor ekan, yo'q ekan...<br>
+<code>Evvel zaman içinde...</code> — Qadim zamonda...<br>
+<code>Bir padişah varmış...</code> — Bir podshoh bor ekan...
+<br><br><b>Tugash:</b><br>
+<code>Onlar ermiş muradına, biz çıkalım kerevetine.</code> — Ular murodiga yetibdi, biz supaning ustiga chiqaylik. (An'anaviy ertak tugatish formulasi)
+<br><br>O'zbek ertaklaridagi "bor ekan, yo'q ekan" bilan <b>deyarli bir xil</b>. Bu zamon hikoya qilishda, rivoyatlarda, afsonalarda juda ko'p ishlatiladi.`,
+ex:[["Bir varmış, bir yokmuş.","Bor ekan, yo'q ekan."],["Evvel zaman içinde bir kral varmış.","Qadim zamonda bir podshoh bor ekan."],["Kralın üç oğlu varmış.","Podshohning uch o'g'li bor ekan."],["En küçük oğlu çok akıllıymış.","Eng kichik o'g'li juda aqlli ekan."],["Bir gün ormana gitmişler.","Bir kuni o'rmonga boribdilar."],["Orada yaşlı bir kadın görmüşler.","U yerda qari bir ayolni ko'ribdilar."],["Kadın onlara yardım etmiş.","Ayol ularga yordam beribdi."],["Sonunda mutlu olmuşlar.","Oxirida baxtli bo'libdilar."]]
+},
+{
+id:'b1-3', lvl:'B1', n:3, tr:'Ek-Fiil: İsim Cümlelerinde Duyulan Geçmiş Zaman', uz:"Ot gaplarda eshitilgan o'tgan zamon",
+body:`Ot gaplarni <code>-mış</code> zamonga aylantirish uchun <code>-(y)mış</code> qo'shimchasi otga qo'shiladi.
+<br><br><code>öğrenci → öğrenciymişim</code> — o'quvchi ekanman<br>
+<code>öğrenci → öğrenciymişsin</code><br>
+<code>öğrenci → öğrenciymiş</code><br>
+<code>öğrenci → öğrenciymişiz</code><br>
+<code>öğrenci → öğrenciymişsiniz</code><br>
+<code>öğrenci → öğrenciymişler</code>
+<br><br><b>Inkor:</b> <code>değilmi</code> so'zi bilan: <code>Ben hasta değilmişim</code> — Men kasal emas ekanman.
+<br><br>O'zbek tilidagi "o'quvchi ekanman", "kasal emas ekanman" qurilishlariga to'liq mos keladi.`,
+ex:[["O eskiden çok zenginmiş.","U ilgari juda boy ekan."],["Sen çok çalışkanmışsın.","Sen juda mehnatkash ekansan."],["Biz gençmişiz.","Biz yosh ekanmiz."],["Onlar öğretmenmişler.","Ular o'qituvchi ekanlar."],["Hava çok sıcakmış.","Havo juda issiq ekan."],["Ben hasta değilmişim.","Men kasal emas ekanman."],["O zaman çocukmuşuz.","O'shanda bola ekanmiz."],["Bu kitap çok güzelmiş.","Bu kitob juda chiroyli ekan."]]
+},
+{
+id:'b1-4', lvl:'B1', n:4, tr:'Geniş Zaman (-ar / -er / -ır / -ir / -r)', uz:"Umumiy zamon (hozirgi-oddiy)",
+body:`Umumiy zamon <b>doimiy, takrorlanuvchi</b> harakatlarni bildiradi. O'zbek tilidagi "-man / -asan / -adi" shakllariga mos keladi.
+<br><br><b>Qo'shimchalar:</b><br>
+• Ko'p bo'g'inli so'zlar → <code>-ır / -ir / -ur / -ür</code>: <code>gelir</code>, <code>yapar</code>, <code>okur</code>, <code>görür</code><br>
+• Bir bo'g'inli, unli bilan tugagan → <code>-r</code>: <code>der</code>, <code>yer</code>, <code>okur</code>
+<br><br><b>Shaxs qo'shimchalari:</b><br>
+<code>-ım</code> (men) → <code>gelirim</code><br>
+<code>-sın</code> (sen) → <code>gelirsin</code><br>
+<code>—</code> (u) → <code>gelir</code><br>
+<code>-ız</code> (biz) → <code>geliriz</code><br>
+<code>-sınız</code> (siz) → <code>gelirsiniz</code><br>
+<code>-lar</code> (ular) → <code>gelirler</code>
+<br><br>O'zbek tilidagi oddiy hozirgi zamon bilan bir xil ma'noga ega.`,
+ex:[["Her gün okula giderim.","Har kuni maktabga boraman."],["Türkçe öğrenirsin.","Turkcha o'rganasan."],["O her sabah koşar.","U har ertalab yuguradi."],["Biz erken kalkarız.","Biz erta turamiz."],["Siz nerede çalışırsınız?","Siz qayerda ishlaysiz?"],["Onlar sinemaya giderler.","Ular kinoga boradilar."],["Ben kahve içerim.","Men qahva ichaman."],["Her yaz tatile gideriz.","Har yoz ta'tilga boramiz."]]
+},
+{
+id:'b1-5', lvl:'B1', n:5, tr:'Geniş Zamanın Olumsuz Yapısı (-maz / -mez)', uz:"Umumiy zamonning inkor shakli",
+body:`Umumiy zamonning inkor shakli <code>-maz / -mez</code> qo'shimchasi bilan yasaladi (1-shaxs birlik va ko'plik bundan mustasno).
+<br><br><code>gelmem</code> (men kelmayman)<br>
+<code>gelmezsin</code> (sen kelmaysan)<br>
+<code>gelmez</code> (u kelmaydi)<br>
+<code>gelmeyiz</code> (biz kelmaymiz)<br>
+<code>gelmezsiniz</code> (siz kelmaysiz)<br>
+<code>gelmezler</code> (ular kelmaydilar)
+<br><br><b>Diqqat:</b> 1-shaxs birlik va ko'plikda <code>-ma / -me</code> ishlatiladi: <code>gelmem</code>, <code>gelmeyiz</code>. Boshqa shaxslarda <code>-maz / -mez</code>.
+<br><br>O'zbek tilidagi "-mayman, -maysan, -maydi" shakllariga mos keladi.`,
+ex:[["Sigara içmem.","Sigaret chekmayman."],["Erken kalkmazsın.","Erta turmaysan."],["O yalan söylemez.","U yolg'on gapirmaydi."],["Geç kalmayız.","Kech qolmaymiz."],["Bilmezsiniz.","Bilmaysiz."],["Onlar çalışmazlar.","Ular ishlamaydilar."],["Et yemem.","Go'sht yemayman."],["Hiç unutmam.","Hech qachon unutmayman."]]
+},
+{
+id:'b1-6', lvl:'B1', n:6, tr:'Geniş Zaman Soru ve Rica Yapıları', uz:"Umumiy zamonda so'roq va iltimos",
+body:`Umumiy zamonda so'roq qo'shimchasi shaxs qo'shimchasidan keyin keladi.
+<br><br><code>Gelir miyim?</code> — Kelaymi?<br>
+<code>Gelir misin?</code> — Kelasanmi?<br>
+<code>Gelir mi?</code> — Keladimi?<br>
+<code>Gelir miyiz?</code> — Kelamizmi?<br>
+<code>Gelir misiniz?</code> — Kelasizmi?<br>
+<code>Gelirler mi?</code> — Keladilarmi?
+<br><br><b>Xushmuomalalik (iltimos) shakli:</b> bu juda muhim! Turk tilida iltimos <b>geniş zamonning so'roq shakli</b> bilan ifodalanadi:<br>
+<code>Bakar mısınız?</code> — Qarab qo'ysangiz?<br>
+<code>Yardım eder misiniz?</code> — Yordam berasizmi?<br>
+<code>Bir kahve alabilir miyim?</code> — Bir qahva olsam bo'ladimi?
+<br><br>Bu o'zbek tilidagi "qarab qo'ying", "yordam bering" kabi xushmuomala iltimoslarga mos keladi.`,
+ex:[["Bakar mısınız?","Qarab qo'ysangiz?"],["Yardım eder misiniz?","Yordam berasizmi?"],["Bir şey sorabilir miyim?","Bir narsa so'rasam bo'ladimi?"],["Ne zaman gelirsin?","Qachon kelasan?"],["Bu otobüs nereye gider?","Bu avtobus qayerga boradi?"],["Fiyatı ne kadar?","Narxi qancha?"],["İngilizce konuşur musunuz?","Inglizcha gaplashasizmi?"],["Menüyü görebilir miyim?","Menyuni ko'rsam bo'ladimi?"]]
+},
+{
+id:'b1-7', lvl:'B1', n:7, tr:'Gereklilik Kipi (-malı / -meli)', uz:"Zaruriyat mayli (-meli / -malı)",
+body:`Zaruriyat mayli <b>"kerak, zarur, shart"</b> ma'nosini beradi. Qo'shimchasi: <code>-malı / -meli</code>.
+<br><br><code>gitmeliyim</code> — ketishim kerak<br>
+<code>gitmelisin</code> — ketishing kerak<br>
+<code>gitmeli</code> — ketishi kerak<br>
+<code>gitmeliyiz</code> — ketishimiz kerak<br>
+<code>gitmelisiniz</code> — ketishingiz kerak<br>
+<code>gitmeliler</code> — ketishlari kerak
+<br><br><b>Inkor:</b> <code>gitmemeliyim</code> — ketmasligim kerak.
+<br><br><b>So'roq:</b> <code>Gitmeli miyim?</code> — Ketishim kerakmi?
+<br><br>O'zbek tilidagi "-ishim kerak" qurilishiga mos keladi. Farqi: turkchada bu <b>bitta qo'shimcha</b> bilan yasaladi, o'zbekchada esa yordamchi so'z ("kerak") bilan.`,
+ex:[["Şimdi gitmeliyim.","Hozir ketishim kerak."],["Daha çok çalışmalısın.","Ko'proq ishlashing kerak."],["O doktora gitmeli.","U shifokorga borishi kerak."],["Erken yatmalıyız.","Erta yotishimiz kerak."],["Sigara içmemelisiniz.","Sigaret chekmasligingiz kerak."],["Bu kitabı okumalıyım.","Bu kitobni o'qishim kerak."],["Ne yapmalıyım?","Nima qilishim kerak?"],["Spor yapmalıyız.","Sport qilishimiz kerak."]]
+},
+{
+id:'b1-8', lvl:'B1', n:8, tr:'Yeterlilik Fiili: -ebilmek / -abilmek', uz:"Imkoniyat fe'li (-a olmoq)",
+body:`Bu qurilish <b>"-a olmoq"</b> ma'nosini beradi va qobiliyat, imkoniyatni bildiradi.
+<br><br><b>Shakli:</b> o'zak + <code>-a / -e</code> + <code>bil-</code> + zamon/shaxs qo'shimchasi.
+<br><br><code>gelebilirim</code> — kela olaman<br>
+<code>gelebilirsin</code> — kela olasan<br>
+<code>gelebilir</code> — kela oladi<br>
+<code>gelebiliriz</code> — kela olamiz<br>
+<code>gelebilirsiniz</code> — kela olasiz<br>
+<code>gelebilirler</code> — kela oladilar
+<br><br><b>Inkor shakli:</b> <code>gelemem</code> (kela olmayman), <code>gelemezsin</code>, <code>gelemez</code>, <code>gelemeyiz</code>, <code>gelemezsiniz</code>, <code>gelemezler</code>.
+<br><br><b>So'roq:</b> <code>Gelebilir miyim?</code> — Kela olamanmi?
+<br><br>O'zbek tilidagi "-a olaman" qurilishiga to'liq mos keladi.`,
+ex:[["Yarın gelebilirim.","Ertaga kela olaman."],["Türkçe konuşabilir misin?","Turkcha gaplasha olasanmi?"],["Bu kitabı okuyabilir.","U bu kitobni o'qiy oladi."],["Yardım edebilir miyiz?","Yordam bera olamizmi?"],["Gelemem, çok meşgulüm.","Kela olmayman, juda bandman."],["Anlayabiliyor musunuz?","Tushuna olasizmi?"],["Ben yüzebilirim.","Men suza olaman."],["O gelemedi.","U kela olmadi."]]
+},
+{
+id:'b1-9', lvl:'B1', n:9, tr:'Emir ve İstek Kipi Birleşimi (B1)', uz:"Buyruq va xohish mayli birikmasi",
+body:`B1 darajasida buyruq mayli <b>barcha shaxslar</b> uchun o'rganiladi.
+<br><br><b>Men:</b> <code>-ayım / -eyim</code> → <code>gideyim</code> (ketay), <code>yapayım</code> (qilay)<br>
+<b>Sen:</b> o'zak → <code>git!</code>, <code>yap!</code><br>
+<b>U:</b> <code>-sın / -sin</code> → <code>gitsin</code> (ketsin), <code>yapsın</code> (qilsin)<br>
+<b>Biz:</b> <code>-alım / -elim</code> → <code>gidelim</code> (ketaylik), <code>yapalım</code> (qilaylik)<br>
+<b>Siz:</b> <code>-ın / -in</code> yoki <code>-yın / -yin</code> → <code>gidin</code>, <code>yapın</code><br>
+<b>Ular:</b> <code>-sınlar / -sinler</code> → <code>gitsinler</code> (ketsinlar), <code>yapsınlar</code> (qilsinlar)
+<br><br><b>Inkor:</b> <code>-ma / -me</code>: <code>gitme</code>, <code>gitmesin</code>, <code>gitmeyin</code>, <code>gitmesinler</code>.
+<br><br>O'zbek tilidagi "-ay, -gin, -sin, -aylik, -inglar, -sinlar" qo'shimchalariga mos keladi.`,
+ex:[["Gideyim.","Ketay."],["Sen git!","Sen ket!"],["O gitsin.","U ketsin."],["Biz gidelim.","Biz ketaylik."],["Siz gidin.","Siz keting."],["Onlar gitsinler.","Ular ketsinlar."],["Gelmesin!","Kelmasin!"],["Yapsınlar.","Qilsinlar."]]
+},
+{
+id:'b1-10', lvl:'B1', n:10, tr:'Amaç ve Sebep: -mak için / -mak üzere / -dığı için', uz:"Maqsad va sabab qurilmalari",
+body:`<b>-mak için</b> — "-ish uchun" (maqsad):<br>
+<code>Türkçe öğrenmek için çalışıyorum.</code> — Turkcha o'rganish uchun ishlayapman.
+<br><br><b>-mak üzere</b> — "-ish uchun, -ish maqsadida" (rasmiyroq):<br>
+<code>Toplantı yapmak üzere geldik.</code> — Yig'ilish qilish maqsadida keldik.
+<br><br><b>-dığı için</b> — "-gani uchun" (sabab):<br>
+<code>Hasta olduğu için gelmedi.</code> — Kasal bo'lgani uchun kelmadi.<br>
+<code>Yağmur yağdığı için dışarı çıkmadık.</code> — Yomg'ir yog'gani uchun tashqariga chiqmadik.
+<br><br>O'zbek tilidagi "-ish uchun" va "-gani uchun" qurilishlariga to'liq mos keladi. Bu B1 darajasining muhim mavzusi.`,
+ex:[["Türkçe öğrenmek için çalışıyorum.","Turkcha o'rganish uchun ishlayapman."],["Para kazanmak için çalışıyor.","Pul topish uchun ishlaydi."],["Seni görmek için geldim.","Seni ko'rish uchun keldim."],["Hasta olduğu için gelemedi.","Kasal bo'lgani uchun kela olmadi."],["Yağmur yağdığı için evde kaldık.","Yomg'ir yog'gani uchun uyda qoldik."],["Geç kaldığım için özür dilerim.","Kech qolganim uchun kechirasiz."],["Yardım etmek üzere buradayım.","Yordam berish uchun bu yerdaman."],["Sınavı kazanmak için çok çalıştı.","Imtihondan o'tish uchun juda ko'p ishladi."]]
+},
+{
+id:'b1-11', lvl:'B1', n:11, tr:'Zarf-Fiil: -ip / -up / -üp', uz:"Ravishdosh: -ip / -ib",
+body:`<code>-ip / -ıp / -up / -üp</code> qo'shimchasi <b>ketma-ket</b> bo'ladigan harakatlarni bog'laydi.
+<br><br><code>gelip</code> — kelib<br>
+<code>yapıp</code> — qilib<br>
+<code>okuyup</code> — o'qib<br>
+<code>görüp</code> — ko'rib
+<br><br><b>Misol:</b> <code>Eve gelip yemek yaptı.</code> — Uyga kelib ovqat qildi.
+<br><br><b>Muhim:</b> bu qo'shimcha <b>bir xil shaxs</b>ning ketma-ket harakatlarini bog'laydi va zamon qo'shimchasi faqat <b>oxirgi fe'lga</b> qo'shiladi.
+<br><br>O'zbek tilidagi <code>-ib</code> qo'shimchasiga to'liq mos keladi: "kelib, qilib, o'qib".`,
+ex:[["Eve gelip yemek yaptı.","Uyga kelib ovqat qildi."],["Kitabı okuyup yattı.","Kitobni o'qib yotdi."],["Elini yıkayıp sofraya oturdu.","Qo'lini yuvib dasturxonga o'tirdi."],["Koşup geldi.","Yugurib keldi."],["Gülüp geçti.","Kulib o'tdi."],["Mektubu yazıp gönderdim.","Xatni yozib yubordim."],["Alışveriş yapıp eve döndük.","Xarid qilib uyga qaytdik."],["Onu görüp tanıdım.","Uni ko'rib tanidim."]]
+},
+{
+id:'b1-12', lvl:'B1', n:12, tr:'Zarf-Fiil: -erek / -arak', uz:"Ravishdosh: -erek / -arak",
+body:`<code>-erek / -arak</code> qo'shimchasi harakatning <b>qanday</b> bajarilganini bildiradi ("-ib" ma'nosida, lekin uslubni ta'kidlaydi).
+<br><br><code>yaparak</code> — qilib (biror usulda)<br>
+<code>gelerek</code> — kelib<br>
+<code>okuyarak</code> — o'qib<br>
+<code>gülerek</code> — kulib
+<br><br><b>Misol:</b> <code>Şarkı söyleyerek yürüyordu.</code> — Qo'shiq aytib yurardi.
+<br><br><b>Farqi -ip bilan:</b> <code>-ip</code> ketma-ketlikni bildiradi, <code>-erek</code> esa <b>bir vaqtda</b> bajarilayotgan harakatni yoki usulni bildiradi.
+<br><br>O'zbek tilidagi "-ib" yoki "-b" qo'shimchasiga mos keladi, ba'zan "holda" so'zi bilan tarjima qilinadi.`,
+ex:[["Şarkı söyleyerek yürüyordu.","Qo'shiq aytib yurardi."],["Gülerek cevap verdi.","Kulib javob berdi."],["Koşarak geldi.","Yugurib keldi."],["Bakarak dinliyordu.","Qarab tinglardi."],["Yazarak öğreniyorum.","Yozib o'rganyapman."],["Ağlayarak konuştu.","Yig'lab gapirdi."],["Düşünerek karar verdik.","O'ylab qaror qildik."],["El sallayarak vedalaştık.","Qo'l silkitib xayrlashdik."]]
+},
+{
+id:'b1-13', lvl:'B1', n:13, tr:'Zarf-Fiil: -ken (Evdeyken, Gelirken)', uz:"Ravishdosh: -ken (-ganda, -ayotganda)",
+body:`<code>-ken</code> qo'shimchasi <b>"-ganda, -ayotganda, -gan paytda"</b> ma'nosini beradi va asosiy fe'lga emas, <b>yordamchi shakllarga</b> qo'shiladi.
+<br><br><b>Ot gaplarda:</b> ot + <code>-(y)ken</code><br>
+<code>evdeyken</code> — uyda bo'lganimda<br>
+<code>öğrenciyken</code> — o'quvchi bo'lganimda<br>
+<code>hastayken</code> — kasal bo'lganimda
+<br><br><b>Fe'l gaplarda:</b> geniş zamon o'zagi + <code>-ken</code><br>
+<code>gelirken</code> — kelayotganimda<br>
+<code>giderken</code> — ketayotganimda<br>
+<code>okurken</code> — o'qiyotganimda<br>
+<code>yaparken</code> — qilayotganimda
+<br><br>O'zbek tilidagi "-ganda, -ayotganda" qo'shimchalariga mos keladi.`,
+ex:[["Evdeyken kitap okudum.","Uyda bo'lganimda kitob o'qidim."],["Gelirken ekmek aldım.","Kelayoтganda non oldim."],["Okurken müzik dinliyorum.","O'qiyotganimda musiqa tinglayapman."],["Öğrenciyken çok çalışırdım.","O'quvchi bo'lganimda juda ko'p ishlardim."],["Hastayken işe gitmedi.","Kasal bo'lganida ishga bormadi."],["Yürürken telefonuma baktım.","Yurayotganimda telefonimga qaradim."],["Sen uyurken biz çalıştık.","Sen uxlayotganingda biz ishladik."],["Küçükken burada oynardık.","Kichkina bo'lganimizda bu yerda o'ynardik."]]
+},
+{
+id:'b1-14', lvl:'B1', n:14, tr:'Zarf-Fiil: -madan / -meden / -meksizin', uz:"Ravishdosh: -masdan / -madan",
+body:`<code>-madan / -meden</code> qo'shimchasi <b>"-masdan, -may"</b> ma'nosini beradi (harakat bajarilmasdan).
+<br><br><code>gelmeden</code> — kelmasdan<br>
+<code>yapmadan</code> — qilmasdan<br>
+<code>okumadan</code> — o'qimasdan<br>
+<code>görmeden</code> — ko'rmasdan
+<br><br><b>Misol:</b> <code>Kahvaltı yapmadan işe gitti.</code> — Nonushta qilmasdan ishga ketdi.
+<br><br><b>-meksizin</b> — rasmiy uslub, xuddi shu ma'noni beradi: <code>beklemeksizin</code> — kutmasdan.
+<br><br>O'zbek tilidagi "-masdan" qo'shimchasiga to'liq mos keladi: "kelmasdan, qilmasdan, o'qimasdan".`,
+ex:[["Kahvaltı yapmadan işe gitti.","Nonushta qilmasdan ishga ketdi."],["Bana sormadan karar verdi.","Mendan so'ramasdan qaror qildi."],["Hiç dinlenmeden çalıştı.","Hech dam olmasdan ishladi."],["Ona bakmadan konuştu.","Unga qaramasdan gapirdi."],["Düşünmeden cevap verdi.","O'ylamasdan javob berdi."],["Elini yıkamadan yemek yedi.","Qo'lini yuvmasdan ovqat yedi."],["Vedalaşmadan gitti.","Xayrlashmasdan ketdi."],["Bir şey söylemeden çıktı.","Hech narsa aytmasdan chiqdi."]]
+},
+{
+id:'b1-15', lvl:'B1', n:15, tr:'Zarf-Fiil: -er ... -mez (Gelir gelmez)', uz:"Ravishdosh: -ishi bilanoq",
+body:`<code>-er ... -mez</code> qurilishi <b>"-ishi bilanoq, -gandan so'ng darhol"</b> ma'nosini beradi.
+<br><br><code>gelir gelmez</code> — kelishi bilanoq<br>
+<code>görür görmez</code> — ko'rishi bilanoq<br>
+<code>yapar yapmaz</code> — qilishi bilanoq<br>
+<code>duyar duymaz</code> — eshitishi bilanoq
+<br><br><b>Misol:</b> <code>Onu görür görmez tanıdım.</code> — Uni ko'rishim bilanoq tanidim.
+<br><br>Shakli: fe'lning <b>umumiy zamon</b> o'zagi takrorlanadi — birinchisi <code>-er / -ar</code> bilan, ikkinchisi <code>-mez / -maz</code> bilan.
+<br><br>O'zbek tilidagi "-ishi bilanoq" qurilishiga to'liq mos keladi.`,
+ex:[["Gelir gelmez beni aradı.","Kelishi bilanoq menga qo'ng'iroq qildi."],["Onu görür görmez tanıdım.","Uni ko'rishim bilanoq tanidim."],["Yapar yapmaz haber ver.","Qilishing bilanoq xabar ber."],["Duyar duymaz geldi.","Eshitishi bilanoq keldi."],["Eve girer girmez yattı.","Uyga kirishi bilanoq yotdi."],["Bitirir bitirmez gideceğim.","Tugatishim bilanoq ketaman."],["Okur okumaz anladı.","O'qishi bilanoq tushundi."],["Başlar başlamaz yağmur yağdı.","Boshlanishi bilanoq yomg'ir yog'di."]]
+},
+{
+id:'b1-16', lvl:'B1', n:16, tr:'Edilgen Fiil (-il / -in)', uz:"Majhul nisbat",
+body:`Majhul nisbat <b>"-il / -in / -un / -ün"</b> qo'shimchalari bilan yasaladi va harakatni <b>kim bajargani noma'lum</b> bo'lganda ishlatiladi.
+<br><br><code>yapmak → yapılmak</code> — qilinmoq<br>
+<code>okumak → okunmak</code> — o'qilmoq<br>
+<code>açmak → açılmak</code> — ochilmoq<br>
+<code>söylemek → söylenmek</code> — aytilmoq<br>
+<code>görmek → görülmek</code> — ko'rilmoq
+<br><br><b>Misol:</b> <code>Bu kitap çok okunuyor.</code> — Bu kitob juda ko'p o'qilyapti.
+<br><br><b>Kim tomonidan?</b> bajaruvchi <code>tarafından</code> yoki <code>-ca</code> bilan beriladi: <code>Bu bina devlet tarafından yapıldı.</code>
+<br><br>O'zbek tilidagi <code>-il / -in</code> qo'shimchasiga mos keladi: "yozilmoq, o'qilmoq, ochilmoq".`,
+ex:[["Bu kitap çok okunuyor.","Bu kitob juda ko'p o'qilyapti."],["Kapı açıldı.","Eshik ochildi."],["Yemek yapıldı.","Ovqat qilindi."],["Sınav sonuçları açıklandı.","Imtihon natijalari e'lon qilindi."],["Bu ev 1990'da yapıldı.","Bu uy 1990-yilda qurildi."],["Türkçe çok konuşuluyor.","Turkcha juda ko'p gapirilyapti."],["Mektup gönderildi.","Xat yuborildi."],["Toplantı iptal edildi.","Yig'ilish bekor qilindi."]]
+},
+{
+id:'b1-17', lvl:'B1', n:17, tr:'Ettirgen Fiil (-dır / -t / -ır)', uz:"Ortirma nisbat",
+body:`Ortirma nisbat <b>"-dır / -dir / -t / -ır / -ir"</b> qo'shimchalari bilan yasaladi va harakatni <b>boshqa birovga bajartirish</b> ma'nosini beradi.
+<br><br><code>yapmak → yaptırmak</code> — qildirmoq<br>
+<code>okumak → okutmak</code> — o'qitmoq<br>
+<code>içmek → içirmek</code> — ichirmoq<br>
+<code>gülmek → güldürmek</code> — kuldirmoq<br>
+<code>yazmak → yazdırmak</code> — yozdirmoq
+<br><br><b>Misol:</b> <code>Evimi boyattım.</code> — Uyimni bo'yattirdim.
+<br><br>O'zbek tilidagi <code>-dir / -t / -ir</code> qo'shimchalariga to'liq mos keladi: "qildirmoq, yozdirmoq, o'qitmoq".`,
+ex:[["Evimi boyattım.","Uyimni bo'yattirdim."],["Saçımı kestirdim.","Sochimni oldirdim."],["Çocuğa kitap okuttu.","Bolaga kitob o'qitdi."],["Bana su içirdi.","Menga suv ichirdi."],["Herkesi güldürdü.","Hammani kuldirib qo'ydi."],["Mektubu yazdırdım.","Xatni yozdirdim."],["Arabayı tamir ettirdik.","Mashinani ta'mirlattirdik."],["Ona yemek yaptırdı.","Unga ovqat qildirdi."]]
+},
+{
+id:'b1-18', lvl:'B1', n:18, tr:'Dönüşlü Fiil (-in / -il)', uz:"O'zlik nisbati",
+body:`O'zlik nisbati <b>"-in / -il / -un / -ün"</b> qo'shimchalari bilan yasaladi va harakat <b>egasining o'ziga qaratilgan</b> bo'ladi.
+<br><br><code>yıkamak → yıkanmak</code> — yuvinmoq<br>
+<code>giymek → giyinmek</code> — ki yinmoq<br>
+<code>sevmek → sevinmek</code> — sevinmoq<br>
+<code>hazırlamak → hazırlanmak</code> — tayyorlanmoq<br>
+<code>korkmak → korkunmak</code> — qo'rqinmoq (kam ishlatiladi)
+<br><br><b>Misol:</b> <code>Her sabah yıkanıyorum.</code> — Har ertalab yuvinaman.
+<br><br>O'zbek tilidagi <code>-in</code> qo'shimchasiga mos keladi: "yuvinmoq, kiyinmoq, sevinmoq, tayyorlanmoq".`,
+ex:[["Her sabah yıkanıyorum.","Har ertalab yuvinaman."],["Çabuk giyindi.","Tez ki yindi."],["Sınavı kazanınca sevindi.","Imtihondan o'tgach sevindi."],["Yolculuğa hazırlanıyoruz.","Sayohatga tayyorlanayapmiz."],["Aynada kendini gördü.","Oynada o'zini ko'rdi."],["Çocuk korkundu.","Bola qo'rqindi."],["Saçını tarandı.","Sochini tarandi."],["Sıkı giyin, hava soğuk.","Issiq kiyin, havo sovuq."]]
+},
+{
+id:'b1-19', lvl:'B1', n:19, tr:'İşteş Fiil (-ış / -iş)', uz:"Birgalik nisbati",
+body:`Birgalik nisbati <b>"-ış / -iş / -uş / -üş"</b> qo'shimchalari bilan yasaladi va harakatning <b>birgalikda yoki o'zaro</b> bajarilishini bildiradi.
+<br><br><code>görmek → görüşmek</code> — ko'rishmoq<br>
+<code>konuşmak → konuşmak</code> (o'zi birgalik)<br>
+<code>selamlamak → selamlaşmak</code> — salomlashmoq<br>
+<code>bakmak → bakışmak</code> — bir-biriga qarashmoq<br>
+<code>dövmek → dövüşmek</code> — urishmoq
+<br><br><b>Misol:</b> <code>Yarın görüşürüz.</code> — Ertaga ko'rishamiz.
+<br><br>O'zbek tilidagi <code>-ish</code> qo'shimchasiga mos keladi: "ko'rishmoq, salomlashmoq, urishmoq".`,
+ex:[["Yarın görüşürüz.","Ertaga ko'rishamiz."],["Onlar selamlaştılar.","Ular salomlashdilar."],["İki arkadaş bakıştı.","Ikki do'st bir-biriga qarashdi."],["Herkes tokalaştı.","Hamma qo'l berishib ko'rishdi."],["Komşular yardımlaştı.","Qo'shnilar yordamlashdilar."],["Çocuklar dövüştü.","Bolalar urishdilar."],["Mektuplaştık.","Xat yozishib turdik."],["Sabahtan beri konuşuyoruz.","Ertalabdan beri gaplashayapmiz."]]
+},
+
+/* ==================== B2 ==================== */
+{
+id:'b2-1', lvl:'B2', n:1, tr:'Koşul Kipi (-sa / -se)', uz:"Shart mayli (-sa / -se)",
+body:`Shart mayli <b>"agar ...sa"</b> ma'nosini beradi. Qo'shimchasi: <code>-sa / -se</code>.
+<br><br><b>Hozirgi/kelasi shart:</b><br>
+<code>gelsem</code> — kelsam<br>
+<code>gelsen</code> — kelsang<br>
+<code>gelse</code> — kelsa<br>
+<code>gelsek</code> — kelsak<br>
+<code>gelseniz</code> — kelsangiz<br>
+<code>gelseler</code> — kelsalar
+<br><br><b>O'tgan zamondagi shart:</b> <code>-saydı / -seydi</code> qo'shimchasi bilan:<br>
+<code>gelseydim</code> — kelganimda (o'tmishda)<br>
+<code>Vaktim olsaydı, gelirdim.</code> — Vaqtim bo'lganida, kelardim.
+<br><br>O'zbek tilidagi <code>-sa</code> qo'shimchasiga to'liq mos keladi: "kelsam, kelsang, kelsa".`,
+ex:[["Param olsa, araba alırım.","Pulim bo'lsa, mashina olaman."],["Gelsen çok sevinirim.","Kelsang juda xursand bo'laman."],["Hava güzel olsa, yürüyüşe çıkarız.","Havo chiroyli bo'lsa, sayrga chiqamiz."],["Vaktim olsaydı, gelirdim.","Vaqtim bo'lganida, kelardim."],["Çalışsan başarılı olursun.","Ishlasang muvaffaqiyatli bo'lasan."],["Bilseydim söylerdim.","Bilganimda aytardim."],["Sınavı geçseydim mutlu olurdum.","Imtihondan o'tganimda baxtli bo'lardim."],["Ne istersen yaparım.","Nima istasang qilaman."]]
+},
+{
+id:'b2-2', lvl:'B2', n:2, tr:'-dığı zaman / -dığında', uz:"«-gan paytda / -ganda»",
+body:`Bu qurilish <b>"-gan paytda, -ganda"</b> ma'nosini beradi va asosiy harakat vaqtini bildiradi.
+<br><br><code>geldiğim zaman / geldiğimde</code> — kelganimda<br>
+<code>geldiğin zaman / geldiğinde</code> — kelganingda<br>
+<code>geldiği zaman / geldiğinde</code> — kelganida<br>
+<code>geldiğimiz zaman / geldiğimizde</code> — kelganimizda<br>
+<code>geldiğiniz zaman / geldiğinizde</code> — kelganingizda<br>
+<code>geldikleri zaman / geldiklerinde</code> — kelganlarida
+<br><br><b>Shakli:</b> fe'l o'zagi + <code>-dığı / -diği / -duğu / -düğü</code> + <code>zaman</code> yoki egalik qo'shimchasi + <code>-de</code>.
+<br><br>O'zbek tilidagi "-ganimda, -ganingda, -ganida" qo'shimchalariga to'liq mos keladi.`,
+ex:[["Okula geldiğimde kimse yoktu.","Maktabga kelganimda hech kim yo'q edi."],["Onu gördüğüm zaman çok sevindim.","Uni ko'rganimda juda xursand bo'ldim."],["Yemek yediğimizde konuştuk.","Ovqat yeganımızda gaplashdik."],["Sen uyuduğunda saat kaçtı?","Sen uxlaganingda soat necha edi?"],["Türkiye'ye geldiğimde Türkçe bilmiyordum.","Turkiyaga kelganimda turkcha bilmasdim."],["Haber aldığımızda hemen yola çıktık.","Xabar olganimizda darhol yo'lga chiqdik."],["Toplantı bittiğinde herkes gitti.","Yig'ilish tugaganida hamma ketdi."],["Bunu duyduğumda şaşırdım.","Buni eshitganimda hayron bo'ldim."]]
+},
+{
+id:'b2-3', lvl:'B2', n:3, tr:'Dolaylı Anlatım (Direct / Indirect Speech)', uz:"Bilvosita nutq",
+body:`Boshqaning gapini <b>o'zgartirib</b> yetkazish bilvosita nutq deyiladi.
+<br><br><b>To'g'ri nutq:</b> <code>Ali: "Yarın geleceğim" dedi.</code><br>
+<b>Bilvosita nutq:</b> <code>Ali yarın geleceğini söyledi.</code> — Ali ertaga kelishini aytdi.
+<br><br><b>Asosiy qoliplar:</b><br>
+• <code>-dığını söyledi</code> — "-ganini aytdi"<br>
+<code>Geldiğini söyledi.</code> — Kelganini aytdi.<br>
+• <code>-acağını söyledi</code> — "-ishini aytdi"<br>
+<code>Geleceğini söyledi.</code> — Kelishini aytdi.<br>
+• <code>-ıp sormadı / sordu</code> — so'radi<br>
+<code>Nerede olduğunu sordu.</code> — Qayerda ekanini so'radi.<br>
+• <code>isteğini / gerektiğini söyledi</code> — xohishini aytdi
+<br><br>O'zbek tilidagi "-ganini aytdi", "-ishini aytdi" qurilishlariga mos keladi.`,
+ex:[["Ali yarın geleceğini söyledi.","Ali ertaga kelishini aytdi."],["Hasta olduğunu söyledi.","Kasal ekanini aytdi."],["Nerede oturduğunu sordu.","Qayerda o'tirishini so'radi."],["Beni sevdiğini söyledi.","Meni sevishini aytdi."],["Türkçe öğrendiğini söyledi.","Turkcha o'rganganini aytdi."],["Yardım etmemi istedi.","Yordam berishimni xohladi."],["Evde olmadığını söyledi.","Uyda emasligini aytdi."],["Ne zaman döneceğini bilmiyorum.","Qachon qaytishini bilmayman."]]
+},
+{
+id:'b2-4', lvl:'B2', n:4, tr:'-dığı halde / -masına rağmen', uz:"«-ganiga qaramasdan / -ishiga qaramasdan»",
+body:`Bu qurilishlar <b>qarama-qarshilik</b>ni bildiradi: "shunday bo'lsa-da, lekin".
+<br><br><b>-dığı halde</b> — "-ganiga qaramasdan":<br>
+<code>Hasta olduğu halde işe geldi.</code> — Kasal bo'lganiga qaramasdan ishga keldi.
+<br><br><b>-masına rağmen</b> — "-ishiga qaramasdan":<br>
+<code>Yağmur yağmasına rağmen dışarı çıktık.</code> — Yomg'ir yog'ishiga qaramasdan tashqariga chiqdik.
+<br><br>Ikkisi ham <b>bir xil ma'no</b> beradi, lekin <code>-masına rağmen</code> ko'proq ishlatiladi va fe'lning inkor shakli bilan yasaladi.
+<br><br>O'zbek tilidagi "-ga qaramasdan" qurilishiga to'liq mos keladi.`,
+ex:[["Hasta olduğu halde işe geldi.","Kasal bo'lganiga qaramasdan ishga keldi."],["Yorgun olmasına rağmen çalışmaya devam etti.","Charchagan bo'lishiga qaramasdan ishlashda davom etdi."],["Yağmur yağmasına rağmen dışarı çıktık.","Yomg'ir yog'ishiga qaramasdan tashqariga chiqdik."],["Zengin olduğu halde mutlu değil.","Boy bo'lganiga qaramasdan baxtli emas."],["Çok çalışmasına rağmen başaramadı.","Juda ko'p ishlashiga qaramasdan uddalay olmadi."],["Genç olmasına rağmen çok tecrübeli.","Yosh bo'lishiga qaramasdan juda tajribali."],["Türkçe bilmesine rağmen konuşmuyor.","Turkcha bilishiga qaramasdan gaplashmaydi."],["Geç olmasına rağmen geldi.","Kech bo'lishiga qaramasdan keldi."]]
+},
+{
+id:'b2-5', lvl:'B2', n:5, tr:'-mış olmalı / -mış olabilir (Olasılık)', uz:"Ehtimollik: «-gan bo'lishi kerak / mumkin»",
+body:`Turk tilida <b>taxmin va ehtimollik</b>ni bildirishning muhim usullari:
+<br><br><b>-mış olmalı</b> — "-gan bo'lishi kerak" (kuchli taxmin):<br>
+<code>O şimdi evde olmalı.</code> — U hozir uyda bo'lishi kerak.<br>
+<code>Uyumuş olmalı.</code> — Uxlab qolgan bo'lishi kerak.
+<br><br><b>-mış olabilir</b> — "-gan bo'lishi mumkin" (ehtimol):<br>
+<code>Geç kalmış olabilir.</code> — Kech qolgan bo'lishi mumkin.
+<br><br><b>-abilir</b> — "-ishi mumkin":<br>
+<code>Yarın gelebilir.</code> — Ertaga kelishi mumkin.
+<br><br><b>Inkor taxmin:</b> <code>olmaz / olamaz</code>:<br>
+<code>Bu doğru olamaz.</code> — Bu to'g'ri bo'lishi mumkin emas.
+<br><br>O'zbek tilidagi "bo'lishi kerak", "bo'lishi mumkin" qurilishlariga mos keladi.`,
+ex:[["O şimdi evde olmalı.","U hozir uyda bo'lishi kerak."],["Uyumuş olmalı.","Uxlab qolgan bo'lishi kerak."],["Geç kalmış olabilir.","Kech qolgan bo'lishi mumkin."],["Yarın gelebilir.","Ertaga kelishi mumkin."],["Bu doğru olamaz.","Bu to'g'ri bo'lishi mumkin emas."],["Onlar tatilde olmalı.","Ular ta'tilda bo'lishi kerak."],["Parasını kaybetmiş olabilir.","Pulini yo'qotgan bo'lishi mumkin."],["Hasta olmalı, rengi solgun.","Kasal bo'lishi kerak, rangi oqargan."]]
+},
+{
+id:'b2-6', lvl:'B2', n:6, tr:'-mak zorunda olmak / -ması gerekmek', uz:"Majburiyat: «-ishga majbur / -ishi kerak»",
+body:`Majburiyatni bildirishning ikki darajasi bor:
+<br><br><b>1) -mak zorunda olmak</b> — "-ishga majbur bo'lmoq" (kuchli majburiyat):<br>
+<code>Her gün çalışmak zorundayım.</code> — Har kuni ishlashga majburman.<br>
+<code>Erken kalkmak zorunda kaldı.</code> — Erta turishga majbur bo'ldi.
+<br><br><b>2) -ması gerekmek</b> — "-ishi kerak" (rasmiy, yumshoqroq):<br>
+<code>Formu doldurmanız gerekiyor.</code> — Formani to'ldirishingiz kerak.<br>
+<code>Bu konuyu konuşmamız gerekiyor.</code> — Bu mavzuni gaplashishimiz kerak.
+<br><br>O'zbek tilidagi "majburman" va "kerak" so'zlariga mos keladi.`,
+ex:[["Her gün çalışmak zorundayım.","Har kuni ishlashga majburman."],["Erken kalkmak zorunda kaldı.","Erta turishga majbur bo'ldi."],["Formu doldurmanız gerekiyor.","Formani to'ldirishingiz kerak."],["Bu konuyu konuşmamız gerekiyor.","Bu mavzuni gaplashishimiz kerak."],["Ona gerçeği söylemek zorundayım.","Unga haqiqatni aytishga majburman."],["Daha dikkatli olman gerekiyor.","Ko'proq ehtiyot bo'lishing kerak."],["Bilet almak zorundayız.","Chipta olishga majburmiz."],["Erken yatması gerekiyor.","Erta yotishi kerak."]]
+}
+];
+
+/* ============================================================
+   DATA 2 — LUG'AT (450+ so'z)
+   ============================================================ */
+const RAW_WORDS = [
+/* --- Muloqot --- */
+["merhaba","salom","A1","Muloqot"],["selam","salom (norasmiy)","A1","Muloqot"],["günaydın","xayrli tong","A1","Muloqot"],
+["iyi günler","xayrli kun","A1","Muloqot"],["iyi akşamlar","xayrli kech","A1","Muloqot"],["iyi geceler","xayrli tun","A1","Muloqot"],
+["hoş geldiniz","xush kelibsiz","A1","Muloqot"],["hoş bulduk","xush ko'rdik","A1","Muloqot"],["hoşça kal","xayr","A1","Muloqot"],
+["güle güle","xayr (ketayotganga)","A1","Muloqot"],["teşekkür ederim","rahmat","A1","Muloqot"],["sağ ol","rahmat (do'stona)","A1","Muloqot"],
+["rica ederim","arzimaydi","A1","Muloqot"],["özür dilerim","kechirasiz","A1","Muloqot"],["affedersiniz","kechirasiz (murojaat)","A1","Muloqot"],
+["lütfen","iltimos","A1","Muloqot"],["evet","ha","A1","Muloqot"],["hayır","yo'q","A1","Muloqot"],
+["belki","balki","A1","Muloqot"],["tamam","xo'p","A1","Muloqot"],["nasılsın?","qalaysan?","A1","Muloqot"],
+["iyiyim","yaxshiman","A1","Muloqot"],["kötüyüm","yomonman","A1","Muloqot"],["adın ne?","isming nima?","A1","Muloqot"],
+["benim adım","mening ismim","A1","Muloqot"],["memnun oldum","tanishganimdan xursandman","A1","Muloqot"],["görüşürüz","ko'rishguncha","A1","Muloqot"],
+["ne haber?","nima gap?","A2","Muloqot"],["iyi şanslar","omad","A2","Muloqot"],["tebrikler","tabriklaymiz","A2","Muloqot"],
+["maalesef","afsuski","A2","Muloqot"],["tabii ki","albatta","A2","Muloqot"],["elbette","albatta","A2","Muloqot"],
+["gerçekten","haqiqatan","A2","Muloqot"],["aynen","aynan","A2","Muloqot"],["katılıyorum","qo'shilaman","A2","Muloqot"],
+["anlıyorum","tushunaman","A1","Muloqot"],["anlamıyorum","tushunmayapman","A1","Muloqot"],["bilmiyorum","bilmayman","A1","Muloqot"],
+["biliyorum","bilaman","A1","Muloqot"],["tekrar eder misiniz?","takrorlaysizmi?","A2","Muloqot"],["yavaş konuşun","sekin gapiring","A2","Muloqot"],
+["nasıl söylenir?","qanday aytiladi?","A2","Muloqot"],["ne demek?","nima degani?","A2","Muloqot"],["Türkçe biliyor musun?","turkcha bilasizmi?","A1","Muloqot"],
+["yardım eder misiniz?","yordam berasizmi?","A2","Muloqot"],["çok naziksiniz","juda muloyimsiz","A2","Muloqot"],["sorun yok","muammo yo'q","A2","Muloqot"],
+["önemli değil","muhim emas","A2","Muloqot"],["endişelenme","tashvishlanma","A2","Muloqot"],["bekle","kut","A1","Muloqot"],
+["gel","kel","A1","Muloqot"],["git","bor","A1","Muloqot"],["bak","qara","A1","Muloqot"],
+["dinle","tingla","A1","Muloqot"],["konuş","gapir","A1","Muloqot"],["söyle","ayt","A1","Muloqot"],
+["sor","so'ra","A1","Muloqot"],["cevap ver","javob ber","A1","Muloqot"],["anlat","tushuntir","A2","Muloqot"],
+["düşün","o'yla","A1","Muloqot"],["hatırla","esla","A2","Muloqot"],["unut","unut","A1","Muloqot"],
+["sev","sev","A1","Muloqot"],["iste","xohla","A1","Muloqot"],["umarım","umid qilamanki","A2","Muloqot"],
+["inşallah","xudo xohlasa","A2","Muloqot"],["örneğin","masalan","A2","Muloqot"],["kısacası","qisqasi","B1","Muloqot"],
+["tanışmak","tanishmoq","A1","Muloqot"],["buyurun","marhamat","A1","Muloqot"],["bir şey değil","hech narsa emas","A2","Muloqot"],
+["geçmiş olsun","o'tib ketsin (kasalga)","A2","Muloqot"],["iyi yolculuklar","yaxshi yo'l","A2","Muloqot"],["kolay gelsin","oson bo'lsin","A2","Muloqot"],
+
+/* --- Sayohat --- */
+["yolculuk","sayohat","A1","Sayohat"],["seyahat","sayohat","A2","Sayohat"],["tatil","ta'til","A1","Sayohat"],
+["uçak","samolyot","A1","Sayohat"],["havaalanı","aeroport","A1","Sayohat"],["uçuş","parvoz","A2","Sayohat"],
+["bilet","chipta","A1","Sayohat"],["pasaport","pasport","A1","Sayohat"],["vize","viza","A2","Sayohat"],
+["valiz","jomadon","A1","Sayohat"],["bagaj","yuk","A2","Sayohat"],["otobüs","avtobus","A1","Sayohat"],
+["tren","poyezd","A1","Sayohat"],["istasyon","vokzal","A1","Sayohat"],["durak","bekat","A1","Sayohat"],
+["taksi","taksi","A1","Sayohat"],["araba","mashina","A1","Sayohat"],["otopark","avtoturargoh","A2","Sayohat"],
+["benzin","benzin","A2","Sayohat"],["harita","xarita","A1","Sayohat"],["adres","manzil","A1","Sayohat"],
+["sokak","ko'cha","A1","Sayohat"],["cadde","shoh ko'cha","A2","Sayohat"],["meydan","maydon","A2","Sayohat"],
+["şehir","shahar","A1","Sayohat"],["kasaba","shaharcha","B1","Sayohat"],["köy","qishloq","A1","Sayohat"],
+["ülke","mamlakat","A1","Sayohat"],["sınır","chegara","A2","Sayohat"],["gümrük","bojxona","A2","Sayohat"],
+["otel","mehmonxona","A1","Sayohat"],["rezervasyon","bron","A2","Sayohat"],["resepsiyon","qabulxona","A2","Sayohat"],
+["oda","xona","A1","Sayohat"],["anahtar","kalit","A1","Sayohat"],["havlu","sochiq","A2","Sayohat"],
+["sabun","sovun","A1","Sayohat"],["yatak","krovat","A1","Sayohat"],["kahvaltı","nonushta","A1","Sayohat"],
+["restoran","restoran","A1","Sayohat"],["menü","menyu","A1","Sayohat"],["hesap","hisob","A1","Sayohat"],
+["bahşiş","choychaqa","A2","Sayohat"],["turist","turist","A1","Sayohat"],["rehber","gid","A2","Sayohat"],
+["müze","muzey","A1","Sayohat"],["kale","qal'a","A2","Sayohat"],["plaj","sohil","A1","Sayohat"],
+["deniz","dengiz","A1","Sayohat"],["göl","ko'l","A1","Sayohat"],["dağ","tog'","A1","Sayohat"],
+["orman","o'rmon","A1","Sayohat"],["nehir","daryo","A2","Sayohat"],["ada","orol","A2","Sayohat"],
+["köprü","ko'prik","A1","Sayohat"],["hava durumu","ob-havo","A2","Sayohat"],["sıcak","issiq","A1","Sayohat"],
+["soğuk","sovuq","A1","Sayohat"],["yağmur","yomg'ir","A1","Sayohat"],["kar","qor","A1","Sayohat"],
+["rüzgar","shamol","A2","Sayohat"],["güneş","quyosh","A1","Sayohat"],["gölge","soya","A2","Sayohat"],
+["kaybolmak","yo'qolmoq","A2","Sayohat"],["bulmak","topmoq","A1","Sayohat"],["yol","yo'l","A1","Sayohat"],
+["yolcu","yo'lovchi","A2","Sayohat"],["kalkış","jo'nash","B1","Sayohat"],["varış","yetib borish","B1","Sayohat"],
+["gecikme","kechikish","B1","Sayohat"],
+
+/* --- Ish / Kariyer --- */
+["iş","ish","A1","Ish/Kariyer"],["meslek","kasb","A1","Ish/Kariyer"],["memur","amaldor","B1","Ish/Kariyer"],
+["mühendis","muhandis","A2","Ish/Kariyer"],["doktor","shifokor","A1","Ish/Kariyer"],["hemşire","hamshira","A2","Ish/Kariyer"],
+["öğretmen","o'qituvchi","A1","Ish/Kariyer"],["avukat","advokat","B1","Ish/Kariyer"],["muhasebeci","buxgalter","B1","Ish/Kariyer"],
+["aşçı","oshpaz","A2","Ish/Kariyer"],["garson","ofitsiant","A2","Ish/Kariyer"],["şoför","haydovchi","A2","Ish/Kariyer"],
+["polis","politsiya","A1","Ish/Kariyer"],["asker","askar","A2","Ish/Kariyer"],["sekreter","kotib","A2","Ish/Kariyer"],
+["çevirmen","tarjimon","B1","Ish/Kariyer"],["gazeteci","jurnalist","B1","Ish/Kariyer"],["mimar","me'mor","B1","Ish/Kariyer"],
+["elektrikçi","elektrik","A2","Ish/Kariyer"],["tamirci","ta'mirchi","A2","Ish/Kariyer"],["satıcı","sotuvchi","A2","Ish/Kariyer"],
+["kasiyer","kassir","A2","Ish/Kariyer"],["maaş","maosh","A2","Ish/Kariyer"],["ücret","to'lov","B1","Ish/Kariyer"],
+["prim","mukofot","B1","Ish/Kariyer"],["izin","ruxsat","A2","Ish/Kariyer"],["mesai","ish vaqti","B1","Ish/Kariyer"],
+["vardiya","smena","B1","Ish/Kariyer"],["sözleşme","shartnoma","B1","Ish/Kariyer"],["mülakat","ish suhbati","B1","Ish/Kariyer"],
+["özgeçmiş","rezyume","B1","Ish/Kariyer"],["başvuru","ariza","B1","Ish/Kariyer"],["deneyim","tajriba","B1","Ish/Kariyer"],
+["tecrübe","tajriba","B1","Ish/Kariyer"],["yetenek","qobiliyat","B1","Ish/Kariyer"],["sertifika","sertifikat","B1","Ish/Kariyer"],
+["terfi","ko'tarilish","B1","Ish/Kariyer"],["istifa","iste'fo","B1","Ish/Kariyer"],["işsiz","ishsiz","A2","Ish/Kariyer"],
+["emekli","nafaqador","B1","Ish/Kariyer"],["çalışmak","ishlamoq","A1","Ish/Kariyer"],["çalışkan","mehnatkash","A2","Ish/Kariyer"],
+["tembel","dangasa","A2","Ish/Kariyer"],["disiplinli","intizomli","B1","Ish/Kariyer"],["sorumlu","mas'ul","B1","Ish/Kariyer"],
+["başarılı","muvaffaqiyatli","A2","Ish/Kariyer"],["verimli","samarali","B1","Ish/Kariyer"],["toplantı","yig'ilish","A2","Ish/Kariyer"],
+["gündem","kun tartibi","B1","Ish/Kariyer"],["rapor","hisobot","B1","Ish/Kariyer"],["proje","loyiha","A2","Ish/Kariyer"],
+["hedef","maqsad","A2","Ish/Kariyer"],["plan","reja","A1","Ish/Kariyer"],["görev","vazifa","A2","Ish/Kariyer"],
+["sorumluluk","mas'uliyat","B1","Ish/Kariyer"],["sonuç","natija","A2","Ish/Kariyer"],["hata","xato","A2","Ish/Kariyer"],
+["çözüm","yechim","A2","Ish/Kariyer"],["öneri","taklif","B1","Ish/Kariyer"],["karar","qaror","A2","Ish/Kariyer"],
+["değerlendirme","baholash","B1","Ish/Kariyer"],["işveren","ish beruvchi","B1","Ish/Kariyer"],["işçi","ishchi","A2","Ish/Kariyer"],
+["patron","xo'jayin","A2","Ish/Kariyer"],["müdür","direktor","A2","Ish/Kariyer"],["ofis","ofis","A1","Ish/Kariyer"],
+["kariyer","karyera","B1","Ish/Kariyer"],["görüşme","suhbat","A2","Ish/Kariyer"],
+
+/* --- Biznes --- */
+["şirket","kompaniya","A2","Biznes"],["firma","firma","A2","Biznes"],["fabrika","zavod","A2","Biznes"],
+["atölye","ustaxona","B1","Biznes"],["büro","ofis","B1","Biznes"],["şube","filial","B1","Biznes"],
+["ortak","hamkor","B1","Biznes"],["ortaklık","hamkorlik","B1","Biznes"],["sermaye","kapital","B2","Biznes"],
+["yatırım","investitsiya","B1","Biznes"],["kâr","foyda","B1","Biznes"],["zarar","zarar","B1","Biznes"],
+["gelir","daromad","B1","Biznes"],["gider","xarajat","B1","Biznes"],["bütçe","byudjet","B1","Biznes"],
+["vergi","soliq","B1","Biznes"],["fatura","hisob-faktura","B1","Biznes"],["makbuz","kvitansiya","B1","Biznes"],
+["banka","bank","A2","Biznes"],["kredi","kredit","B1","Biznes"],["borç","qarz","A2","Biznes"],
+["faiz","foiz","B1","Biznes"],["transfer","o'tkazma","B1","Biznes"],["ödeme","to'lov","A2","Biznes"],
+["nakit","naqd","B1","Biznes"],["kredi kartı","kredit karta","A1","Biznes"],["indirim","chegirma","A2","Biznes"],
+["kampanya","aksiya","A2","Biznes"],["müşteri","mijoz","A2","Biznes"],["tedarikçi","ta'minotchi","B2","Biznes"],
+["sipariş","buyurtma","A2","Biznes"],["teslimat","yetkazib berish","B1","Biznes"],["depo","ombor","B1","Biznes"],
+["stok","zaxira","B1","Biznes"],["ürün","mahsulot","A2","Biznes"],["hizmet","xizmat","A2","Biznes"],
+["kalite","sifat","A2","Biznes"],["fiyat","narx","A1","Biznes"],["maliyet","tannarx","B1","Biznes"],
+["pazarlama","marketing","B1","Biznes"],["reklam","reklama","A2","Biznes"],["marka","brend","B1","Biznes"],
+["satış","sotuv","A2","Biznes"],["anlaşma","kelishuv","B1","Biznes"],["kontrat","kontrakt","B1","Biznes"],
+["imza","imzo","A2","Biznes"],["mühür","muhr","B2","Biznes"],["belge","hujjat","A2","Biznes"],
+["teklif","taklif","B1","Biznes"],["pazarlık","savdolashish","B1","Biznes"],["rekabet","raqobat","B2","Biznes"],
+["pazar","bozor","A1","Biznes"],["ihracat","eksport","B2","Biznes"],["ithalat","import","B2","Biznes"],
+["kargo","yuk tashish","A2","Biznes"],["komisyon","komissiya","B2","Biznes"],["kuruluş","tashkil etish","B2","Biznes"],
+["iflas","bankrotlik","B2","Biznes"],["büyüme","o'sish","B1","Biznes"],["kriz","inqiroz","B2","Biznes"],
+["risk","xavf","B1","Biznes"],["fırsat","imkoniyat","B1","Biznes"],["strateji","strategiya","B2","Biznes"],
+["gelir vergisi","daromad solig'i","B2","Biznes"],["hesap","hisob raqami","A2","Biznes"],["hesap özeti","hisob varaqasi","B1","Biznes"],
+["taksit","bo'lib to'lash","B1","Biznes"],["senet","veksel","B2","Biznes"],
+
+/* --- Ta'lim --- */
+["okul","maktab","A1","Ta'lim"],["üniversite","universitet","A1","Ta'lim"],["fakülte","fakultet","A2","Ta'lim"],
+["bölüm","bo'lim","A2","Ta'lim"],["ders","dars","A1","Ta'lim"],["öğrenci","o'quvchi","A1","Ta'lim"],
+["sınıf","sinf","A1","Ta'lim"],["sınav","imtihon","A1","Ta'lim"],["ödev","uy vazifasi","A1","Ta'lim"],
+["kitap","kitob","A1","Ta'lim"],["defter","daftar","A1","Ta'lim"],["kalem","qalam","A1","Ta'lim"],
+["silgi","o'chirg'ich","A1","Ta'lim"],["tahta","doska","A2","Ta'lim"],["kütüphane","kutubxona","A1","Ta'lim"],
+["laboratuvar","laboratoriya","B1","Ta'lim"],["konferans","konferensiya","B1","Ta'lim"],["seminer","seminar","B1","Ta'lim"],
+["diploma","diplom","A2","Ta'lim"],["karne","baholar daftarchasi","A2","Ta'lim"],["puan","ball","A2","Ta'lim"],
+["alfabe","alifbo","A1","Ta'lim"],["dilbilgisi","grammatika","A2","Ta'lim"],["kelime","so'z","A1","Ta'lim"],
+["cümle","gap","A2","Ta'lim"],["paragraf","paragraf","B1","Ta'lim"],["metin","matn","B1","Ta'lim"],
+["çeviri","tarjima","A2","Ta'lim"],["telaffuz","talaffuz","A2","Ta'lim"],["anlam","ma'no","A1","Ta'lim"],
+["kural","qoida","A2","Ta'lim"],["örnek","misol","A1","Ta'lim"],["alıştırma","mashq","A2","Ta'lim"],
+["cevap","javob","A1","Ta'lim"],["konu","mavzu","A2","Ta'lim"],["ünite","bo'lim","A2","Ta'lim"],
+["seviye","daraja","A2","Ta'lim"],["kurs","kurs","A1","Ta'lim"],["hoca","muallim","A2","Ta'lim"],
+["bilgi","ma'lumot","A1","Ta'lim"],["bilim","fan","A2","Ta'lim"],["araştırma","tadqiqot","B1","Ta'lim"],
+["makale","maqola","B1","Ta'lim"],["tez","dissertatsiya","B2","Ta'lim"],["sunum","taqdimot","B1","Ta'lim"],
+["ezberlemek","yodlamoq","B1","Ta'lim"],["tekrar etmek","takrorlamoq","A2","Ta'lim"],["anlamak","tushunmoq","A1","Ta'lim"],
+["öğrenmek","o'rganmoq","A1","Ta'lim"],["öğretmek","o'rgatmoq","A2","Ta'lim"],["okumak","o'qimoq","A1","Ta'lim"],
+["yazmak","yozmoq","A1","Ta'lim"],["dinlemek","tinglamoq","A1","Ta'lim"],["sözlük","lug'at","A2","Ta'lim"],
+["sayfa","sahifa","A1","Ta'lim"],["satır","satr","B1","Ta'lim"],["başlık","sarlavha","B1","Ta'lim"],
+["içerik","mazmun","B1","Ta'lim"],["mola","tanaffus","A2","Ta'lim"],["yurt","yotoqxona","B1","Ta'lim"],
+["burs","stipendiya","B1","Ta'lim"],["mezuniyet","bitirish","B1","Ta'lim"],["mezun","bitiruvchi","B1","Ta'lim"],
+["ders programı","o'quv rejasi","B1","Ta'lim"],["sınav sonucu","imtihon natijasi","A2","Ta'lim"],["üniversite öğrencisi","talaba","A2","Ta'lim"],
+["not tutmak","konspekt yozmoq","B1","Ta'lim"],["ders çalışmak","dars qilmoq","A1","Ta'lim"],["hazırlanmak","tayyorlanmoq","A2","Ta'lim"],
+
+/* --- Salomatlik --- */
+["sağlık","sog'liq","A1","Salomatlik"],["hastane","kasalxona","A1","Salomatlik"],["klinik","klinika","A2","Salomatlik"],
+["eczane","dorixona","A1","Salomatlik"],["ilaç","dori","A1","Salomatlik"],["reçete","retsept","A2","Salomatlik"],
+["ağrı","og'riq","A1","Salomatlik"],["baş ağrısı","bosh og'rig'i","A2","Salomatlik"],["karın","qorin","A1","Salomatlik"],
+["boğaz","tomoq","A1","Salomatlik"],["ateş","isitma","A2","Salomatlik"],["öksürük","yo'tal","A2","Salomatlik"],
+["grip","gripp","A2","Salomatlik"],["nezle","tumov","A2","Salomatlik"],["alerji","allergiya","B1","Salomatlik"],
+["yara","yara","A2","Salomatlik"],["kan","qon","A2","Salomatlik"],["kalp","yurak","A1","Salomatlik"],
+["akciğer","o'pka","B1","Salomatlik"],["mide","oshqozon","A2","Salomatlik"],["böbrek","buyrak","A2","Salomatlik"],
+["kemik","suyak","A2","Salomatlik"],["kas","muskul","B1","Salomatlik"],["deri","teri","A2","Salomatlik"],
+["göz","ko'z","A1","Salomatlik"],["kulak","quloq","A1","Salomatlik"],["burun","burun","A1","Salomatlik"],
+["diş","tish","A1","Salomatlik"],["dil","til","A1","Salomatlik"],["el","qo'l","A1","Salomatlik"],
+["kol","qo'l (yelka)","A1","Salomatlik"],["bacak","oyoq","A1","Salomatlik"],["ayak","oyoq (panja)","A1","Salomatlik"],
+["parmak","barmoq","A1","Salomatlik"],["sırt","orqa","A2","Salomatlik"],["boyun","bo'yin","A2","Salomatlik"],
+["omuz","yelka","A2","Salomatlik"],["beyin","miya","A2","Salomatlik"],["sinir","asab","B1","Salomatlik"],
+["virüs","virus","B1","Salomatlik"],["mikrop","mikrob","B1","Salomatlik"],["aşı","emlash","B1","Salomatlik"],
+["ameliyat","operatsiya","B1","Salomatlik"],["pansuman","bog'lam","B1","Salomatlik"],["iğne","ukol","A2","Salomatlik"],
+["muayene","ko'rik","B1","Salomatlik"],["tahlil","tahlil","A2","Salomatlik"],["röntgen","rentgen","B1","Salomatlik"],
+["hasta","bemor","A1","Salomatlik"],["hekim","shifokor","B1","Salomatlik"],["acil","shoshilinch","A2","Salomatlik"],
+["ambulans","tez yordam","A2","Salomatlik"],["vitamin","vitamin","A2","Salomatlik"],["istirahat","dam olish","B1","Salomatlik"],
+["tedavi","davolash","B1","Salomatlik"],["iyileşmek","tuzalmoq","A2","Salomatlik"],["kontrol","tekshiruv","A2","Salomatlik"],
+["tansiyon","qon bosimi","B1","Salomatlik"],["nefes","nafas","A2","Salomatlik"],["kilo","vazn","A2","Salomatlik"],
+["boy","bo'y","A1","Salomatlik"],["diyet","dieta","B1","Salomatlik"],["sigara","sigaret","A2","Salomatlik"],
+["alkol","alkogol","B1","Salomatlik"],["uyku","uyqu","A1","Salomatlik"],["stres","stress","B1","Salomatlik"],
+["kırık","singan","B1","Salomatlik"],["yanık","kuygan","B1","Salomatlik"],["baş dönmesi","bosh aylanishi","B1","Salomatlik"],
+
+/* --- Oila --- */
+["aile","oila","A1","Oila"],["anne","ona","A1","Oila"],["baba","ota","A1","Oila"],
+["oğul","o'g'il","A1","Oila"],["kız","qiz","A1","Oila"],["kardeş","aka/uka","A1","Oila"],
+["abla","opa","A1","Oila"],["ağabey","aka","A1","Oila"],["dede","bobo","A1","Oila"],
+["nine","buvi","A1","Oila"],["torun","nevara","A2","Oila"],["hala","amaki (otaning opasi)","A2","Oila"],
+["teyze","amma (onaning opasi)","A2","Oila"],["amca","amaki","A2","Oila"],["dayı","tog'a","A2","Oila"],
+["yeğen","jiyan","A2","Oila"],["kuzen","amakivachcha","A2","Oila"],["eş","turmush o'rtoq","A1","Oila"],
+["karı","xotin","A1","Oila"],["koca","er","A1","Oila"],["gelin","kelin","A2","Oila"],
+["damat","kuyov","A2","Oila"],["kayınvalide","qaynona","B1","Oila"],["kayınpeder","qaynota","B1","Oila"],
+["görümce","qaynsingil","B1","Oila"],["baldız","qaynacha","B1","Oila"],["bacanak","bojani","B1","Oila"],
+["çocuk","bola","A1","Oila"],["bebek","chaqaloq","A1","Oila"],["genç","yosh","A1","Oila"],
+["yaşlı","qari","A1","Oila"],["yetişkin","katta yoshli","B1","Oila"],["erkek","erkak","A1","Oila"],
+["kadın","ayol","A1","Oila"],["arkadaş","do'st","A1","Oila"],["komşu","qo'shni","A1","Oila"],
+["misafir","mehmon","A1","Oila"],["düğün","to'y","A1","Oila"],["nişan","nishon","A2","Oila"],
+["bayram","bayram","A1","Oila"],["doğum günü","tug'ilgan kun","A1","Oila"],["hediye","sovg'a","A1","Oila"],
+["sevgi","sevgi","A1","Oila"],["saygı","hurmat","A2","Oila"],["sabır","sabr","A2","Oila"],
+["mutluluk","baxt","A2","Oila"],["üzüntü","xafalik","A2","Oila"],["kızgın","jahli chiqqan","A2","Oila"],
+["yorgun","charchagan","A1","Oila"],["sevinçli","xursand","A2","Oila"],["ev","uy","A1","Oila"],
+["daire","kvartira","A2","Oila"],["mutfak","oshxona","A1","Oila"],["salon","mehmonxona (zal)","A2","Oila"],
+["banyo","hammom","A1","Oila"],["tuvalet","hojatxona","A1","Oila"],["yatak odası","yotoqxona","A2","Oila"],
+["bahçe","hovli","A1","Oila"],["kapı","eshik","A1","Oila"],["pencere","deraza","A1","Oila"],
+["masa","stol","A1","Oila"],["sandalye","stul","A1","Oila"],["koltuk","kreslo","A2","Oila"],
+["dolap","shkaf","A2","Oila"],["halı","gilam","A1","Oila"],["perde","parda","A2","Oila"],
+["ayna","oyna","A2","Oila"]
+];
+
+const globalDictionary = RAW_WORDS.map(function(w){
+  return { tr: w[0], uz: w[1], lvl: w[2], cat: w[3] };
+});
+
+const DICT_CATS = ["Muloqot","Sayohat","Ish/Kariyer","Biznes","Ta'lim","Salomatlik","Oila"];
+const DICT_LVLS = ["A1","A2","B1","B2"];
+
+/* ============================================================
+   DATA 3 — DIALOGLAR
+   ============================================================ */
+const DIALOGUES = [
+{
+id:'d1', lvl:'A1', title:'Tanishuv', uzTitle:'Tanishuv', icon:'👋',
+lines:[
+["A","Merhaba! Benim adım Aziz.","Salom! Mening ismim Aziz."],
+["B","Merhaba Aziz! Ben Jasur. Memnun oldum.","Salom Aziz! Men Jasur. Tanishganimdan xursandman."],
+["A","Ben de memnun oldum. Nasılsın?","Men ham xursandman. Qalaysan?"],
+["B","İyiyim, teşekkür ederim. Sen nasılsın?","Yaxshiman, rahmat. Sen qalaysan?"],
+["A","Ben de iyiyim. Nerelisin?","Men ham yaxshiman. Qayerdansan?"],
+["B","Ben Özbekistanlıyım, Taşkentliyim. Sen?","Men O'zbekistonlikman, Toshkentlikman. Sen?"],
+["A","Ben de Taşkentliyim. Kaç yaşındasın?","Men ham Toshkentlikman. Necha yoshdasan?"],
+["B","Yirmi iki yaşındayım. Sen kaç yaşındasın?","Yigirma ikki yoshdaman. Sen necha yoshdasan?"],
+["A","Ben yirmi beş yaşındayım. Ne iş yapıyorsun?","Men yigirma besh yoshdaman. Nima ish qilasan?"],
+["B","Ben öğrenciyim, Türkçe öğreniyorum.","Men o'quvchiman, turkcha o'rganyapman."],
+["A","Ne güzel! Ben de Türkçe öğreniyorum.","Juda yaxshi! Men ham turkcha o'rganyapman."],
+["B","Harika! Birlikte çalışalım.","Ajoyib! Birga o'qiyлик."]
+]},
+{
+id:'d2', lvl:'A1', title:'Restoranda', uzTitle:'Restoranda', icon:'🍽️',
+lines:[
+["G","Hoş geldiniz! Kaç kişisiniz?","Xush kelibsiz! Necha kishisiz?"],
+["M","İki kişiyiz.","Ikki kishimiz."],
+["G","Buyurun, şu masaya oturabilirsiniz.","Marhamat, ana u stolga o'tirsangiz bo'ladi."],
+["M","Teşekkür ederim. Menüyü alabilir miyim?","Rahmat. Menyuni olsam bo'ladimi?"],
+["G","Tabii ki, buyurun. Ne içmek istersiniz?","Albatta, marhamat. Nima ichishni xohlaysiz?"],
+["M","Ben bir çay alayım. Sen ne istersin?","Men bir choy olay. Sen nima xohlaysan?"],
+["N","Ben ayran istiyorum.","Men ayron xohlayapman."],
+["G","Yemek olarak ne alırsınız?","Ovqatga nima olasiz?"],
+["M","Bir porsiyon kebap, bir de pilav lütfen.","Bir porsiya kabob, bir ham palov, iltimos."],
+["N","Ben de çorba ve salata istiyorum.","Men ham sho'rva va salat xohlayapman."],
+["G","Hemen hazırlıyorum. Afiyet olsun!","Darhol tayyorlayapman. Yoqimli ishtaha!"],
+["M","Hesabı alabilir miyim?","Hisobni olsam bo'ladimi?"],
+["G","Toplam yüz elli lira.","Jami yuz elli lira."],
+["M","Buyurun. Üstü kalsın.","Marhamat. Qaytimi qolsin."],
+["G","Çok teşekkür ederim! Yine bekleriz.","Katta rahmat! Yana kutamiz."]
+]},
+{
+id:'d3', lvl:'A2', title:'Mehmonxonada', uzTitle:'Mehmonxonada', icon:'🏨',
+lines:[
+["M","İyi akşamlar! Bir rezervasyonum var.","Xayrli kech! Mening bronim bor."],
+["R","İyi akşamlar! Adınız nedir?","Xayrli kech! Ismingiz nima?"],
+["M","Aziz Karimov. İki gecelik rezervasyon.","Aziz Karimov. Ikki kecha uchun bron."],
+["R","Pasaportunuzu alabilir miyim?","Pasportingizni olsam bo'ladimi?"],
+["M","Tabii, buyurun.","Albatta, marhamat."],
+["R","Teşekkür ederim. Odanız 305 numarada.","Rahmat. Xonangiz 305-raqamda."],
+["M","Kahvaltı dahil mi?","Nonushta kiritilganmi?"],
+["R","Evet, kahvaltı sabah yedide başlıyor.","Ha, nonushta ertalab yettida boshlanadi."],
+["M","Wi-Fi şifresi nedir?","Wi-Fi paroli nima?"],
+["R","Şifre resepsiyonun yanında yazıyor.","Parol qabulxona yonida yozilgan."],
+["M","Asansör nerede?","Lift qayerda?"],
+["R","Sağ tarafta, koridorun sonunda.","O'ng tomonda, koridorning oxirida."],
+["M","Çıkış saati kaçta?","Chiqish vaqti soat nechada?"],
+["R","Öğlen on ikide. İyi istirahatler!","Tushda o'n ikkida. Yaxshi dam oling!"]
+]},
+{
+id:'d4', lvl:'A2', title:'Şifokor qabulida', uzTitle:'Shifokor qabulida', icon:'🩺',
+lines:[
+["D","Buyurun, oturun. Şikayetiniz nedir?","Marhamat, o'tiring. Shikoyatingiz nima?"],
+["B","İki günden beri başım ağrıyor.","Ikki kundan beri boshim og'riyapti."],
+["D","Ateşiniz var mı?","Isitmangiz bormi?"],
+["B","Evet, dün akşam otuz sekiz dereceydi.","Ha, kecha kechqurun o'ttiz sakkiz daraja edi."],
+["D","Öksürük veya boğaz ağrısı var mı?","Yo'tal yoki tomoq og'rig'i bormi?"],
+["B","Boğazım biraz ağrıyor, öksürüyorum da.","Tomog'im biroz og'riyapti, yo'talayapman ham."],
+["D","Ağzınızı açın, bakayım. Evet, boğazınız kızarmış.","Og'zingizni oching, qaray. Ha, tomog'ingiz qizargan."],
+["D","Kan tahlili yapmamız gerekiyor.","Qon tahlili qilishimiz kerak."],
+["B","Peki doktor, nerede yaptıracağım?","Xo'p doktor, qayerda qildiraman?"],
+["D","İkinci katta, laboratuvarda.","Ikkinchi qavatda, laboratoriyada."],
+["D","Size ilaç yazıyorum. Günde üç kere için.","Sizga dori yozaman. Kuniga uch marta iching."],
+["B","Ne zaman iyileşirim?","Qachon tuzalaman?"],
+["D","İlaçları düzenli kullanırsanız üç günde geçer.","Dorilarni muntazam ichsangiz, uch kunda o'tadi."],
+["B","Çok teşekkür ederim doktor.","Katta rahmat doktor."],
+["D","Geçmiş olsun. Bol bol dinlenin.","O'tib ketsin. Ko'p dam oling."]
+]},
+{
+id:'d5', lvl:'B1', title:'İş mülakatı', uzTitle:'Ish suhbati', icon:'💼',
+lines:[
+["İ","Hoş geldiniz, buyurun oturun.","Xush kelibsiz, marhamat o'tiring."],
+["A","Teşekkür ederim.","Rahmat."],
+["İ","Özgeçmişinizi inceledim. Kendinizden bahseder misiniz?","Rezyumeingizni ko'rib chiqdim. O'zingiz haqingizda gapirib bering."],
+["A","Ben Aziz Karimov, yirmi sekiz yaşındayım.","Men Aziz Karimov, yigirma sakkiz yoshdaman."],
+["A","Üniversitede iktisat okudum ve beş yıllık deneyimim var.","Universitetda iqtisod o'qidim va besh yillik tajribam bor."],
+["İ","Şu anki işinizde ne yapıyorsunuz?","Hozirgi ishingizda nima qilasiz?"],
+["A","Satış bölümünde çalışıyorum ve on kişilik bir ekibi yönetiyorum.","Savdo bo'limida ishlayapman va o'n kishilik jamoani boshqaraman."],
+["İ","Neden iş değiştirmek istiyorsunuz?","Nega ishni o'zgartirishni xohlaysiz?"],
+["A","Kendimi geliştirmek ve daha büyük projelerde çalışmak istiyorum.","O'zimni rivojlantirishni va kattaroq loyihalarda ishlashni xohlayapman."],
+["İ","Yabancı dil biliyor musunuz?","Chet tillarini bilasizmi?"],
+["A","İngilizce ve Türkçe biliyorum. Türkçemi geliştiriyorum.","Ingliz va turk tillarini bilaman. Turkchamni rivojlantiryapman."],
+["İ","Beklentiniz nedir?","Kutishingiz nima?"],
+["A","Piyasaya uygun bir maaş ve kariyer imkânı.","Bozorga mos maosh va karyera imkoniyati."],
+["İ","Çok iyi. İki gün içinde size haber vereceğiz.","Juda yaxshi. Ikki kun ichida sizga xabar beramiz."],
+["A","İlginiz için teşekkür ederim.","E'tiboringiz uchun rahmat."]
+]},
+{
+id:'d6', lvl:'A2', title:'Aeroportda', uzTitle:'Aeroportda', icon:'✈️',
+lines:[
+["G","İyi günler! Biletinizi ve pasaportunuzu gösterin.","Xayrli kun! Chiptangizni va pasportingizni ko'rsating."],
+["Y","Buyurun. İstanbul'a uçuyorum.","Marhamat. Istanbúlga uchyapman."],
+["G","Kaç parça bagajınız var?","Nechta yukingiz bor?"],
+["Y","Bir valizim ve bir el bagajım var.","Bitta jomadonim va bitta qo'l yukim bor."],
+["G","Valizinizi tartalım. Yirmi üç kilo. Tamam.","Jomadoningizni tortaylik. Yigirma uch kilo. Bo'ldi."],
+["G","Uçuş kartınız. Uçuş kapısı on iki numara.","Uchish kartangiz. Uchish darvozasi o'n ikki raqam."],
+["Y","Uçuş saat kaçta?","Uchish soat nechada?"],
+["G","Saat üçte. İki saat önce kapıda olun.","Soat uchda. Ikki soat oldin darvozada bo'ling."],
+["Y","Güvenlik kontrolü nerede?","Xavfsizlik nazorati qayerda?"],
+["G","Solda, merdivenlerin yanında.","Chapda, zinapoyalar yonida."],
+["Y","Teşekkür ederim. İyi günler!","Rahmat. Xayrli kun!"],
+["G","İyi yolculuklar!","Yaxshi yo'l!"]
+]},
+{
+id:'d7', lvl:'B1', title:'Ev kiralamak', uzTitle:'Uy ijaraga olish', icon:'🏠',
+lines:[
+["E","İyi günler, daireyi görmeye mi geldiniz?","Xayrli kun, kvartirani ko'rishga keldingizmi?"],
+["M","Evet, ilanınızı gördüm. Kiralık mı?","Ha, e'loningizni ko'rdim. Ijaraga beriladimi?"],
+["E","Evet, iki odalı, eşyalı bir daire.","Ha, ikki xonali, mebelli kvartira."],
+["M","Aylık kirası ne kadar?","Oylik ijarasi qancha?"],
+["E","Aylık beş yüz dolar, faturalar dahil değil.","Oylik besh yuz dollar, hisob-kitoblar kiritilmagan."],
+["M","Depozito istiyor musunuz?","Depozit so'raysizmi?"],
+["E","Evet, bir aylık kira kadar depozito.","Ha, bir oylik ijara miqdorida depozit."],
+["M","Mutfak ve banyo yeni mi?","Oshxona va hammom yangimi?"],
+["E","Evet, geçen yıl yenilendi.","Ha, o'tgan yili yangilangan."],
+["M","Merkeze ne kadar uzak?","Markazga qanchalik uzoq?"],
+["E","Yürüyerek on beş dakika, otobüsle beş dakika.","Piyoda o'n besh daqiqa, avtobusda besh daqiqa."],
+["M","Sözleşmeyi görebilir miyim?","Shartnomani ko'rsam bo'ladimi?"],
+["E","Tabii. Bir yıllık sözleşme yapıyoruz.","Albatta. Bir yillik shartnoma tuzamiz."],
+["M","Tamam, anlaştık. Ne zaman taşınabilirim?","Xo'p, kelishdik. Qachon ko'chib kelsam bo'ladi?"],
+["E","Önümüzdeki aydan itibaren.","Keyingi oydan boshlab."]
+]},
+{
+id:'d8', lvl:'A2', title:'Universitetda', uzTitle:'Universitetda', icon:'🎓',
+lines:[
+["O","Merhaba, kayıt için mi geldiniz?","Salom, ro'yxatdan o'tishga keldingizmi?"],
+["T","Evet, Türk dili kursuna kaydolmak istiyorum.","Ha, turk tili kursiga yozilishni xohlayapman."],
+["O","Hangi seviyedesiniz?","Qaysi darajadasiz?"],
+["T","Sanırım A2 seviyesindeyim.","Menimcha, A2 darajasidaman."],
+["O","Seviye tespit sınavına girmeniz gerekiyor.","Daraja aniqlash imtihoniga kirishingiz kerak."],
+["T","Sınav ne zaman?","Imtihon qachon?"],
+["O","Her pazartesi saat onda.","Har dushanba soat o'nda."],
+["T","Kurs ne kadar sürüyor?","Kurs qancha davom etadi?"],
+["O","Bir seviye sekiz hafta sürüyor.","Bir daraja sakkiz hafta davom etadi."],
+["T","Dersler haftada kaç gün?","Darslar haftada necha kun?"],
+["O","Haftada üç gün, ikişer saat.","Haftada uch kun, ikki soatdan."],
+["T","Ücreti ne kadar?","To'lovi qancha?"],
+["O","Bir seviye için iki milyon lira.","Bir daraja uchun ikki million lira."],
+["T","Öğrenci indirimi var mı?","Talabalar uchun chegirma bormi?"],
+["O","Evet, öğrenci kartınızla yüzde yirmi indirim.","Ha, talaba kartangiz bilan yigirma foiz chegirma."]
+]},
+{
+id:'d9', lvl:'A1', title:'Bozorda', uzTitle:'Bozorda', icon:'🛒',
+lines:[
+["S","Buyurun! Ne arıyorsunuz?","Marhamat! Nima qidirayapsiz?"],
+["M","Elma ne kadar?","Olma qancha?"],
+["S","Kilosu on beş lira.","Kilosi o'n besh lira."],
+["M","Biraz pahalı. On iki lira olur mu?","Biroz qimmat. O'n ikki lira bo'ladimi?"],
+["S","On üç lira olsun, son fiyat.","O'n uch lira bo'lsin, oxirgi narx."],
+["M","Tamam, iki kilo verin.","Xo'p, ikki kilo bering."],
+["S","Başka ne alacaksınız?","Yana nima olasiz?"],
+["M","Bir kilo domates ve yarım kilo salatalık.","Bir kilo pomidor va yarim kilo bodring."],
+["S","Domates çok taze, bugün geldi.","Pomidor juda yangi, bugun keldi."],
+["M","Toplam ne kadar?","Jami qancha?"],
+["S","Elli iki lira.","Ellik ikki lira."],
+["M","Buyurun yüz lira.","Marhamat, yuz lira."],
+["S","Kırk sekiz lira para üstü.","Qirq sakkiz lira qaytim."],
+["M","Teşekkür ederim, iyi günler.","Rahmat, xayrli kun."],
+["S","Yine bekleriz!","Yana kuting!"]
+]},
+{
+id:'d10', lvl:'B1', title:'Yol so\'rash', uzTitle:"Yo'l so'rash", icon:'🗺️',
+lines:[
+["T","Affedersiniz, bir şey sorabilir miyim?","Kechirasiz, bir narsa so'rasam bo'ladimi?"],
+["Y","Tabii, buyurun.","Albatta, marhamat."],
+["T","Tren istasyonuna nasıl gidebilirim?","Poyezd vokzaliga qanday borishim mumkin?"],
+["Y","Yürüyerek mi, yoksa otobüsle mi?","Piyoda yoki avtobusda?"],
+["T","Yürüyerek gitmek istiyorum.","Piyoda borishni xohlayapman."],
+["Y","Bu sokaktan dümdüz gidin.","Bu ko'chadan to'g'riga boring."],
+["T","Ne kadar sürer?","Qancha vaqt oladi?"],
+["Y","Yaklaşık yirmi dakika.","Taxminan yigirma daqiqa."],
+["T","Yolda bir kavşak var mı?","Yo'lda chorraha bormi?"],
+["Y","Evet, ikinci kavşakta sağa dönün.","Ha, ikkinchi chorrahada o'ngga buriling."],
+["T","Orada bir market görecek miyim?","U yerda do'kon ko'ramanmi?"],
+["Y","Evet, marketin hemen yanında istasyon var.","Ha, do'konning yonidayoq vokzal bor."],
+["T","Çok teşekkür ederim!","Katta rahmat!"],
+["Y","Rica ederim, iyi yolculuklar!","Arzimaydi, yaxshi yo'l!"]
+]},
+{
+id:'d11', lvl:'B1', title:'Telefonda suhbat', uzTitle:'Telefonda suhbat', icon:'📞',
+lines:[
+["A","Alo, merhaba! Aziz mi?","Allo, salom! Azizmi?"],
+["B","Evet, buyurun, benim.","Ha, marhamat, men."],
+["A","Ben Jasur. Rahatsız ediyor muyum?","Men Jasur. Bezovta qilyapmanmi?"],
+["B","Hayır, hiç değil. Ne haber?","Yo'q, umuman. Nima gap?"],
+["A","Yarın akşam için bir planım var.","Ertaga kechqurun uchun rejam bor."],
+["B","Ne gibi?","Qanday?"],
+["A","Sinemaya gitmek istiyorum. Sen de gelir misin?","Kinoga borishni xohlayapman. Sen ham kelasizmi?"],
+["B","Ne zaman başlıyor?","Qachon boshlanadi?"],
+["A","Film saat yedide başlıyor.","Film soat yettida boshlanadi."],
+["B","Altı buçukta buluşalım mı?","Olti yarimda uchrashaylikmi?"],
+["A","Harika olur! Nerede buluşalım?","Ajoyib bo'ladi! Qayerda uchrashaylik?"],
+["B","Metro istasyonunun önünde, tamam mı?","Metro bekati oldida, bo'ladimi?"],
+["A","Tamam, anlaştık. Görüşürüz!","Xo'p, kelishdik. Ko'rishguncha!"],
+["B","Görüşürüz, hoşça kal!","Ko'rishguncha, xayr!"]
+]}
+];
+
+/* ============================================================
+   DATA 4 — TESTLAR
+   ============================================================ */
+const TESTS = [
+{
+id:'t-a1', lvl:'A1', title:'A1 — Umumiy test', uzTitle:"Alifbo, garmoniya, kelishiklar, zamоnlar", icon:'🔴',
+qs:[
+{t:'mc', q:'"Merhaba!" so\'zining tarjimasi qanday?', o:['Xayr','Salom','Rahmat','Kechirasiz'], a:1, e:'"Merhaba" — eng ko\'p ishlatiladigan salomlashish so\'zi.'},
+{t:'mc', q:'Qaysi turk harfi o\'zbek tilidagi "sh" tovushini beradi?', o:['ç','ş','ğ','ı'], a:1, e:'ş = sh (şeker — shakar). ç esa ch tovushini beradi.'},
+{t:'mc', q:'"kitap" so\'zining ko\'plik shakli qaysi?', o:['kitap lar','kitaplar','kitablar','kitapLar'], a:1, e:'Oxirgi unli "a" (orqa qator) → -lar. Yumshash faqat unli bilan boshlanuvchi qo\'shimchada bo\'ladi.'},
+{t:'fill', q:'Ben okula ___ . (gitmek — hozirgi zamon, men)', a:['gidiyorum'], e:'git- + iyor + um → gidiyorum. "t" harfi unli oldida "d" ga yumshaydi.'},
+{t:'mc', q:'"Ev___ geliyorum." — bo\'sh joyga mos qo\'shimchani tanlang.', o:['dan','den','tan','ten'], a:1, e:'"ev" oxirgi unlisi "e" (old qator) va oxiri jarangli undosh → -den.'},
+{t:'order', q:'Tarjima qiling: "Men maktabga ketyapman."', w:['gidiyorum','okula','Ben'], a:'Ben okula gidiyorum', e:'Turk tilida ega + jo\'nalish kelishigidagi to\'ldiruvchi + fe\'l tartibi ishlatiladi.'},
+{t:'mc', q:'"Bu kitap ___?" — to\'g\'ri so\'roq qo\'shimchasini tanlang.', o:['mı','mi','mu','mü'], a:0, e:'"kitap" oxirgi unlisi "a" (orqa, tekis) → mı.'},
+{t:'mc', q:'"Sokak___ oynuyorlar." — to\'g\'ri shaklni tanlang.', o:['da','de','ta','te'], a:2, e:'"sokak" oxiri "k" — jarangsiz undosh → -ta (Fıstıkçı Şahap qoidasi).'},
+{t:'mc', q:'"Ben öğrenci___." — to\'g\'ri shaklni tanlang.', o:['yim','im','sin','dir'], a:0, e:'"öğrenci" unli bilan tugaydi → orasiga "y" qo\'shiladi: -yim.'},
+{t:'fill', q:'Onun bir kardeşi ___ . (bor)', a:['var'], e:'"var" — bor, "yok" — yo\'q.'},
+{t:'mc', q:'"3" sonining turkcha yozilishi qaysi?', o:['üç','dört','beş','iki'], a:0, e:'üç = 3, dört = 4, beş = 5, iki = 2.'},
+{t:'mc', q:'"birinci" so\'zining ma\'nosi nima?', o:['birinchi','bir','bir marta','birga'], a:0, e:'-inci qo\'shimchasi tartib son yasaydi: bir → birinci.'},
+{t:'mc', q:'"O nerede?" gapining to\'g\'ri tarjimasi qaysi?', o:['U qayerda?','Bu nima?','Kim u?','U qanday?'], a:0, e:'"nerede" — qayerda degan ma\'noni beradi.'},
+{t:'fill', q:'Sen her gün kitap ___ . (okumak — geniş zamon, sen)', a:['okursun'], e:'oku- + r + sun → okursun.'},
+{t:'mc', q:'"Gidelim!" so\'zining ma\'nosi nima?', o:['Keting!','Ketdik!','Kel, ketaylik!','Ketmang!'], a:2, e:'-alım/-elim qo\'shimchasi "keling, ... qilaylik" ma\'nosini beradi.'}
+]},
+{
+id:'t-a2', lvl:'A2', title:'A2 — Umumiy test', uzTitle:"Egalik, izafet, zamоnlar, ko'makchilar", icon:'🟡',
+qs:[
+{t:'mc', q:'"benim ev___" — to\'g\'ri egalik qo\'shimchasini tanlang.', o:['im','ım','um','üm'], a:0, e:'"ev" oxirgi unlisi "e" (old, tekis) → -im.'},
+{t:'mc', q:'"okulun kapısı" qanday izafet turi?', o:['Aniq izafet','Aniqmas izafet','Zanjirsimon izafet','Sifat qurilmasi'], a:0, e:'Aniq izafetda 1-ot genitiv, 2-ot egalik qo\'shimchasini oladi.'},
+{t:'mc', q:'"Türk kahvesi" qanday qurilish?', o:['Aniq izafet','Aniqmas izafet','Zanjirsimon izafet','Egalik qo\'shimchasi'], a:1, e:'Aniqmas izafetda 1-ot qo\'shimcha olmaydi, 2-ot egalik oladi.'},
+{t:'fill', q:'Dün okula ___ . (gelmek — belirli o\'tgan zamon, men)', a:['geldim'], e:'gel- + di + m → geldim.'},
+{t:'mc', q:'"Gelmedim" so\'zining to\'g\'ri tarjimasi qaysi?', o:['Men kelmadim','Men kelmayapman','Men kelmoqchi emasman','Men kelmasdim'], a:0, e:'-me + -di + -m = gelmedim → kelmadim.'},
+{t:'fill', q:'Yarın sana ___ . (yardım etmek — kelasi zamon, men)', a:['yardım edeceğim'], e:'et- + ecek + im → edeceğim ("t" harfi "d" ga yumshaydi).'},
+{t:'mc', q:'"Gitmem lazım" qanday tarjima qilinadi?', o:['Ketishim kerak','Ketmoqchiman','Ketdim','Ketmayman'], a:0, e:'-mem + lazım qurilishi "-ishim kerak" ma\'nosini beradi.'},
+{t:'fill', q:'Ben senin ___ çalışkanım. (kabi)', a:['gibi'], e:'gibi — o\'xshashlikni bildiruvchi ko\'makchi.'},
+{t:'mc', q:'"otobüs___ gidiyorum" — to\'g\'ri shaklni tanlang.', o:['le','la','ile','dan'], a:1, e:'"otobüs" oxirgi unlisi "ü" (old, yumaloq) → -le emas, lekin amalda "otobüsle" ishlatiladi. To\'g\'ri javob: otobüsle.'},
+{t:'fill', q:'Dersten ___ sinemaya gidiyoruz. (keyin)', a:['sonra'], e:'-dan sonra = -dan keyin.'},
+{t:'mc', q:'"sabahtan beri" iborasining ma\'nosi nima?', o:['ertalabdan beri','ertalabgacha','ertalabdan keyin','ertalabdan oldin'], a:0, e:'-dan beri = "-dan beri" (boshlanish nuqtasi).'},
+{t:'mc', q:'"en güzel" birikmasining ma\'nosi nima?', o:['eng go\'zal','juda go\'zal','go\'zalroq','go\'zal emas'], a:0, e:'"en" + sifat = orttirma daraja (eng ...).'},
+{t:'fill', q:'Lütfen ___ konuşun. (sekin)', a:['yavaş'], e:'yavaş — sekin, asta.'},
+{t:'mc', q:'"bence" so\'zining ma\'nosi nima?', o:['menimcha','seningcha','uningcha','bizningcha'], a:0, e:'ben + -ce = bence = menimcha.'},
+{t:'order', q:'Tarjima qiling: "Men har kuni kitob o\'qiyman."', w:['okurum','gün','kitap','Her'], a:'Her gün kitap okurum', e:'Geniş zamon: her gün + kitap + okurum.'}
+]},
+{
+id:'t-b1', lvl:'B1', title:'B1 — Umumiy test', uzTitle:"-mış, geniş zamon, nisbatlar, ravisdoshlar", icon:'🟢',
+qs:[
+{t:'mc', q:'"-mış" qo\'shimchasi qaysi zamonni bildiradi?', o:['Ko\'rilgan o\'tgan zamon','Eshitilgan o\'tgan zamon','Hozirgi zamon','Kelasi zamon'], a:1, e:'-mış — guvoh bo\'lmagan, eshitilgan o\'tgan zamon ("-gan ekan").'},
+{t:'fill', q:'Ali dün okula ___ . (gelmiş — u)', a:['gelmiş'], e:'gel- + miş → gelmiş = kelgan ekan.'},
+{t:'mc', q:'"Bir varmış, bir yokmuş" qaysi janrga xos?', o:['Masal','She\'r','Xat','E\'lon'], a:0, e:'Bu — turk ertaklarining an\'anaviy boshlanishi ("Bor ekan, yo\'q ekan").'},
+{t:'fill', q:'Ben her sabah spor ___ . (yapmak — geniş zamon, men)', a:['yaparım'], e:'yap- + ar + ım → yaparım.'},
+{t:'mc', q:'"gelmem" shakli qanday ma\'no beradi?', o:['Men kelmayman (geniş zamon inkor)','Men kelmadim','Men kelmayapman','Men kelmoqchiman'], a:0, e:'Geniş zamonning inkor shakli 1-shaxsda -ma/-me bilan yasaladi.'},
+{t:'fill', q:'Yarın erken ___ . (kalkmak — gereklilik, men)', a:['kalkmalıyım'], e:'kalk- + malı + yım → kalkmalıyım.'},
+{t:'mc', q:'"gelebilirim" so\'zining ma\'nosi nima?', o:['Kela olaman','Kelishim kerak','Kelmoqchiman','Kelmayman'], a:0, e:'-e + bil + irim = "-a olaman" ma\'nosini beradi.'},
+{t:'fill', q:'Seni görmek ___ geldim. (uchun)', a:['için'], e:'-mak için = "-ish uchun" maqsad qurilmasi.'},
+{t:'mc', q:'"yapıp" qanday shakl?', o:['-ip ravisdosh','-erek ravisdosh','-ken shakli','-madan shakli'], a:0, e:'-ip/-ıp qo\'shimchasi ketma-ket harakatlarni bog\'laydi.'},
+{t:'fill', q:'Evde___ kitap okuyorum. (hozirgi zamon, men)', a:['yken'], e:'evde + -ken → evdeyken = uyda bo\'lganimda.'},
+{t:'mc', q:'"gelir gelmez" iborasining ma\'nosi nima?', o:['Kelishi bilanoq','Kelgandan keyin','Kelishdan oldin','Kelguncha'], a:0, e:'-er ... -mez qurilmasi "-ishi bilanoq" ma\'nosini beradi.'},
+{t:'mc', q:'"Kitap okunuyor" gapida qaysi nisbat ishlatilgan?', o:['Edilgen','Ettirgen','Dönüşlü','İşteş'], a:0, e:'okun- — edilgen (majhul) nisbat: kitob o\'qilyapti.'},
+{t:'fill', q:'Annem bana yemek ___ . (yaptırmak — o\'tgan zamon, u)', a:['yaptırdı'], e:'yap- + tır + dı → yaptırdı = qildirdi.'},
+{t:'mc', q:'"görüşmek" fe\'li qaysi nisbatda?', o:['İşteş','Edilgen','Ettirgen','Dönüşlü'], a:0, e:'-üş qo\'shimchasi birgalik (o\'zaro) nisbatni yasaydi.'},
+{t:'fill', q:'Ben her gün duş ___ . (dönüşlü fe\'l, men)', a:['yıkanıyorum'], e:'yıka- + ın + ıyor + um → yıkanıyorum (yuvinaman).'}
+]},
+{
+id:'t-b2', lvl:'B2', title:'B2 — Umumiy test', uzTitle:"Shart, bilvosita nutq, ehtimollik, majburiyat", icon:'🔵',
+qs:[
+{t:'fill', q:'Vaktim ___ sana yardım ederdim. (olmak — o\'tgan shart)', a:['olsaydı'], e:'ol- + sa + ydı → olsaydı (bo\'lganida).'},
+{t:'mc', q:'"geldiğimde" so\'zining ma\'nosi nima?', o:['Kelganimda','Kelishimdan oldin','Kelgach darhol','Kelgunimcha'], a:0, e:'-dığım + -de → kelganimda.'},
+{t:'mc', q:'Bilvosita nutq: Ali "Yarın geleceğim" dedi. Qaysi shakl to\'g\'ri?', o:['Ali yarın geleceğini söyledi','Ali yarın geliyorum dedi','Ali yarın gelecek mi dedi','Ali yarın geldi'], a:0, e:'Bilvosita nutqda -acağını söyledi qolipi ishlatiladi.'},
+{t:'fill', q:'Hasta ___ işe geldi. (qaramasdan)', a:['olmasına rağmen'], e:'-masına rağmen = "-ishiga qaramasdan".'},
+{t:'mc', q:'"-dığı halde" qanday ma\'no beradi?', o:['-ga qaramasdan','-gani uchun','-gandan keyin','-guncha'], a:0, e:'-dığı halde = "-ganiga qaramasdan" (qarama-qarshilik).'},
+{t:'fill', q:'O şimdi evde ___ . (bo\'lishi kerak — taxmin)', a:['olmalı'], e:'-malı bu yerda ehtimollik/taxmin ma\'nosini beradi.'},
+{t:'mc', q:'"gelmiş olabilir" qanday tarjima qilinadi?', o:['Kelgan bo\'lishi mumkin','Kelishi kerak','Kelishi shart','Kelmoqchi'], a:0, e:'-mış + olabilir = "-gan bo\'lishi mumkin".'},
+{t:'fill', q:'Her gün çalışmak ___ . (majburiyat, men)', a:['zorundayım'], e:'-mak zorunda olmak = "-ishga majbur bo\'lmoq".'},
+{t:'mc', q:'"Keşke daha çok çalış___ ." — to\'g\'ri shaklni tanlang.', o:['saydım','sam','malıyım','ırım'], a:0, e:'Keşke + -saydı = afsuski, o\'tmishdagi afsus-nadomat.'},
+{t:'fill', q:'Yağmur yağ___ dışarı çıkmayacağız. (shart)', a:['arsa'], e:'yağ- + ar + sa → yağarsa (yog\'sa).'},
+{t:'mc', q:'"-mak yerine" qanday ma\'no beradi?', o:['-ish o\'rniga','-ish uchun','-gandan keyin','-ish bilan'], a:0, e:'yerine — o\'rniga ma\'nosini beradi.'},
+{t:'fill', q:'O, benim ___ daha tecrübeli. (men bilan solishtirish)', a:['benden'], e:'Taqqoslashda "benden daha" = "mendan ko\'proq" ishlatiladi.'},
+{t:'mc', q:'"söylenmesine rağmen" ning ma\'nosi nima?', o:['Aytilganiga qaramasdan','Aytish uchun','Aytilgandan keyin','Aytilguncha'], a:0, e:'-mesine rağmen = "-ishiga qaramasdan".'},
+{t:'fill', q:'Bu kitabı okumuş ___ . (taxmin: o\'qigan bo\'lishim kerak)', a:['olmalıyım'], e:'-mış olmalı = "-gan bo\'lishi kerak".'},
+{t:'mc', q:'"gel-" fe\'li bilan "-dığı zaman" qurilishi qaysi?', o:['geldiğim zaman','gelmiş zaman','geler zaman','gelip zaman'], a:0, e:'gel- + diğ + im + zaman → geldiğim zaman.'}
+]}
+];
+
+
+/* ============================================================
+   APP — ROUTER & VIEWS
+   ============================================================ */
+const $ = id => document.getElementById(id);
+let route={name:'lessons',tab:'lessons'}, dictFilter={q:'',cat:'Barchasi',lvl:'Barchasi'}, testFilter='Barchasi';
+let gramLevel='A1', lessonMode='gram', showTr=false, run=null, orderPick=[], timerId=null;
+const TIME=30, TAB_MAP={lessons:'lessons',topic:'lessons',dialog:'lessons',tests:'tests',testRun:'tests',store:'store',dict:'dict',profile:'profile'};
+const BOOSTS=[
+ {id:'double',ic:'⚡',name:'Double XP',desc:'24 soat davomida XP va tangalar ×2',price:150},
+ {id:'shield',ic:'🛡',name:'Streak Shield',desc:"Kun o'tkazib yuborilsa, seriya saqlanadi (1 ta)",price:100,qty:1},
+ {id:'hint',ic:'✂️',name:'50/50 Hint',desc:"Testda 2 ta noto'g'ri variantni olib tashlaydi (3 ta)",price:60,qty:3},
+ {id:'freeze',ic:'❄️',name:'Time Freeze',desc:"B1–B2 testlarda taymerni to'xtatadi (3 ta)",price:60,qty:3},
+ {id:'life',ic:'❤️',name:'Extra Life',desc:"Xato javobdan keyin qayta urinish (2 ta)",price:80,qty:2}];
+
+function go(name,params){
+  clearInterval(timerId);
+  route=Object.assign({name:name},params||{}); route.tab=TAB_MAP[name]||'lessons';
+  $('app').classList.remove('still'); window.scrollTo(0,0); render();
+}
+function rerender(){ const y=window.scrollY; render(); $('app').classList.add('still'); window.scrollTo(0,y); }
+function backAction(){
+  if(route.name==='topic'){ const t=TOPICS.filter(x=>x.id===route.id)[0]; openLevel(t?t.lvl:gramLevel); }
+  else if(route.name==='dialog'){ lessonMode='dlg'; go('lessons'); }
+  else if(route.name==='testRun') quitTest();
+}
+if(tg&&tg.BackButton){ try{tg.BackButton.onClick(backAction);}catch(e){} }
+function render(){
+  const V={lessons:viewLessons,topic:viewTopic,dialog:viewDialog,tests:viewTests,testRun:viewTestRun,store:viewStore,dict:viewDict,profile:viewProfile};
+  $('app').innerHTML=(V[route.name]||viewLessons)();
+  $('nav').innerHTML=[['lessons','📚','Darslar'],['tests','✍️','Testlar'],['store','🛍',"Do'kon"],['dict','📖',"Lug'at"],['profile','👤','Profil']]
+    .map(it=>'<button class="'+(route.tab===it[0]?'on':'')+'" onclick="go(\''+it[0]+'\')"><span class="ic">'+it[1]+'</span>'+it[2]+'</button>').join('');
+  if(route.name==='dict') renderDictList();
+  if(route.name==='testRun') renderQuestion();
+  if(tg&&tg.BackButton){ try{ ['topic','dialog','testRun'].indexOf(route.name)>-1?tg.BackButton.show():tg.BackButton.hide(); }catch(e){} }
+}
+function hdr(title,sub,back){
+  return '<div class="hdr">'+(back?'<button class="back" onclick="backAction()">‹</button>':'')+
+    '<h1>'+title+(sub?'<span class="sub">'+sub+'</span>':'')+'</h1>'+
+    '<button class="ibtn snd" onclick="toggleSound()">'+(state.sound?'🔊':'🔇')+'</button><span class="coin">🪙 '+state.coins+'</span></div>';
+}
+
+/* ---- progress helpers ---- */
+const levelTopics=l=>TOPICS.filter(t=>t.lvl===l);
+const isLearned=id=>state.learned.indexOf(id)>-1;
+const levelLearned=l=>levelTopics(l).filter(t=>isLearned(t.id)).length;
+const levelPercent=l=>{const a=levelTopics(l).length;return a?Math.round(levelLearned(l)/a*100):0;};
+const coursePercent=()=>TOPICS.length?Math.round(state.learned.length/TOPICS.length*100):0;
+function toggleLearned(id){
+  const i=state.learned.indexOf(id);
+  if(i<0){ state.learned.push(id); const a=addXp(15); Snd.coin(); hap.ok(); toast('+'+a+' XP  🪙 +'+a); }
+  else state.learned.splice(i,1);
+  saveState(); rerender();
+}
+function ringHTML(pct,size,st){
+  const r=(size-st)/2,c=2*Math.PI*r,off=c-c*pct/100,m=size/2;
+  return '<div class="ring" style="width:'+size+'px;height:'+size+'px"><svg width="'+size+'" height="'+size+'">'+
+   '<circle cx="'+m+'" cy="'+m+'" r="'+r+'" stroke="rgba(255,255,255,.28)" stroke-width="'+st+'" fill="none"/>'+
+   '<circle cx="'+m+'" cy="'+m+'" r="'+r+'" stroke="#fff" stroke-width="'+st+'" fill="none" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" style="transition:stroke-dashoffset .8s"/></svg>'+
+   '<div class="val">'+pct+'%</div></div>';
+}
+
+/* ---- LESSONS (Darslar) ---- */
+function viewLessons(){
+  const d=new Date(), wd=globalDictionary[(d.getFullYear()*372+(d.getMonth()+1)*31+d.getDate())%globalDictionary.length];
+  const xpPct=(state.xp%200)/2;
+  let h='<div class="view">'+hdr('TÖMER Türkçe',"O'zbeklar uchun to'liq kurs");
+  h+='<div class="hero"><div class="row" style="margin-bottom:14px"><div class="ava">'+(TG_USER&&TG_USER.photo_url?'<img src="'+esc(TG_USER.photo_url)+'">':esc(USER_INITIALS))+'</div>'+
+    '<div style="flex:1;min-width:0"><h2>Salom, '+esc((USER_NAME||'').split(' ')[0])+'! 👋</h2><p>'+(doubleOn()?'⚡ Double XP faol — ballar ikki baravar!':"Bugun ham turkchani o'rganamizmi?")+'</p></div></div>'+
+    '<div class="row" style="gap:14px">'+ringHTML(coursePercent(),76,7)+'<div style="flex:1"><div style="font-size:13px;opacity:.9">Kurs progressi</div>'+
+    '<div style="font-size:15px;font-weight:700">'+state.learned.length+' / '+TOPICS.length+" mavzu</div>"+
+    '<div class="bar" style="background:rgba(255,255,255,.25)"><i style="width:'+xpPct+'%;background:#fff"></i></div>'+
+    '<div style="font-size:11.5px;opacity:.9;margin-top:4px">'+levelOf()+'-daraja • keyingisigacha '+(200-state.xp%200)+' XP</div></div></div></div>';
+  h+='<div class="stats"><div class="stat"><b>'+state.xp+'</b><span>XP</span></div><div class="stat"><b>🔥 '+state.streak+'</b><span>Kunlik seriya</span></div><div class="stat"><b>'+state.totalCorrect+"</b><span>To'g'ri javob</span></div></div>";
+  h+='<div class="wod"><div class="row" style="justify-content:space-between"><span class="pill">Söz kunlik</span><span class="pill">'+esc(wd.lvl)+'</span></div><div class="w">'+esc(wd.tr)+'</div><div class="t">'+esc(wd.uz)+'</div></div>';
+  h+='<div class="seg"><button class="'+(lessonMode==='gram'?'on':'')+'" onclick="lessonMode=\'gram\';rerender()">Grammatika</button><button class="'+(lessonMode==='dlg'?'on':'')+'" onclick="lessonMode=\'dlg\';rerender()">Suhbatlar</button></div>';
+  if(lessonMode==='gram'){
+    h+='<div class="chips">'+['A1','A2','B1','B2'].map(l=>'<button class="chip'+(gramLevel===l?' on':'')+'" onclick="gramLevel=\''+l+'\';rerender()">'+l+' • '+levelPercent(l)+'%</button>').join('')+'</div>';
+    const arr=levelTopics(gramLevel),p=levelPercent(gramLevel);
+    h+='<div class="card"><div class="row" style="justify-content:space-between"><div><h3 style="margin:0">'+gramLevel+' darajasi</h3><div class="muted">'+levelLearned(gramLevel)+' / '+arr.length+" mavzu o'rganildi</div></div><div style=\"font-size:22px;font-weight:800\">"+p+'%</div></div><div class="bar"><i style="width:'+p+'%"></i></div></div>';
+    arr.forEach(t=>{const dn=isLearned(t.id);
+      h+='<div class="item" onclick="go(\'topic\',{id:\''+t.id+'\'})"><div class="ic" style="'+(dn?'background:rgba(52,199,89,.2);color:#2fae55':'')+'">'+(dn?'✓':t.n)+'</div><div class="tx"><b>'+esc(t.tr)+'</b><span>'+esc(t.uz)+'</span></div><div class="ar">›</div></div>';});
+  } else {
+    DIALOGUES.forEach(d=>{h+='<div class="item" onclick="showTr=false;go(\'dialog\',{id:\''+d.id+'\'})"><div class="ic">'+d.icon+'</div><div class="tx"><b>'+esc(d.title)+'</b><span>'+esc(d.uzTitle)+' • '+d.lines.length+' satr</span></div><div class="ar"><span class="badge '+d.lvl.toLowerCase()+'">'+d.lvl+'</span></div></div>';});
+  }
+  return h+'<div style="height:20px"></div></div>';
+}
+function openLevel(l){ gramLevel=l; lessonMode='gram'; go('lessons'); }
+
+function viewTopic(){
+  const t=TOPICS.filter(x=>x.id===route.id)[0];
+  if(!t) return '<div class="empty">Mavzu topilmadi</div>';
+  const arr=levelTopics(t.lvl),pos=arr.indexOf(t),next=arr[pos+1],prev=arr[pos-1],dn=isLearned(t.id);
+  let h='<div class="view">'+hdr(esc(t.tr),t.lvl+' • '+(pos+1)+'/'+arr.length+' mavzu',1);
+  h+='<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:6px"><span class="badge '+t.lvl.toLowerCase()+'">'+t.lvl+'</span>'+(dn?'<span class="badge" style="background:rgba(52,199,89,.2);color:#2fae55">✓ O\'rganildi</span>':'')+'</div><h3 style="margin:0 0 2px">'+esc(t.uz)+'</h3><div class="muted">Turkcha nomi: '+esc(t.tr)+'</div></div>';
+  h+='<div class="gram">'+t.body+'</div><div class="sect">Misollar</div><div class="ex">'+t.ex.map(e=>'<div class="line"><div class="tr">'+esc(e[0])+'</div><div class="uz">'+esc(e[1])+'</div></div>').join('')+'</div>';
+  h+='<div style="padding:10px 16px"><button data-q class="btn '+(dn?'ghost':'')+'" onclick="toggleLearned(\''+t.id+'\')">'+(dn?'↺ Belgini olib tashlash':"✓ O'rganildi deb belgilash (+15 XP)")+'</button></div>';
+  h+='<div class="row" style="padding:0 16px 20px">'+(prev?'<button class="btn ghost" onclick="go(\'topic\',{id:\''+prev.id+'\'})">‹ '+esc(prev.tr)+'</button>':'')+(next?'<button class="btn" onclick="go(\'topic\',{id:\''+next.id+'\'})">'+esc(next.tr)+' ›</button>':'')+'</div></div>';
+  return h;
+}
+function viewDialog(){
+  const d=DIALOGUES.filter(x=>x.id===route.id)[0];
+  if(!d) return '<div class="empty">Dialog topilmadi</div>';
+  let h='<div class="view">'+hdr(d.icon+' '+esc(d.title),esc(d.uzTitle)+' • '+d.lvl,1);
+  h+='<div style="padding:10px 16px"><button class="btn ghost" onclick="showTr=!showTr;rerender()">'+(showTr?'🙈 Tarjimani yashirish':"👁 Tarjimani ko'rsatish")+'</button></div><div class="card" style="padding:0;overflow:hidden">'+
+    d.lines.map(l=>'<div class="dline'+(showTr?' show':'')+'"><div class="who">'+esc(l[0])+'</div><div class="body"><div class="tr">'+esc(l[1])+'</div><div class="uz">'+esc(l[2])+'</div></div></div>').join('')+'</div>';
+  return h+'<div style="padding:10px 16px 24px"><button class="btn" onclick="backAction()">← Barcha suhbatlar</button></div></div>';
+}
+
+/* ---- DICTIONARY (Lug'at) ---- */
+function viewDict(){
+  let h='<div class="view">'+hdr("Lug'at",globalDictionary.length+" ta so'z va ibora");
+  h+='<div style="padding:10px 16px 0"><input class="inp" value="'+esc(dictFilter.q)+'" placeholder="Turkcha yoki o\'zbekcha qidirish..." oninput="dictFilter.q=this.value;renderDictList()"></div>';
+  h+='<div class="chips">'+['Barchasi'].concat(DICT_CATS).map(c=>'<button class="chip mini'+(dictFilter.cat===c?' on':'')+'" onclick="dictFilter.cat=\''+c.replace(/'/g,"\\'")+'\';rerender()">'+esc(c)+'</button>').join('')+'</div>';
+  h+='<div class="chips" style="padding-top:0">'+['Barchasi'].concat(DICT_LVLS).map(c=>'<button class="chip mini'+(dictFilter.lvl===c?' on':'')+'" onclick="dictFilter.lvl=\''+c+'\';rerender()">'+c+'</button>').join('')+'</div>';
+  return h+'<div id="dictList"></div><div style="height:20px"></div></div>';
+}
+function renderDictList(){
+  const box=$('dictList'); if(!box) return; const q=low(dictFilter.q);
+  const list=globalDictionary.filter(w=>(dictFilter.cat==='Barchasi'||w.cat===dictFilter.cat)&&(dictFilter.lvl==='Barchasi'||w.lvl===dictFilter.lvl)&&(!q||low(w.tr).indexOf(q)>-1||low(w.uz).indexOf(q)>-1));
+  box.innerHTML=list.length?list.map(w=>'<div class="item"><div class="ic"><span class="badge '+w.lvl.toLowerCase()+'">'+w.lvl+'</span></div><div class="tx"><b>'+esc(w.tr)+'</b><span>'+esc(w.uz)+' • '+esc(w.cat)+'</span></div></div>').join(''):'<div class="empty">🔍 Hech narsa topilmadi.<br>Boshqa so\'zni sinab ko\'ring.</div>';
+}
+
+/* ---- STORE (Do'kon) ---- */
+function viewStore(){
+  const left=state.doubleUntil-Date.now(), hh=Math.floor(left/36e5), mm=Math.floor(left%36e5/6e4);
+  let h='<div class="view">'+hdr("Do'kon","Tangalar bilan mavzu va kuchaytirgichlar");
+  h+='<div class="card"><h3>Sizning zaxirangiz</h3><div class="boosts" style="margin:0"><span class="chip mini on">⚡ '+(doubleOn()?hh+' s '+mm+' d':'faol emas')+'</span>'+
+    '<span class="chip mini">🛡 '+state.inv.shield+'</span><span class="chip mini">✂️ '+state.inv.hint+'</span><span class="chip mini">❄️ '+state.inv.freeze+'</span><span class="chip mini">❤️ '+state.inv.life+'</span></div>'+
+    '<div class="muted" style="margin-top:8px">Tangalar XP bilan birga topiladi: darslar va testlar uchun.</div></div>';
+  h+='<div class="sect">Kuchaytirgichlar</div>';
+  BOOSTS.forEach(b=>{h+='<div class="item" style="cursor:default"><div class="ic" style="font-size:20px">'+b.ic+'</div><div class="tx"><b>'+b.name+'</b><span>'+b.desc+'</span></div><button data-q class="btn small" onclick="buyBoost(\''+b.id+'\')">🪙 '+b.price+'</button></div>';});
+  h+='<div class="sect">Mavzular</div><div class="grid">';
+  THEMES.forEach(t=>{
+    const c=t.c.length?t.c:['#f2f2f7','#ffffff','#111','#8a8a8e','#2481cc','#1a5f99'], own=state.themes.indexOf(t.id)>-1, act=state.theme===t.id;
+    h+='<div class="th'+(act?' act':'')+'" id="th_'+t.id+'"><div class="sw" style="background:linear-gradient('+c[0]+' 0 55%,'+c[1]+' 55% 100%)"><u style="background:'+c[2]+'"></u><i style="background:linear-gradient(90deg,'+c[4]+','+c[5]+')"></i></div><b>'+t.name+'</b>'+
+      (act?'<button class="btn ghost" disabled>Faol ✓</button>':own?'<button data-q class="btn ghost" onclick="pickTheme(\''+t.id+'\')">Tanlash</button>':'<button data-q class="btn" onclick="buyTheme(\''+t.id+'\')">🪙 '+t.price+'</button>')+'</div>';
+  });
+  return h+'</div><div style="height:20px"></div></div>';
+}
+function noCoins(id){ Snd.bad(); hap.bad(); toast("Tangalar yetarli emas 🪙"); const e=$(id); if(e){e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');} }
+function buyBoost(id){
+  const b=BOOSTS.filter(x=>x.id===id)[0]; if(state.coins<b.price) return noCoins('app');
+  state.coins-=b.price;
+  if(id==='double') state.doubleUntil=Math.max(Date.now(),state.doubleUntil)+864e5; else state.inv[id]+=b.qty;
+  saveState(); Snd.coin(); hap.ok(); toast(b.ic+' '+b.name+' sotib olindi!'); rerender();
+}
+function buyTheme(id){
+  const t=themeById(id); if(state.coins<t.price) return noCoins('th_'+id);
+  state.coins-=t.price; state.themes.push(id); Snd.coin(); hap.ok(); pickTheme(id);
+}
+function pickTheme(id){ state.theme=id; applyTheme(id); saveState(); Snd.sweep(); hap.sel(); toast('🎨 '+themeById(id).name); rerender(); }
+
+/* ---- TESTS (Testlar) ---- */
+function viewTests(){
+  let h='<div class="view">'+hdr('Testlar',TESTS.length+' ta test');
+  h+='<div class="chips">'+['Barchasi','A1','A2','B1','B2'].map(l=>'<button class="chip'+(testFilter===l?' on':'')+'" onclick="testFilter=\''+l+'\';rerender()">'+l+'</button>').join('')+'</div>';
+  h+='<div class="card" style="font-size:13px"><b>B1–B2 testlarda</b> har savolga '+TIME+' soniya beriladi. ❄️ Time Freeze taymerni to\'xtatadi.</div>';
+  const list=TESTS.filter(t=>testFilter==='Barchasi'||t.lvl===testFilter);
+  if(!list.length) h+='<div class="empty">Bu daraja uchun test topilmadi.</div>';
+  list.forEach(t=>{const r=state.tests[t.id],b=r?r.best:null;
+    h+='<div class="item" onclick="startTest(\''+t.id+'\')"><div class="ic">'+t.icon+'</div><div class="tx"><b>'+esc(t.title)+'</b><span>'+esc(t.uzTitle)+' • '+t.qs.length+' savol</span>'+(b!==null?'<div class="bar g" style="margin-top:6px"><i style="width:'+b+'%"></i></div>':'')+'</div><div class="ar" style="text-align:right"><span class="badge '+t.lvl.toLowerCase()+'">'+t.lvl+'</span>'+(b!==null?'<div style="font-size:11px;color:var(--hint);margin-top:4px">'+b+'%</div>':'')+'</div></div>';});
+  return h+'<div style="height:20px"></div></div>';
+}
+const isTimed=()=>run&&(run.test.lvl==='B1'||run.test.lvl==='B2');
+function startTest(id){
+  const t=TESTS.filter(x=>x.id===id)[0]; if(!t) return;
+  run={test:t,qs:t.qs,i:0,correct:0,sel:null,done:false,finished:false,gone:[]}; orderPick=[]; go('testRun',{id:id});
+}
+function viewTestRun(){
+  if(!run) return '<div class="view">'+hdr('Test','',1)+'<div class="empty">Test yuklanmadi.</div></div>';
+  const t=run.test,total=run.qs.length,pct=Math.round(run.i/total*100);
+  let h='<div class="view">'+hdr(esc(t.title),t.lvl+' • Savol '+Math.min(run.i+1,total)+'/'+total,1)+'<div style="padding:10px 16px 0"><div class="bar" style="margin:0"><i style="width:'+pct+'%"></i></div></div>';
+  if(run.finished){
+    const sc=Math.round(run.correct/total*100);
+    const msg=sc>=90?'🏆 Ajoyib natija! Siz bu mavzuni mukammal bilasiz.':sc>=70?"👍 Yaxshi! Yana ozgina mashq qilsangiz mukammal bo'ladi.":sc>=50?"📚 O'rtacha. Mavzularni qayta ko'rib chiqishni tavsiya qilamiz.":"💪 Tushkunlikka tushmang! Grammatika bo'limini qayta o'qib, yana urinib ko'ring.";
+    h+='<div class="card" style="text-align:center;padding:24px 16px"><div style="font-size:44px;font-weight:800;letter-spacing:-2px">'+sc+'%</div><div class="muted">'+run.correct+' / '+total+' to\'g\'ri javob</div><div class="bar"><i style="width:'+sc+'%"></i></div><p style="margin:16px 0 0">'+msg+'</p></div>'+
+      '<div class="stats"><div class="stat"><b>+'+run.earned+'</b><span>XP'+(run.dbl?' (×2)':'')+'</span></div><div class="stat"><b>🪙 '+run.earned+'</b><span>Tanga</span></div><div class="stat"><b>'+(total-run.correct)+'</b><span>Xato</span></div></div>'+
+      '<div style="padding:10px 16px 24px"><button data-q class="btn" onclick="startTest(\''+t.id+'\')">🔄 Yana bir marta</button><div style="height:10px"></div><button class="btn ghost" onclick="go(\'tests\')">← Testlar ro\'yxatiga</button></div></div>';
+    return h;
+  }
+  return h+'<div class="card" id="quizBox"></div><div style="height:20px"></div></div>';
+}
+const oc=(k,c)=>'opt '+(c||'')+(run.gone.indexOf(k)>-1?' gone':'');
+function refreshBoosts(){
+  const e=$('bst'); if(!e||!run) return; const q=run.qs[run.i]; let h='';
+  if(q.t==='mc'&&state.inv.hint>0&&!run.done&&!run.gone.length) h+='<button class="chip mini" onclick="useHint()">✂️ 50/50 ×'+state.inv.hint+'</button>';
+  if(isTimed()&&state.inv.freeze>0&&!run.done&&!run.frozen) h+='<button class="chip mini" onclick="useFreeze()">❄️ Freeze ×'+state.inv.freeze+'</button>';
+  if(doubleOn()) h+='<span class="chip mini on">⚡ ×2 XP</span>';
+  e.innerHTML=h;
+}
+function useHint(){
+  const q=run.qs[run.i]; if(run.done||q.t!=='mc'||state.inv.hint<1||run.gone.length) return;
+  run.gone=shuffle(q.o.map((_,k)=>k).filter(k=>k!==q.a)).slice(0,2); state.inv.hint--; saveState();
+  if(run.gone.indexOf(run.sel)>-1) run.sel=null;
+  q.o.forEach((_,k)=>{const b=$('opt'+k); if(b) b.className=oc(k,k===run.sel?'sel':'');}); refreshBoosts();
+}
+function useFreeze(){
+  if(run.done||run.frozen||state.inv.freeze<1) return; run.frozen=true; state.inv.freeze--; saveState();
+  const t=$('tm'); if(t) t.classList.add('frz'); refreshBoosts(); toast('❄️ Vaqt to\'xtatildi');
+}
+function useLife(){
+  if(state.inv.life<1||!run) return; state.inv.life--; state.totalAnswered--; saveState(); toast('❤️ Qayta urinib ko\'ring!'); renderQuestion();
+}
+function setBar(){ const i=$('tmi'); if(i) i.style.width=Math.max(0,run.left/TIME*100)+'%'; }
+function renderQuestion(){
+  const box=$('quizBox'); if(!box||!run||run.finished) return;
+  clearInterval(timerId); const q=run.qs[run.i];
+  run.sel=null; run.done=false; run.gone=[]; run.frozen=false; run.left=TIME; orderPick=[];
+  let h='<div class="qmeta">Savol '+(run.i+1)+' / '+run.qs.length+'</div>'+(isTimed()?'<div class="timer" id="tm" style="margin-top:8px"><i id="tmi"></i></div>':'')+'<div class="boosts" id="bst" style="margin-top:8px"></div><div class="qtext">'+esc(q.q)+'</div>';
+  if(q.t==='mc') h+=q.o.map((o,i)=>'<button class="opt" id="opt'+i+'" onclick="selOpt('+i+')">'+esc(o)+'</button>').join('');
+  else if(q.t==='fill') h+='<input id="fillInp" class="inp" placeholder="Javobni yozing..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key===\'Enter\'){checkAnswer();}">';
+  else h+='<div class="ansarea" id="ansArea"></div><div class="chips" style="padding:4px 0 10px">'+q.w.map((w,i)=>'<button class="chip" id="w'+i+'" onclick="pickWord('+i+')">'+esc(w)+'</button>').join('')+'</div>';
+  h+='<div id="fb"></div><button data-q class="btn" id="chkBtn" onclick="checkAnswer()">Tekshirish</button>';
+  box.innerHTML=h; refreshBoosts(); if(q.t==='order') renderAnsArea();
+  if(isTimed()){ setBar(); timerId=setInterval(function(){ if(!run||run.done){clearInterval(timerId);return;} if(run.frozen) return; run.left--; setBar(); if(run.left<=0){clearInterval(timerId);checkAnswer(true);} },1000); }
+  if(q.t==='fill') setTimeout(function(){const el=$('fillInp'); if(el) el.focus();},120);
+}
+function selOpt(i){ if(run.done) return; run.sel=i; run.qs[run.i].o.forEach((_,k)=>{const b=$('opt'+k); if(b) b.className=oc(k,k===i?'sel':'');}); }
+function pickWord(i){ if(run.done||orderPick.indexOf(i)>-1) return; orderPick.push(i); const b=$('w'+i); if(b) b.style.opacity='.35'; renderAnsArea(); }
+function unpickWord(p){ if(run.done) return; const i=orderPick[p]; orderPick.splice(p,1); const b=$('w'+i); if(b) b.style.opacity='1'; renderAnsArea(); }
+function renderAnsArea(){
+  const a=$('ansArea'); if(!a||!run) return; const q=run.qs[run.i];
+  a.innerHTML=orderPick.length?orderPick.map((idx,p)=>'<button class="chip" onclick="unpickWord('+p+')">'+esc(q.w[idx])+'</button>').join(''):'<span class="muted" style="padding:8px">So\'zlarni to\'g\'ri tartibda bosing...</span>';
+}
+function checkAnswer(forced){
+  if(!run||run.done) return; forced=forced===true;
+  const q=run.qs[run.i]; let ok=false,ca='';
+  if(q.t==='mc'){
+    if(run.sel===null&&!forced){toast('Iltimos, javobni tanlang');return;}
+    ok=run.sel===q.a; ca=q.o[q.a];
+    q.o.forEach((_,k)=>{const b=$('opt'+k); if(b) b.className=oc(k,k===q.a?'good':k===run.sel?'bad':'');});
+  } else if(q.t==='fill'){
+    const el=$('fillInp'),v=el?el.value.trim():'';
+    if(!v&&!forced){toast('Iltimos, javobni yozing');return;}
+    ok=!!v&&q.a.some(a=>low(a)===low(v)); ca=q.a[0]; if(el) el.disabled=true;
+  } else {
+    if(!orderPick.length&&!forced){toast("Iltimos, so'zlarni tanlang");return;}
+    ok=low(orderPick.map(i=>q.w[i]).join(' '))===low(q.a); ca=q.a;
+  }
+  clearInterval(timerId); run.done=true; if(ok) run.correct++;
+  state.totalAnswered++; if(ok) state.totalCorrect++; saveState();
+  if(ok){Snd.ok();hap.ok();}else{Snd.bad();hap.bad();}
+  $('fb').innerHTML='<div class="fb '+(ok?'good':'bad')+'"><b style="display:block">'+(ok?"✅ To'g'ri!":(forced&&run.left<=0?'⏱ Vaqt tugadi':'❌ Xato'))+'</b>'+(ok?'':'To\'g\'ri javob: <b>'+esc(ca)+'</b><br>')+(q.e?'<span style="color:var(--hint)">'+esc(q.e)+'</span>':'')+
+    (!ok&&state.inv.life>0?'<div style="margin-top:8px"><button class="btn ghost small" onclick="useLife()">❤️ Extra Life: qayta urinish ('+state.inv.life+')</button></div>':'')+'</div>';
+  const b=$('chkBtn'); b.textContent=run.i+1<run.qs.length?'Keyingi savol →':"Natijani ko'rish 🏁"; b.className='btn '+(ok?'ok':''); b.setAttribute('onclick','nextQuestion()');
+  refreshBoosts();
+}
+function nextQuestion(){
+  if(!run) return;
+  if(run.i+1<run.qs.length){ run.i++; renderQuestion(); const b=$('quizBox'); if(b&&b.scrollIntoView) b.scrollIntoView({behavior:'smooth',block:'start'}); return; }
+  run.finished=true; run.dbl=doubleOn();
+  const sc=Math.round(run.correct/run.qs.length*100), prev=state.tests[run.test.id];
+  state.tests[run.test.id]={best:prev?Math.max(prev.best,sc):sc,tries:prev?prev.tries+1:1};
+  run.earned=addXp(run.correct*10); saveState();
+  if(sc>=70){Snd.coin();hap.ok();}else hap.warn();
+  go('testRun',{id:run.test.id});
+}
+function quitTest(){
+  if(!run){go('tests');return;}
+  const ok=function(){ clearInterval(timerId); run=null; go('tests'); };
+  if(run.finished) return ok();
+  if(tg&&tg.showConfirm){ try{ tg.showConfirm('Testni tark etmoqchimisiz? Natija saqlanmaydi.',function(y){if(y)ok();}); return; }catch(e){} }
+  if(confirm('Testni tark etmoqchimisiz? Natija saqlanmaydi.')) ok();
+}
+
+/* ---- PROFILE ---- */
+function viewProfile(){
+  const th=themeById(state.theme); let h='<div class="view">'+hdr('Profil','Natijalaringiz va sozlamalar');
+  h+='<div class="card" style="text-align:center;padding:24px 16px"><div class="ava" style="width:80px;height:80px;margin:0 auto 12px;font-size:30px;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--btntext)">'+(TG_USER&&TG_USER.photo_url?'<img src="'+esc(TG_USER.photo_url)+'">':esc(USER_INITIALS))+'</div><h3 style="margin:0 0 2px;font-size:19px">'+esc(USER_NAME)+'</h3><div class="muted">'+(TG_USER&&TG_USER.username?'@'+esc(TG_USER.username):'Telegram foydalanuvchisi')+' • '+levelOf()+'-daraja</div></div>';
+  h+='<div class="stats"><div class="stat"><b>'+state.xp+'</b><span>XP</span></div><div class="stat"><b>🔥 '+state.streak+'</b><span>Kun seriya</span></div><div class="stat"><b>🪙 '+state.coins+'</b><span>Tanga</span></div></div>';
+  h+='<div class="card"><h3>⚙️ Sozlamalar</h3><div class="row" style="justify-content:space-between;padding:6px 0"><span>Ovoz effektlari <span class="muted" id="sndTxt">'+(state.sound?'Yoqilgan':"O'chirilgan")+'</span></span><button class="ibtn snd" onclick="toggleSound()">'+(state.sound?'🔊':'🔇')+'</button></div>'+
+    '<div class="row" style="justify-content:space-between;padding:6px 0"><span>Mavzu <span class="muted">'+th.name+'</span></span><button class="btn small ghost" onclick="go(\'store\')">Do\'kon ›</button></div></div>';
+  const done=Object.keys(state.tests).length, row=(a,b)=>'<div class="row" style="justify-content:space-between;padding:6px 0"><span class="muted">'+a+'</span><b>'+b+'</b></div>';
+  h+='<div class="card"><h3>📊 Statistika</h3>'+row("O'rganilgan mavzular",state.learned.length+' / '+TOPICS.length)+row('Topshirilgan testlar',done+' / '+TESTS.length)+row('Jami savollar',state.totalAnswered)+row("To'g'ri javoblar",state.totalCorrect)+row('Aniqlik',state.totalAnswered?Math.round(state.totalCorrect/state.totalAnswered*100)+'%':'—')+'</div>';
+  h+='<div class="sect">Darajalar bo\'yicha</div>'+['A1','A2','B1','B2'].map(l=>'<div class="card" style="padding:12px 16px"><div class="row" style="justify-content:space-between"><b style="font-size:14px">'+l+' darajasi</b><span class="muted">'+levelLearned(l)+'/'+levelTopics(l).length+'</span></div><div class="bar"><i style="width:'+levelPercent(l)+'%"></i></div></div>').join('');
+  return h+'<div style="padding:10px 16px 24px"><button class="btn ghost" onclick="resetProgress()">🗑 Progressni tozalash</button><p class="muted" style="text-align:center">Tanga, mavzular va kuchaytirgichlar saqlanib qoladi.</p></div></div>';
+}
+function resetProgress(){
+  const go_=function(){ Object.assign(state,{learned:[],tests:{},xp:0,streak:0,lastDay:null,totalCorrect:0,totalAnswered:0}); saveState(); updateStreak(); rerender(); };
+  const m="Darslar, testlar va XP o'chiriladi. Davom etilsinmi?";
+  if(tg&&tg.showConfirm){ try{ tg.showConfirm(m,function(y){if(y)go_();}); return; }catch(e){} }
+  if(confirm(m)) go_();
+}
+
+/* ===== INIT ===== */
+loadState(); applyTheme(state.theme); render();
+if(tg){ try{ tg.onEvent('themeChanged',function(){ if(state.theme==='classic') applyTheme('classic'); }); }catch(e){} }
+</script>
+</body>
+</html>
